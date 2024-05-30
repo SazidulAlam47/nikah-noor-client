@@ -44,7 +44,7 @@ const MemberCard = ({ bioData }) => {
                 </div>
             </CardHeader>
             <CardBody className="text-center">
-                <table className="w-full min-w-max table-auto text-left">
+                <table className="w-full table-auto text-left">
                     <tbody>
                         {TABLE_ROWS.map(({ field, value }, index) => {
                             const isLast = index === TABLE_ROWS.length - 1;

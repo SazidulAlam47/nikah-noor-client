@@ -26,7 +26,7 @@ const Header = () => {
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
                 as="li"
-                variant="small"
+                variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
             >
@@ -36,7 +36,7 @@ const Header = () => {
             </Typography>
             <Typography
                 as="li"
-                variant="small"
+                variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
             >
@@ -46,7 +46,7 @@ const Header = () => {
             </Typography>
             <Typography
                 as="li"
-                variant="small"
+                variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
             >
@@ -56,7 +56,7 @@ const Header = () => {
             </Typography>
             <Typography
                 as="li"
-                variant="small"
+                variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
             >

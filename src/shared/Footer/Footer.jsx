@@ -1,8 +1,8 @@
 import { Typography } from "@material-tailwind/react";
-import Logo from "../../components/Logo/Logo";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Container from "../../components/Container/Container";
+import { Link } from "react-router-dom";
 
 const SITEMAP = [
     {
@@ -23,10 +23,23 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
     return (
-        <footer className="relative w-full">
+        <footer className="relative w-full bg-black/5">
             <Container>
                 <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
-                    <Logo />
+                    <div className="md:pr-8">
+                        <Link to="/" className="inline-block w-2/5">
+                            <img
+                                src="/logo.png"
+                                alt="logo"
+                                className="w-full"
+                            />
+                        </Link>
+                        <Typography className="font-normal text-gray-800 pt-2">
+                            Connecting hearts and building lifelong
+                            partnerships. At Nikah Noor, we make finding your
+                            soulmate easy and secure.
+                        </Typography>
+                    </div>
                     {SITEMAP.map(({ title, links }, key) => (
                         <div key={key} className="w-full">
                             <Typography

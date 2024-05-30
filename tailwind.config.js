@@ -12,6 +12,10 @@ export default withMT({
     extend: {
       colors: {
         primary: "#e4316f",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        prociono: ["Prociono", "sans-serif"],
       }
     },
   },

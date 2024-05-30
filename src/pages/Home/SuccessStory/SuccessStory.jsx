@@ -5,6 +5,7 @@ import Container from "../../../components/Container/Container";
 import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import PropTypes from "prop-types";
+import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 
 const SampleNextArrow = ({ onClick }) => {
     return (
@@ -43,22 +44,28 @@ const SuccessStory = () => {
         autoplay: true,
         autoplaySpeed: 5000,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-                breakpoint: 769,
+                breakpoint: 825,
                 settings: {
                     slidesToShow: 1,
                 },
             },
             {
-                breakpoint: 1025,
+                breakpoint: 1304,
                 settings: {
                     slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 1701,
+                settings: {
+                    slidesToShow: 3,
                 },
             },
         ],
@@ -69,15 +76,17 @@ const SuccessStory = () => {
     }
 
     return (
-        <Container>
-            <div className="py-12">
-                <div className="slider-container relative">
-                    <Slider {...settings}>
-                        {stories?.map((story) => (
-                            <SuccessCard key={story._id} story={story} />
-                        ))}
-                    </Slider>
-                </div>
+        <Container py>
+            <SectionHeading
+                title="Success Stories"
+                subtitle="Read inspiring stories from couples who found love and happiness through Nikah Noor"
+            />
+            <div className="slider-container relative">
+                <Slider {...settings}>
+                    {stories?.map((story) => (
+                        <SuccessCard key={story._id} story={story} />
+                    ))}
+                </Slider>
             </div>
         </Container>
     );
