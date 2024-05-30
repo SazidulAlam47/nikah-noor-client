@@ -27,14 +27,15 @@ const SuccessCard = ({ story }) => {
                         <Typography
                             variant="h5"
                             color="blue-gray"
-                            className="font-medium text-lg"
+                            className="font-medium"
                         >
                             Marriage Date :{" "}
                             {moment(story.marriageDate).format("Do MMM, YYYY")}
                         </Typography>
                         <Typography
                             color="blue-gray"
-                            className="flex items-center gap-1.5 font-normal"
+                            variant="h6"
+                            className="flex items-center gap-1.5 font-normal text-lg"
                         >
                             <FaStar className="text-[#fbc02d]" />
                             {story.reviewStar}
