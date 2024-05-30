@@ -1,9 +1,9 @@
 import {
     Navbar,
-    MobileNav,
     Typography,
     Button,
     IconButton,
+    Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -92,7 +92,7 @@ const Header = () => {
                         )}
                     </IconButton>
                 </div>
-                <MobileNav open={openNav}>
+                <Collapse open={openNav}>
                     <div className="container mx-auto">
                         {navList}
                         <div className="flex items-center gap-x-1">
@@ -102,7 +102,7 @@ const Header = () => {
                             </Button>
                         </div>
                     </div>
-                </MobileNav>
+                </Collapse>
             </Container>
         </Navbar>
     );
