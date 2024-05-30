@@ -7,6 +7,8 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { customTheme } from "./theme/customTheme.js";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const queryClient = new QueryClient();
 

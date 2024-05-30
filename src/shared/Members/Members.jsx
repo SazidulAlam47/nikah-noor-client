@@ -18,7 +18,7 @@ const Members = () => {
 
     return (
         <Container>
-            <div className="grid grid-cols-1 md:grid-cols-3 py-12 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-12 gap-5">
                 {bioDatas?.map((bioData) => (
                     <MemberCard key={bioData.biodataId} bioData={bioData} />
                 ))}
