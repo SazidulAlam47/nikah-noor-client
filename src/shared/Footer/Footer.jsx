@@ -2,6 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import Logo from "../../components/Logo/Logo";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Container from "../../components/Container/Container";
 
 const SITEMAP = [
     {
@@ -23,7 +24,7 @@ const currentYear = new Date().getFullYear();
 const Footer = () => {
     return (
         <footer className="relative w-full">
-            <div className="mx-auto w-full max-w-7xl px-2">
+            <Container>
                 <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
                     <Logo />
                     {SITEMAP.map(({ title, links }, key) => (
@@ -91,7 +92,7 @@ const Footer = () => {
                         </a>
                     </div>
                 </div>
-            </div>
+            </Container>
         </footer>
     );
 };

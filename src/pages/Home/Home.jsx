@@ -1,8 +1,19 @@
+import { Helmet } from "react-helmet-async";
+import Hero from "./Hero/Hero";
+import Members from "../../shared/Members/Members";
+import SuccessStory from "./SuccessStory/SuccessStory";
+
 const Home = () => {
     return (
-        <div>
-            <p>This is Home</p>
-        </div>
+        <>
+            <Helmet>
+                <title>Nikah Noor</title>
+            </Helmet>
+
+            <Hero />
+            <Members />
+            <SuccessStory />
+        </>
     );
 };
 

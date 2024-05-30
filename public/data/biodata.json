@@ -1,0 +1,50 @@
+[
+    {
+        "biodataId": 1,
+        "biodataType": "Male",
+        "profileImage": "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Dhaka",
+        "age": 30,
+        "occupation": "Job"
+    },
+    {
+        "biodataId": 2,
+        "biodataType": "Female",
+        "profileImage": "https://images.unsplash.com/photo-1561442748-c50715dc32f6?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Chattagram",
+        "age": 23,
+        "occupation": "Student"
+    },
+    {
+        "biodataId": 3,
+        "biodataType": "Male",
+        "profileImage": "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Rangpur",
+        "age": 45,
+        "occupation": "Job"
+    },
+    {
+        "biodataId": 4,
+        "biodataType": "Female",
+        "profileImage": "https://images.unsplash.com/photo-1640154852397-a6b72d3d2fe1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Khulna",
+        "age": 30,
+        "occupation": "House wife"
+    },
+    {
+        "biodataId": 5,
+        "biodataType": "Male",
+        "profileImage": "https://images.unsplash.com/photo-1582015752624-e8b1c75e3711?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Sylhet",
+        "age": 23,
+        "occupation": "Student"
+    },
+    {
+        "biodataId": 6,
+        "biodataType": "Female",
+        "profileImage": "https://plus.unsplash.com/premium_photo-1683133405779-081b5e4311e1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "permanentDivision": "Barisal",
+        "age": 45,
+        "occupation": "Job"
+    }
+]

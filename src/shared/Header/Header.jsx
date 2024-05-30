@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
+import Container from "../../components/Container/Container";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
@@ -67,41 +68,42 @@ const Header = () => {
     );
 
     return (
-        <Navbar className="px-4 py-2 lg:px-8 lg:py-4 mx-auto shadow-none">
-            <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-                {/* Logo */}
-                <Logo />
-                <div className="hidden lg:block">{navList}</div>
-                <div className="flex items-center gap-x-1">
-                    {/* TODO: User name */}
-                    <Button className="hidden lg:inline-block">
-                        <span>Login</span>
-                    </Button>
-                </div>
-                <IconButton
-                    variant="text"
-                    className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-                    ripple={false}
-                    onClick={() => setOpenNav(!openNav)}
-                >
-                    {openNav ? (
-                        <RxCross2 size={20} />
-                    ) : (
-                        <RxHamburgerMenu size={20} />
-                    )}
-                </IconButton>
-            </div>
-            <MobileNav open={openNav}>
-                <div className="container mx-auto">
-                    {navList}
+        <Navbar className="px-0 py-2 lg:py-4 mx-auto shadow-none w-full max-w-full">
+            <Container>
+                <div className="flex items-center justify-between text-blue-gray-900">
+                    <Logo />
+                    <div className="hidden lg:block">{navList}</div>
                     <div className="flex items-center gap-x-1">
                         {/* TODO: User name */}
-                        <Button fullWidth>
+                        <Button className="hidden lg:inline-block">
                             <span>Login</span>
                         </Button>
                     </div>
+                    <IconButton
+                        variant="text"
+                        className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+                        ripple={false}
+                        onClick={() => setOpenNav(!openNav)}
+                    >
+                        {openNav ? (
+                            <RxCross2 size={20} />
+                        ) : (
+                            <RxHamburgerMenu size={20} />
+                        )}
+                    </IconButton>
                 </div>
-            </MobileNav>
+                <MobileNav open={openNav}>
+                    <div className="container mx-auto">
+                        {navList}
+                        <div className="flex items-center gap-x-1">
+                            {/* TODO: User name */}
+                            <Button fullWidth>
+                                <span>Login</span>
+                            </Button>
+                        </div>
+                    </div>
+                </MobileNav>
+            </Container>
         </Navbar>
     );
 };
