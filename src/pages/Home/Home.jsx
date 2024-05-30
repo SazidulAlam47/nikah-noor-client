@@ -3,6 +3,7 @@ import Hero from "./Hero/Hero";
 import Members from "../../shared/Members/Members";
 import SuccessStory from "./SuccessStory/SuccessStory";
 import Counter from "./Counter/Counter";
+import Steps from "./Steps/Steps";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
 
             <Hero />
             <Members />
+            <Steps />
             <Counter />
             <SuccessStory />
         </>
