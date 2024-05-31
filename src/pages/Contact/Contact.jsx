@@ -40,7 +40,7 @@ const Contact = () => {
                 </Typography>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="max-w-screen-md mx-auto border rounded-xl p-10 space-y-5 shadow-lg"
+                    className="max-w-screen-md mx-auto border rounded-xl p-5 sm:p-10 space-y-5 shadow-lg"
                 >
                     <div className="space-y-1">
                         <Input
@@ -107,7 +107,7 @@ const Contact = () => {
                         type="submit"
                         size="lg"
                         fullWidth
-                        className="rounded-full"
+                        className="rounded-full bg-gradient-to-r from-[#542b79] to-[#eb3284]"
                     >
                         Send
                     </Button>
