@@ -1,8 +1,14 @@
+import { Helmet } from "react-helmet-async";
+import PageTitle from "../../components/PageTitle/PageTitle";
+
 const Biodatas = () => {
     return (
-        <div>
-            <p>This is Biodatas</p>
-        </div>
+        <>
+            <Helmet>
+                <title>Nikah Noor | Biodatas</title>
+            </Helmet>
+            <PageTitle title="Biodatas" />
+        </>
     );
 };
 

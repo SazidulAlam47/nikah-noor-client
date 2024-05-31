@@ -34,6 +34,7 @@ const Header = () => {
                 variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
+                onClick={() => setOpenNav(false)}
             >
                 <NavLink to="/" className="flex items-center">
                     Home
@@ -44,6 +45,7 @@ const Header = () => {
                 variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
+                onClick={() => setOpenNav(false)}
             >
                 <NavLink to="/biodatas" className="flex items-center">
                     Biodatas
@@ -54,6 +56,7 @@ const Header = () => {
                 variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
+                onClick={() => setOpenNav(false)}
             >
                 <NavLink to="/about" className="flex items-center">
                     About Us
@@ -64,6 +67,7 @@ const Header = () => {
                 variant="paragraph"
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
+                onClick={() => setOpenNav(false)}
             >
                 <NavLink to="/contact" className="flex items-center">
                     Contact Us
