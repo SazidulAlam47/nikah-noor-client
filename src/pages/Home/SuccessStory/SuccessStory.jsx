@@ -72,7 +72,15 @@ const SuccessStory = () => {
     };
 
     if (isPending) {
-        return <p>Loading...</p>;
+        return (
+            <Container py>
+                <SectionHeading
+                    title="Success Stories"
+                    subtitle="Read inspiring stories from couples who found love and happiness through Nikah Noor"
+                />
+                <div></div>
+            </Container>
+        );
     }
 
     return (

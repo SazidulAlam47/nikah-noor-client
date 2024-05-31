@@ -4,7 +4,7 @@ import MemberCard from "./MemberCard";
 
 const Members = () => {
     const { data: bioDatas, isPending } = useQuery({
-        queryKey: ["premium-members"],
+        queryKey: ["members"],
         queryFn: async () => {
             const res = await axios.get("/data/biodata.json");
             return res.data;

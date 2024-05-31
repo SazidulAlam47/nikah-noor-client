@@ -7,6 +7,7 @@ import {
 } from "@material-tailwind/react";
 
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const MemberCard = ({ bioData }) => {
     const TABLE_ROWS = [
@@ -77,7 +78,9 @@ const MemberCard = ({ bioData }) => {
                         })}
                     </tbody>
                 </table>
-                <Button className="mt-6">View Profile</Button>
+                <Link to={`/profile/${bioData.biodataId}`}>
+                    <Button className="mt-6">View Profile</Button>
+                </Link>
             </CardBody>
         </Card>
     );

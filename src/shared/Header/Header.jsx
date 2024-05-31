@@ -11,7 +11,7 @@ import Logo from "../../components/Logo/Logo";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
 import Container from "../../components/Container/Container";
-import Profile from "./Profile/Profile";
+import UserAvatar from "./UserAvatar/UserAvatar";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
@@ -95,7 +95,7 @@ const Header = () => {
                     <div className="hidden lg:block">{navList}</div>
                     <div className="flex gap-4 items-center">
                         {user ? (
-                            <Profile handleLogOut={handleLogOut} />
+                            <UserAvatar handleLogOut={handleLogOut} />
                         ) : (
                             <Button className="hidden lg:block">
                                 <span>Login</span>

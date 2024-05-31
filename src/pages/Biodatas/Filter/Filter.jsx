@@ -5,37 +5,52 @@ import "react-range-slider-input/dist/style.css";
 import "./Filter.css";
 import { useState } from "react";
 import { colorStyles, divisionOptions, genderOptions } from "./FilterData";
-import { useForm } from "react-hook-form";
 
-const Filter = () => {
+import PropTypes from "prop-types";
+
+const Filter = ({ setOpen }) => {
     const [values, setValues] = useState([18, 60]);
+    const [fromError, setFromError] = useState(false);
+    const [toError, setToError] = useState(false);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const gender = form.get("gender");
+        const division = form.get("division");
+        let from = values[0];
+        let to = values[1];
 
-    const onSubmit = (data) => {
+        if (values[0] < 18 || values[0] > 60) {
+            setFromError(true);
+            return;
+        } else if (values[1] < 18 || values[1] > 60) {
+            setToError(true);
+            return;
+        }
+
         if (values[0] > values[1]) {
+            from = values[1];
+            to = values[0];
             setValues([values[1], values[0]]);
         }
-        const { gender, division } = data;
-        console.log({ gender, division, from: values[0], to: values[1] });
+
+        console.log({ gender, division, from, to });
+        setOpen(false);
     };
 
     return (
-        <div className="py-12 px-8">
-            <Typography variant="h5" className="pb-4">
+        <div className="md:py-12 px-4 md:px-8">
+            <Typography variant="h5" className="pb-4 hidden md:block">
                 Filters
             </Typography>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={onSubmit} className="space-y-4">
                 <div className="space-y-1">
                     <label>I&apos;m looking for</label>
                     <Select
                         options={genderOptions}
                         styles={colorStyles}
-                        {...register("gender")}
+                        name="gender"
                     />
                 </div>
                 <div className="space-y-5">
@@ -54,27 +69,21 @@ const Filter = () => {
                             label="from"
                             className="w-1/2"
                             value={values[0]}
-                            {...register("from", {
-                                pattern:
-                                    /^(1[89]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|60)$/,
-                            })}
+                            name="from"
                             onChange={(e) =>
                                 setValues([e.target.value, values[1]])
                             }
-                            error={Boolean(errors.from)}
+                            error={fromError}
                         />
                         <Input
                             label="to"
                             className="w-1/2"
                             value={values[1]}
-                            {...register("to", {
-                                pattern:
-                                    /^(1[89]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|60)$/,
-                            })}
+                            name="to"
                             onChange={(e) =>
                                 setValues([values[0], e.target.value])
                             }
-                            error={Boolean(errors.to)}
+                            error={toError}
                         />
                     </div>
                 </div>
@@ -83,13 +92,17 @@ const Filter = () => {
                     <Select
                         options={divisionOptions}
                         styles={colorStyles}
-                        {...register("division")}
+                        name="division"
                     />
                 </div>
                 <Button type="submit">Apply Filter</Button>
             </form>
         </div>
     );
+};
+
+Filter.propTypes = {
+    setOpen: PropTypes.func.isRequired,
 };
 
 export default Filter;

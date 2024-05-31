@@ -12,7 +12,7 @@ import profileMenuItems from "./profileMenuItems";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Profile = ({ handleLogOut }) => {
+const UserAvatar = ({ handleLogOut }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -77,8 +77,8 @@ const Profile = ({ handleLogOut }) => {
     );
 };
 
-Profile.propTypes = {
+UserAvatar.propTypes = {
     handleLogOut: PropTypes.func.isRequired,
 };
 
-export default Profile;
+export default UserAvatar;
