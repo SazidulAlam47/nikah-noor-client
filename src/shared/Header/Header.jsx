@@ -6,14 +6,19 @@ import {
     Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
 import Container from "../../components/Container/Container";
+import Profile from "./Profile/Profile";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
+    // TODO: user authentication
+    const user = true;
+    // TODO: admin configuration
+    const isAdmin = false;
 
     useEffect(() => {
         window.addEventListener(
@@ -67,39 +72,93 @@ const Header = () => {
         </ul>
     );
 
+    const handleLogOut = () => {
+        // logOut()
+        //     .then(() => {
+        //         toast.success("LogOut Successful");
+        //     })
+        //     .catch((err) => {
+        //         displayError(err);
+        //     });
+        console.log("logout");
+    };
+
     return (
-        <Navbar className="px-0 py-2 lg:py-4 mx-auto shadow-none w-full max-w-full">
+        <Navbar className="px-0 py-3 lg:py-4 mx-auto shadow-none w-full max-w-full">
             <Container>
                 <div className="flex items-center justify-between text-blue-gray-900">
                     <Logo />
                     <div className="hidden lg:block">{navList}</div>
-                    <div className="flex items-center gap-x-1">
-                        {/* TODO: User name */}
-                        <Button className="hidden lg:inline-block">
-                            <span>Login</span>
-                        </Button>
-                    </div>
-                    <IconButton
-                        variant="text"
-                        className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-                        ripple={false}
-                        onClick={() => setOpenNav(!openNav)}
-                    >
-                        {openNav ? (
-                            <RxCross2 size={20} />
+                    <div className="flex gap-4 items-center">
+                        {user ? (
+                            <Profile handleLogOut={handleLogOut} />
                         ) : (
-                            <RxHamburgerMenu size={20} />
+                            <Button className="hidden lg:block">
+                                <span>Login</span>
+                            </Button>
                         )}
-                    </IconButton>
+                        <IconButton
+                            variant="text"
+                            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+                            ripple={false}
+                            onClick={() => setOpenNav(!openNav)}
+                        >
+                            {openNav ? (
+                                <RxCross2 size={25} />
+                            ) : (
+                                <RxHamburgerMenu size={25} />
+                            )}
+                        </IconButton>
+                    </div>
                 </div>
                 <Collapse open={openNav}>
                     <div className="container mx-auto">
                         {navList}
                         <div className="flex items-center gap-x-1">
-                            {/* TODO: User name */}
-                            <Button fullWidth>
-                                <span>Login</span>
-                            </Button>
+                            {user ? (
+                                <>
+                                    {isAdmin ? (
+                                        <Link
+                                            to="/dashboard/admin-dashboard"
+                                            className="w-full"
+                                        >
+                                            <Button fullWidth>
+                                                <span>Admin Dashboard</span>
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Link
+                                            to="/dashboard/edit-biodata"
+                                            className="w-full"
+                                        >
+                                            <Button fullWidth>
+                                                <span>Edit Biodata</span>
+                                            </Button>
+                                        </Link>
+                                    )}
+
+                                    <Button
+                                        fullWidth
+                                        color="blue-gray"
+                                        onClick={handleLogOut}
+                                    >
+                                        <span>Logout</span>
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="w-full">
+                                        <Button fullWidth>
+                                            <span>Login</span>
+                                        </Button>
+                                    </Link>
+                                    <Link to="/register" className="w-full">
+                                        <Button fullWidth>
+                                            <span>Register</span>
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </Collapse>

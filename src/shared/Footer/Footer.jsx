@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Container from "../../components/Container/Container";
 import { Link } from "react-router-dom";
@@ -25,8 +25,8 @@ const Footer = () => {
     return (
         <footer className="relative w-full bg-black/5">
             <Container>
-                <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="md:pr-8">
+                <div className="mx-auto grid w-full grid-cols-2 gap-8 py-12 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="lg:pr-4 xl:pr-8 col-span-2 md:col-span-3 lg:col-span-1 text-center lg:text-start">
                         <Link to="/" className="inline-block w-2/5">
                             <img
                                 src="/logo.png"
@@ -80,25 +80,25 @@ const Footer = () => {
                     </Typography>
                     <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
                         <a
-                            href="#"
+                            href="https://www.facebook.com/OrdhekDeen/"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaFacebook size={18} />
                         </a>
                         <a
-                            href="#"
+                            href="https://www.linkedin.com/company/ordhekdeen/"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
-                            <FaInstagram size={18} />
+                            <FaLinkedin size={18} />
                         </a>
                         <a
-                            href="#"
+                            href="https://x.com/ordhekdeen"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaXTwitter size={18} />
                         </a>
                         <a
-                            href="#"
+                            href="https://www.youtube.com/OrdhekDeen"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaYoutube size={18} />
