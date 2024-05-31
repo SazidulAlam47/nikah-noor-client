@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import PropTypes from "prop-types";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
+import SuccessCardSkeleton from "./SuccessCardSkeleton";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const SampleNextArrow = ({ onClick }) => {
     return (
@@ -30,6 +32,8 @@ const SamplePrevArrow = ({ onClick }) => {
 };
 
 const SuccessStory = () => {
+    const size = useWindowSize();
+
     const { data: stories, isPending } = useQuery({
         queryKey: ["success-sorties"],
         queryFn: async () => {
@@ -72,13 +76,27 @@ const SuccessStory = () => {
     };
 
     if (isPending) {
+        const skeletonCount =
+            size.width < 768
+                ? 1
+                : size.width < 1024
+                ? 2
+                : size.width < 1280
+                ? 3
+                : 4;
         return (
             <Container py>
                 <SectionHeading
                     title="Success Stories"
                     subtitle="Read inspiring stories from couples who found love and happiness through Nikah Noor"
                 />
-                <div></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    {Array(skeletonCount)
+                        .fill(null)
+                        .map((_, index) => (
+                            <SuccessCardSkeleton key={index} />
+                        ))}
+                </div>
             </Container>
         );
     }

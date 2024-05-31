@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Filter from "./Filter/Filter";
 import Members from "../../shared/Members/Members";
-import Container from "../../components/Container/Container";
 import SectionHeading from "../../shared/SectionHeading/SectionHeading";
 import { IoSettingsOutline } from "react-icons/io5";
 import {
@@ -40,14 +39,12 @@ const Biodatas = () => {
                 <div className="w-[25%] border-r hidden md:inline-block">
                     <Filter setOpen={setOpen} />
                 </div>
-                <div className="px-1 sm:px-5 md:w-[75%] py-6 md:py-12">
-                    <Container>
-                        <SectionHeading
-                            title="All Members' Biodata"
-                            subtitle="Discover profiles of our members and connect with your potential life partner"
-                        />
-                        <Members />
-                    </Container>
+                <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12">
+                    <SectionHeading
+                        title="All Members' Biodata"
+                        subtitle="Discover profiles of our members and connect with your potential life partner"
+                    />
+                    <Members />
                 </div>
             </div>
             <Drawer
