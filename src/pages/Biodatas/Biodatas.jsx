@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import Filter from "./Filter/Filter";
 import Members from "../../shared/Members/Members";
+import Container from "../../components/Container/Container";
+import SectionHeading from "../../shared/SectionHeading/SectionHeading";
 
 const Biodatas = () => {
     return (
@@ -14,7 +16,13 @@ const Biodatas = () => {
                     <Filter />
                 </div>
                 <div className="w-[75%]">
-                    <Members />
+                    <Container py>
+                        <SectionHeading
+                            title="All Members' Biodata"
+                            subtitle="Discover profiles of our members and connect with your potential life partner"
+                        />
+                        <Members />
+                    </Container>
                 </div>
             </div>
         </>

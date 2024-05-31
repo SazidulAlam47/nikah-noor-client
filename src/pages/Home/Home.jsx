@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "./Hero/Hero";
-import Members from "../../shared/Members/Members";
 import SuccessStory from "./SuccessStory/SuccessStory";
 import Counter from "./Counter/Counter";
 import Steps from "./Steps/Steps";
+import PremiumMembers from "./PremiumMembers/PremiumMembers";
 
 const Home = () => {
     return (
@@ -13,10 +13,8 @@ const Home = () => {
             </Helmet>
 
             <Hero />
-
-            <Members />
+            <PremiumMembers />
             <Steps />
-
             <Counter />
             <SuccessStory />
         </>
