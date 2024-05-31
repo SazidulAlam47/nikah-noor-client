@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import PageTitle from "../../components/PageTitle/PageTitle";
+import Filter from "./Filter/Filter";
+import Members from "../../shared/Members/Members";
 
 const Biodatas = () => {
     return (
@@ -7,7 +8,15 @@ const Biodatas = () => {
             <Helmet>
                 <title>Nikah Noor | Biodatas</title>
             </Helmet>
-            <PageTitle title="Biodatas" />
+
+            <div className="flex">
+                <div className="w-[25%] border-r">
+                    <Filter />
+                </div>
+                <div className="w-[75%]">
+                    <Members />
+                </div>
+            </div>
         </>
     );
 };

@@ -88,7 +88,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar className="px-0 py-3 lg:py-4 mx-auto shadow-none w-full max-w-full">
+        <Navbar className="px-0 py-3 lg:py-4 mx-auto w-full max-w-full rounded-none shadow-md">
             <Container>
                 <div className="flex items-center justify-between text-blue-gray-900">
                     <Logo />

@@ -1,0 +1,20 @@
+.css-1nmdiq5-menu {
+    z-index: 999 !important;
+}
+
+.range-input div {
+    min-width: 0 !important;
+    width: 50% !important;
+}
+
+#range-slider .range-slider__range {
+    background: #ffadbb;
+    transition: height 0.3s;
+    z-index: 2;
+}
+
+#range-slider .range-slider__thumb {
+    background: #ff657f;
+    transition: transform 0.3s;
+    z-index: 4;
+}
