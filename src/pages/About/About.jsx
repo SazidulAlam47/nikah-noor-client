@@ -14,7 +14,7 @@ const About = () => {
                 <div className="max-w-screen-2xl mx-auto space-y-4">
                     <Typography
                         variant="h3"
-                        className="text-center font-NotoNaskhArabic"
+                        className="text-center font-calibri"
                     >
                         ﷽
                     </Typography>
@@ -22,22 +22,21 @@ const About = () => {
                         Indeed, all praise belongs to Allah. We seek refuge in
                         Him from the evils within ourselves and from our ill
                         deeds. Peace and blessings be upon the Prophet{" "}
-                        <span className="font-NotoNaskhArabic">
-                            <span className="font-NotoNaskhArabic">(ﷺ)</span>
+                        <span className="font-calibri">
+                            <span className="font-calibri">(ﷺ)</span>
                         </span>
                         .
                     </Typography>
                     <Typography variant="lead">
                         Marriage is a distinctive blessing given by Almighty
                         Allah and a vital Sunnah of the Prophet{" "}
-                        <span className="font-NotoNaskhArabic">(ﷺ)</span>.
-                        According to the Qur&apos;an and Hadith, marriage is
-                        regarded as a means of purity, half of the deen
-                        (religion), and a source of financial prosperity. Allah
-                        commands the believers to marry for its moral,
-                        spiritual, social, and psychological benefits. The Holy
-                        Prophet{" "}
-                        <span className="font-NotoNaskhArabic">(ﷺ)</span> said,
+                        <span className="font-calibri">(ﷺ)</span>. According to
+                        the Qur&apos;an and Hadith, marriage is regarded as a
+                        means of purity, half of the deen (religion), and a
+                        source of financial prosperity. Allah commands the
+                        believers to marry for its moral, spiritual, social, and
+                        psychological benefits. The Holy Prophet{" "}
+                        <span className="font-calibri">(ﷺ)</span> said,
                         “Marriage is my precept and my practice. Those who do
                         not follow my practice are not of me.” He also said,
                         “When a man has married, he has completed one-half of
