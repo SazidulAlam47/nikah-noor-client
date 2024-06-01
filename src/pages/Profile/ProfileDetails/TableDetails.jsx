@@ -21,7 +21,7 @@ const TableDetails = ({ tableRows, tableTitle, biodataType }) => {
                             key={index}
                             className={`${
                                 biodataType === "Male"
-                                    ? "odd:bg-blue-50/50"
+                                    ? "odd:bg-blue-50/70"
                                     : "odd:bg-pink-50/70"
                             }`}
                         >

@@ -8,7 +8,7 @@ import "./PhotoDetails.css";
 const PhotoDetails = ({ biodata }) => {
     return (
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-5">
-            <div className="w-full sm:w-fit sm:h-52 aspect-square rounded-lg overflow-hidden shadow-xl shadow-blue-gray-900/50 cursor-pointer relative">
+            <div className="w-full sm:w-fit sm:h-52 lg:h-60  xl:h-64 2xl:h-72 aspect-square rounded-lg overflow-hidden shadow-xl shadow-blue-gray-900/50 cursor-pointer relative">
                 <PhotoProvider>
                     <PhotoView src={biodata.profileImage}>
                         <img src={biodata.profileImage} alt={biodata?.name} />
