@@ -36,9 +36,12 @@ const Biodatas = () => {
                 </Button>
             </div>
             <div className="flex">
-                <div className="w-[25%] border-r hidden md:inline-block">
+                <aside
+                    className="w-[25%] border-r hidden md:block sticky top-0 h-screen
+                "
+                >
                     <Filter setOpen={setOpen} />
-                </div>
+                </aside>
                 <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12">
                     <SectionHeading
                         title="All Members' Biodata"

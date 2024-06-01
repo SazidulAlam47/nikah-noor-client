@@ -40,7 +40,7 @@ const Filter = ({ setOpen }) => {
     };
 
     return (
-        <div className="md:py-12 px-4 md:px-8">
+        <div className="md:pt-12 px-4 md:px-8">
             <Typography variant="h5" className="pb-4 hidden md:block">
                 Filters
             </Typography>
@@ -95,7 +95,9 @@ const Filter = ({ setOpen }) => {
                         name="division"
                     />
                 </div>
-                <Button type="submit">Apply Filter</Button>
+                <div className="text-center">
+                    <Button type="submit">Apply Filter</Button>
+                </div>
             </form>
         </div>
     );
