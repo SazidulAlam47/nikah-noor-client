@@ -3,6 +3,7 @@ import PhotoDetails from "./PhotoDetails";
 import TableDetails from "./TableDetails";
 import moment from "moment";
 import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const ProfileDetails = ({ biodata }) => {
     // TODO: premium memberships
@@ -84,12 +85,14 @@ const ProfileDetails = ({ biodata }) => {
     ];
 
     const requestBtn = (
-        <Button
-            size="sm"
-            color={biodata.biodataType === "Male" ? "blue" : "pink"}
-        >
-            Request Contact
-        </Button>
+        <Link to={`/checkout/${biodata.biodataId}`}>
+            <Button
+                size="sm"
+                color={biodata.biodataType === "Male" ? "blue" : "pink"}
+            >
+                Request Contact
+            </Button>
+        </Link>
     );
 
     const contactTable = [
