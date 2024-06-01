@@ -7,7 +7,6 @@ import useAuth from "../../hooks/useAuth";
 import AuthForm from "./AuthForm";
 import useDisplayError from "../../hooks/useDisplayError";
 
-
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,7 +26,7 @@ const Login = () => {
 
     const handleLogin = (data) => {
         const { email, password } = data;
-        console.log(data);
+
         signInWithPassword(email, password)
             .then((result) => {
                 console.log(result.user);
