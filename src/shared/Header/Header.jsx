@@ -14,11 +14,12 @@ import Container from "../../components/Container/Container";
 import UserAvatar from "./UserAvatar/UserAvatar";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import displayError from "../../utils/displayError";
+import useDisplayError from "../../hooks/useDisplayError";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
     const { user, logOut } = useAuth();
+    const displayError = useDisplayError();
     // TODO: admin configuration
     const isAdmin = false;
 

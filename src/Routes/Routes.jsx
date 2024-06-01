@@ -6,6 +6,7 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import Profile from "../pages/Profile/Profile";
 import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 
 const router = createBrowserRouter([
     {
@@ -32,11 +33,15 @@ const router = createBrowserRouter([
                 path: "/profile/:biodataId",
                 element: <Profile />,
             },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/register",
+                element: <Register />,
+            },
         ],
-    },
-    {
-        path: "/login",
-        element: <Login />,
     },
 ]);
 

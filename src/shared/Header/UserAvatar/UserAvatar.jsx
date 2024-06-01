@@ -43,7 +43,7 @@ const UserAvatar = ({ handleLogOut }) => {
                         withBorder={true}
                         color="blue-gray"
                         className=" p-0.5"
-                        src={user?.photoURL}
+                        // src={user?.photoURL}
                     />
                 </Button>
             </MenuHandler>

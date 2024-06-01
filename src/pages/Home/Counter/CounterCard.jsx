@@ -13,11 +13,7 @@ const CounterCard = ({ counter }) => {
                 <img src={counter.icon} alt="card-image" className="h-full" />
             </CardHeader>
             <CardBody>
-                <Typography
-                    variant="p"
-                    color="blue-gray"
-                    className="mb-2 text-center"
-                >
+                <Typography color="blue-gray" className="mb-2 text-center">
                     {counter.title}
                 </Typography>
                 <Typography
