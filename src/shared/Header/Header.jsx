@@ -16,7 +16,7 @@ import UserAvatar from "./UserAvatar/UserAvatar";
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
     // TODO: user authentication
-    const user = true;
+    const user = false;
     // TODO: admin configuration
     const isAdmin = false;
 
@@ -97,9 +97,11 @@ const Header = () => {
                         {user ? (
                             <UserAvatar handleLogOut={handleLogOut} />
                         ) : (
-                            <Button className="hidden lg:block">
-                                <span>Login</span>
-                            </Button>
+                            <Link to="/login">
+                                <Button className="hidden lg:block">
+                                    <span>Login</span>
+                                </Button>
+                            </Link>
                         )}
                         <IconButton
                             variant="text"
@@ -157,7 +159,7 @@ const Header = () => {
                                         </Button>
                                     </Link>
                                     <Link to="/register" className="w-full">
-                                        <Button fullWidth>
+                                        <Button fullWidth color="blue-gray">
                                             <span>Register</span>
                                         </Button>
                                     </Link>

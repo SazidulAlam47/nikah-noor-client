@@ -32,11 +32,11 @@ const Profile = () => {
                 <title>Nikah Noor | {biodata?.name}</title>
             </Helmet>
             <Container>
-                <div className="flex">
-                    <div className="px-1 sm:px-5 md:px-8 md:w-[70%] py-12">
+                <div className="flex flex-col lg:flex-row">
+                    <div className="px-1 sm:px-5 md:px-8 lg:w-[70%] py-12">
                         <ProfileDetails biodata={biodata} />
                     </div>
-                    <aside className="w-[30%] p-6 border-l py-10">
+                    <aside className="lg:w-[30%] lg:border-l lg:py-10 lg:px-6">
                         <Typography
                             variant="h5"
                             color="blue-gray"

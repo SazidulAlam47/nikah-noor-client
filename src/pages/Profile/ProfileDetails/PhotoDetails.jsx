@@ -7,8 +7,8 @@ import "./PhotoDetails.css";
 
 const PhotoDetails = ({ biodata }) => {
     return (
-        <div className="flex gap-4">
-            <div className="h-52 aspect-square rounded-lg overflow-hidden shadow-xl shadow-blue-gray-900/50 cursor-pointer relative">
+        <div className="flex flex-col sm:flex-row gap-8 sm:gap-5">
+            <div className="w-full sm:w-fit sm:h-52 aspect-square rounded-lg overflow-hidden shadow-xl shadow-blue-gray-900/50 cursor-pointer relative">
                 <PhotoProvider>
                     <PhotoView src={biodata.profileImage}>
                         <img src={biodata.profileImage} alt={biodata?.name} />
@@ -20,24 +20,24 @@ const PhotoDetails = ({ biodata }) => {
                 />
             </div>
             <div className="flex flex-col justify-center">
-                <Typography variant="lead" className="flex items-center gap-3">
-                    <Typography variant="h5">Biodata ID:</Typography>
+                <Typography variant="lead">
+                    <span className="font-bold">Biodata ID: </span>
                     {biodata?.biodataId}
                 </Typography>
-                <Typography variant="lead" className="flex items-center gap-3">
-                    <Typography variant="h5">Biodata Type:</Typography>
+                <Typography variant="lead">
+                    <span className="font-bold">Biodata Type: </span>
                     {biodata?.biodataType}
                 </Typography>
-                <Typography variant="lead" className="flex items-center gap-3">
-                    <Typography variant="h5">Name:</Typography>
+                <Typography variant="lead">
+                    <span className="font-bold">Name: </span>
                     {biodata?.name}
                 </Typography>
-                <Typography variant="lead" className="flex items-center gap-3">
-                    <Typography variant="h5">Age:</Typography>
+                <Typography variant="lead">
+                    <span className="font-bold">Age: </span>
                     {biodata?.age}
                 </Typography>
-                <Typography variant="lead" className="flex items-center gap-3">
-                    <Typography variant="h5">Permanent Division:</Typography>
+                <Typography variant="lead">
+                    <span className="font-bold">Permanent Division: </span>
                     {biodata?.permanentDivision}
                 </Typography>
             </div>
