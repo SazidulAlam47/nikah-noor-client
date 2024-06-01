@@ -6,6 +6,7 @@ import Container from "../../components/Container/Container";
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import Members from "../../shared/Members/Members";
 import { Typography } from "@material-tailwind/react";
+import Loader from "../../components/Loader/Loader";
 
 const Profile = () => {
     const { biodataId } = useParams();
@@ -23,7 +24,7 @@ const Profile = () => {
     console.log(biodata);
 
     if (isPending) {
-        return <p>Loading..</p>;
+        return <Loader />;
     }
 
     return (

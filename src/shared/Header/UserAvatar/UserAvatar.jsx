@@ -11,9 +11,11 @@ import { useState } from "react";
 import profileMenuItems from "./profileMenuItems";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import useAuth from "../../../hooks/useAuth";
 
 const UserAvatar = ({ handleLogOut }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleClick = (path, isLastItem) => {
@@ -37,11 +39,11 @@ const UserAvatar = ({ handleLogOut }) => {
                     <Avatar
                         variant="circular"
                         size="md"
-                        alt="tania andrew"
+                        alt={user?.displayName}
                         withBorder={true}
                         color="blue-gray"
                         className=" p-0.5"
-                        src="https://docs.material-tailwind.com/img/face-2.jpg"
+                        src={user?.photoURL}
                     />
                 </Button>
             </MenuHandler>

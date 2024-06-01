@@ -1,13 +1,13 @@
 import { Card, Typography } from "@material-tailwind/react";
 import PropTypes from "prop-types";
 
-const TableDetails = ({ tableRows, tableTitle, biodata }) => {
+const TableDetails = ({ tableRows, tableTitle, biodataType }) => {
     return (
         <Card className="w-full rounded-lg mt-12 overflow-hidden">
             <Typography
                 variant="h5"
                 className={`border-t-2 rounded-lg text-center py-2 ${
-                    biodata?.biodataType === "Male"
+                    biodataType === "Male"
                         ? "border-blue-200"
                         : "border-pink-200"
                 }`}
@@ -20,7 +20,7 @@ const TableDetails = ({ tableRows, tableTitle, biodata }) => {
                         <tr
                             key={index}
                             className={`${
-                                biodata?.biodataType === "Male"
+                                biodataType === "Male"
                                     ? "odd:bg-blue-50/50"
                                     : "odd:bg-pink-50/70"
                             }`}
@@ -53,7 +53,7 @@ const TableDetails = ({ tableRows, tableTitle, biodata }) => {
 
 TableDetails.propTypes = {
     tableRows: PropTypes.array.isRequired,
-    biodata: PropTypes.object.isRequired,
+    biodataType: PropTypes.string.isRequired,
     tableTitle: PropTypes.string.isRequired,
 };
 

@@ -12,11 +12,13 @@ import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
 import Container from "../../components/Container/Container";
 import UserAvatar from "./UserAvatar/UserAvatar";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import displayError from "../../utils/displayError";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
-    // TODO: user authentication
-    const user = false;
+    const { user, logOut } = useAuth();
     // TODO: admin configuration
     const isAdmin = false;
 
@@ -77,13 +79,13 @@ const Header = () => {
     );
 
     const handleLogOut = () => {
-        // logOut()
-        //     .then(() => {
-        //         toast.success("LogOut Successful");
-        //     })
-        //     .catch((err) => {
-        //         displayError(err);
-        //     });
+        logOut()
+            .then(() => {
+                toast.success("LogOut Successful");
+            })
+            .catch((err) => {
+                displayError(err);
+            });
         console.log("logout");
     };
 

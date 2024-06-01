@@ -112,32 +112,32 @@ const ProfileDetails = ({ biodata }) => {
             <TableDetails
                 tableRows={personalTable}
                 tableTitle="Personal Details"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
             <TableDetails
                 tableRows={physicalTable}
                 tableTitle="Physical Appearance"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
             <TableDetails
                 tableRows={locationTable}
                 tableTitle="Location Details"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
             <TableDetails
                 tableRows={familyTable}
                 tableTitle="Family Details"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
             <TableDetails
                 tableRows={partnerTable}
                 tableTitle="Partner Preference"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
             <TableDetails
                 tableRows={contactTable}
                 tableTitle="Contact Details"
-                biodata={biodata}
+                biodataType={biodata.biodataType}
             />
         </>
     );
