@@ -2,8 +2,12 @@ import PropTypes from "prop-types";
 import PhotoDetails from "./PhotoDetails";
 import TableDetails from "./TableDetails";
 import moment from "moment";
+import { Button } from "@material-tailwind/react";
 
 const ProfileDetails = ({ biodata }) => {
+    // TODO: premium memberships
+    const premium = false;
+
     const personalTable = [
         {
             field: "Name",
@@ -79,14 +83,23 @@ const ProfileDetails = ({ biodata }) => {
         },
     ];
 
+    const requestBtn = (
+        <Button
+            size="sm"
+            color={biodata.biodataType === "Male" ? "blue" : "pink"}
+        >
+            Request Contact
+        </Button>
+    );
+
     const contactTable = [
         {
             field: "Contact Email",
-            value: biodata?.contactEmail,
+            value: premium ? biodata?.contactEmail : requestBtn,
         },
         {
             field: "Mobile Number",
-            value: biodata?.mobileNumber,
+            value: premium ? biodata?.mobileNumber : requestBtn,
         },
     ];
 
