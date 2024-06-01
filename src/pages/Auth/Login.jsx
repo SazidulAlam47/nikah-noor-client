@@ -89,10 +89,10 @@ const Login = () => {
                     fullWidth
                 >
                     <img
-                        src={`https://www.material-tailwind.com/logos/logo-google.png`}
+                        src="https://www.material-tailwind.com/logos/logo-google.png"
                         alt="google"
                         className="h-6 w-6"
-                    />{" "}
+                    />
                     sign in with google
                 </Button>
                 <Typography
