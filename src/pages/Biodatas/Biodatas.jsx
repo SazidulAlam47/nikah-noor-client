@@ -36,10 +36,7 @@ const Biodatas = () => {
                 </Button>
             </div>
             <div className="flex">
-                <aside
-                    className="w-[25%] border-r hidden md:block sticky top-0 h-screen
-                "
-                >
+                <aside className="w-[25%] border-r hidden md:block sticky pt-10 top-0 h-screen">
                     <Filter setOpen={setOpen} />
                 </aside>
                 <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12">

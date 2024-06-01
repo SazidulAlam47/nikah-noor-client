@@ -40,7 +40,7 @@ const Filter = ({ setOpen }) => {
     };
 
     return (
-        <div className="md:pt-12 px-4 md:px-8">
+        <div className="px-4 md:px-8">
             <Typography variant="h5" className="pb-4 hidden md:block">
                 Filters
             </Typography>

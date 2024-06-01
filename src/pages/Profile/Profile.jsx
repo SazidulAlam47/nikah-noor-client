@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
+import Container from "../../components/Container/Container";
+import ProfileDetails from "./ProfileDetails/ProfileDetails";
+import Members from "../../shared/Members/Members";
+import { Typography } from "@material-tailwind/react";
 
 const Profile = () => {
     const { biodataId } = useParams();
@@ -22,9 +27,28 @@ const Profile = () => {
     }
 
     return (
-        <div>
-            <p>This is Profile</p>
-        </div>
+        <>
+            <Helmet>
+                <title>Nikah Noor | {biodata?.name}</title>
+            </Helmet>
+            <Container>
+                <div className="flex">
+                    <div className="px-1 sm:px-5 md:px-8 md:w-[70%] py-12">
+                        <ProfileDetails biodata={biodata} />
+                    </div>
+                    <aside className="w-[30%] p-6 border-l py-10">
+                        <Typography
+                            variant="h5"
+                            color="blue-gray"
+                            className="text-center font-prociono"
+                        >
+                            Similar biodatas
+                        </Typography>
+                        <Members sidebar />
+                    </aside>
+                </div>
+            </Container>
+        </>
     );
 };
 
