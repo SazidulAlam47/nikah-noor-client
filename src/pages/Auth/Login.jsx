@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -13,25 +12,44 @@ const Login = () => {
     const { loading } = useAuth();
     const displayError = useDisplayError();
 
-    const { user, googleLogin, signInWithPassword } = useAuth();
+    const { googleLogin, signInWithPassword } = useAuth();
 
-    useEffect(() => {
-        if (user) {
-            // user already logged in
-            toast.success("Login Successful");
-            // navigate
-            location.state ? navigate(location.state) : navigate("/");
-        }
-    }, [user, navigate, location]);
+    const successTask = (result) => {
+        // console.log(result.user);
+        // const name = result.user.displayName;
+        // const email = result.user.email;
+        // const image = result.user.photoURL;
+        // const user = { email, name, image };
 
-    const handleLogin = (data) => {
+        // axiosPublic.put("/users", user).then((res) => {
+        //     console.log(res.data);
+        //     toast.success("Login Successful");
+        //     // navigate
+        //     if (result.user.emailVerified) {
+        //         location.state ? navigate(location.state) : navigate("/");
+        //     }
+        // });
+        console.log(result.user);
+        toast.success("Login Successful");
+        location.state ? navigate(location.state) : navigate("/");
+    };
+
+    const handlePasswordLogin = (data) => {
         const { email, password } = data;
 
         signInWithPassword(email, password)
             .then((result) => {
-                console.log(result.user);
-                location.state ? navigate(location.state) : navigate("/");
-                toast.success("Login Successful");
+                successTask(result);
+            })
+            .catch((err) => {
+                displayError(err);
+            });
+    };
+
+    const handleGoogle = () => {
+        googleLogin()
+            .then((result) => {
+                successTask(result);
             })
             .catch((err) => {
                 displayError(err);
@@ -50,7 +68,7 @@ const Login = () => {
                 <Typography className="mb-8 text-gray-600 font-normal text-[18px]">
                     Enter your email and password to sign in
                 </Typography>
-                <AuthForm handleSubmit={handleLogin} />
+                <AuthForm handleSubmit={handlePasswordLogin} />
                 {/* <div className="!mt-4 flex justify-center">
                         <Typography
                             as="a"
@@ -64,7 +82,7 @@ const Login = () => {
                     </div> */}
                 <Button
                     disabled={loading}
-                    onClick={googleLogin}
+                    onClick={handleGoogle}
                     variant="outlined"
                     size="lg"
                     className="mt-6 flex h-12 items-center justify-center gap-2"

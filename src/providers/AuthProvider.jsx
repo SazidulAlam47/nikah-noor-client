@@ -6,7 +6,7 @@ import {
     onAuthStateChanged,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
-    signInWithRedirect,
+    signInWithPopup,
     signOut,
     updateProfile,
 } from "firebase/auth";
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
 
     const googleLogin = () => {
         setLoading(true);
-        return signInWithRedirect(auth, googleProvider);
+        return signInWithPopup(auth, googleProvider);
     };
 
     const createUser = (email, password) => {
