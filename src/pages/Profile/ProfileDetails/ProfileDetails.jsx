@@ -4,6 +4,7 @@ import TableDetails from "./TableDetails";
 import moment from "moment";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons/fa6";
 
 const ProfileDetails = ({ biodata }) => {
     // TODO: premium memberships
@@ -108,7 +109,13 @@ const ProfileDetails = ({ biodata }) => {
 
     return (
         <>
-            <PhotoDetails biodata={biodata} />
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
+                <PhotoDetails biodata={biodata} />
+                <Button className="h-fit w-fit flex items-center gap-2 ">
+                    <FaHeart size={14} />
+                    Add to favorites
+                </Button>
+            </div>
             <TableDetails
                 tableRows={personalTable}
                 tableTitle="Personal Details"

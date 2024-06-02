@@ -25,6 +25,7 @@ const Biodatas = () => {
             <Helmet>
                 <title>Nikah Noor | Biodatas</title>
             </Helmet>
+            {/* Mobile Filter Button */}
             <div className="flex justify-end pt-6 pr-3 sm:pr-8 md:hidden">
                 <Button
                     onClick={openDrawer}
@@ -35,6 +36,7 @@ const Biodatas = () => {
                     <span>Filters</span>
                 </Button>
             </div>
+            {/* Desktop */}
             <div className="flex">
                 <aside className="w-[25%] border-r hidden md:block sticky pt-10 top-0 h-screen">
                     <Filter setOpen={setOpen} />
@@ -47,6 +49,7 @@ const Biodatas = () => {
                     <Members />
                 </div>
             </div>
+            {/* Mobile Filter Drawer */}
             <Drawer
                 placement="bottom"
                 size={size.height ? size.height : 1000}

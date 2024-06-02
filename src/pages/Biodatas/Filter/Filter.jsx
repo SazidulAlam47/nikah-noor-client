@@ -104,7 +104,7 @@ const Filter = ({ setOpen }) => {
 };
 
 Filter.propTypes = {
-    setOpen: PropTypes.func.isRequired,
+    setOpen: PropTypes.func,
 };
 
 export default Filter;

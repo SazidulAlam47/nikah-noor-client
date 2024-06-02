@@ -8,6 +8,8 @@ import Profile from "../pages/Profile/Profile";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import PrivateRoute from "./PrivetRoute";
+import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
+import Checkout from "../pages/Dashboard/Checkout/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -46,7 +48,19 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />,
             },
+            {
+                path: "/checkout/:biodataId",
+                element: (
+                    <PrivateRoute>
+                        <Checkout />
+                    </PrivateRoute>
+                ),
+            },
         ],
+    },
+    {
+        path: "/dashboard",
+        element: <DashboardLayout />,
     },
 ]);
 

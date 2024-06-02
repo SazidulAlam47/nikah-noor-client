@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Container from "../../components/Container/Container";
-import { Link } from "react-router-dom";
+import Logo from "../../components/Logo/Logo";
 
 const SITEMAP = [
     {
@@ -27,13 +27,7 @@ const Footer = () => {
             <Container>
                 <div className="mx-auto grid w-full grid-cols-2 gap-8 py-12 md:grid-cols-3 lg:grid-cols-4">
                     <div className="lg:pr-4 xl:pr-8 col-span-2 md:col-span-3 lg:col-span-1 text-center lg:text-start">
-                        <Link to="/" className="inline-block w-2/5">
-                            <img
-                                src="/logo.png"
-                                alt="logo"
-                                className="w-full"
-                            />
-                        </Link>
+                        <Logo width="2/5" />
                         <Typography className="font-normal text-gray-800 pt-2">
                             Connecting hearts and building lifelong
                             partnerships. At Nikah Noor, we make finding your
