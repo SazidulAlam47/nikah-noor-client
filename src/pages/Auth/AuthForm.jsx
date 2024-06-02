@@ -39,7 +39,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
     };
 
     return (
-        <form className="min-w-[430px]" onSubmit={handleSubmit(onSubmit)}>
+        <form className="sm:min-w-[430px]" onSubmit={handleSubmit(onSubmit)}>
             {registerPage && (
                 <div className="mb-6">
                     <Input
@@ -52,7 +52,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                     />
                     {errors.name && (
                         <div className="flex gap-2 items-center text-red-600 pt-1">
-                            <BsExclamationCircleFill />
+                            <BsExclamationCircleFill className="hidden sm:inline-block" />
                             <Typography>{errors.name.message}</Typography>
                         </div>
                     )}
@@ -74,7 +74,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                 />
                 {errors.email && (
                     <div className="flex gap-2 items-center text-red-600 pt-1">
-                        <BsExclamationCircleFill />
+                        <BsExclamationCircleFill className="hidden sm:inline-block" />
                         <Typography>{errors.email.message}</Typography>
                     </div>
                 )}
@@ -105,7 +105,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                         />
                         {errors.password && (
                             <div className="flex gap-2 items-center text-red-600 pt-1">
-                                <BsExclamationCircleFill />
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
                                 <Typography>
                                     {errors.password.message}
                                 </Typography>
@@ -137,7 +137,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                         />
                         {errors.password && (
                             <div className="flex gap-2 items-center text-red-600 pt-1">
-                                <BsExclamationCircleFill />
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
                                 <Typography>
                                     {errors.password.message}
                                 </Typography>
@@ -164,7 +164,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                     ></input>
                     {errors.image && (
                         <div className="flex gap-2 items-center text-red-600 pt-1">
-                            <BsExclamationCircleFill />
+                            <BsExclamationCircleFill className="hidden sm:inline-block" />
                             <Typography>{errors.image.message}</Typography>
                         </div>
                     )}

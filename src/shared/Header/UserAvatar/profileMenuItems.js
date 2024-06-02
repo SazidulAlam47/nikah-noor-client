@@ -22,14 +22,14 @@ const userMenuItems = [
         path: "/dashboard/view-biodata"
     },
     {
-        label: "My Contact Request",
+        label: "My Contact Requests",
         icon: IoIosContacts,
-        path: "/dashboard/my-contact-request"
+        path: "/dashboard/contact-requests"
     },
     {
-        label: "Favorites Biodata",
+        label: "Favorite Biodatas",
         icon: CiHeart,
-        path: "/dashboard/favorites-biodata"
+        path: "/dashboard/favorite-biodatas"
     }
 ];
 

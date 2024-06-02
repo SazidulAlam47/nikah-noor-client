@@ -3,6 +3,7 @@ import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Container from "../../components/Container/Container";
 import Logo from "../../components/Logo/Logo";
+import { Link } from "react-router-dom";
 
 const SITEMAP = [
     {
@@ -68,31 +69,34 @@ const Footer = () => {
                         variant="small"
                         className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
                     >
-                        &copy; {currentYear}{" "}
-                        <a href="https://material-tailwind.com/">Nikah Noor</a>.
-                        All Rights Reserved.
+                        &copy; {currentYear} <Link to="/">Nikah Noor</Link>. All
+                        Rights Reserved.
                     </Typography>
                     <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
                         <a
                             href="https://www.facebook.com/OrdhekDeen/"
+                            target="_blank"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaFacebook size={18} />
                         </a>
                         <a
                             href="https://www.linkedin.com/company/ordhekdeen/"
+                            target="_blank"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaLinkedin size={18} />
                         </a>
                         <a
                             href="https://x.com/ordhekdeen"
+                            target="_blank"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaXTwitter size={18} />
                         </a>
                         <a
                             href="https://www.youtube.com/OrdhekDeen"
+                            target="_blank"
                             className="opacity-80 transition-opacity hover:opacity-100"
                         >
                             <FaYoutube size={18} />

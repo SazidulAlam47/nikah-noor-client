@@ -11,6 +11,9 @@ import PrivateRoute from "./PrivetRoute";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Checkout from "../pages/Dashboard/Checkout/Checkout";
 import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
+import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
+import ContactRequests from "../pages/Dashboard/ContactRequests/ContactRequests";
+import FavoriteBiodatas from "../pages/Dashboard/FavoriteBiodatas/FavoriteBiodatas";
 
 const router = createBrowserRouter([
     {
@@ -75,6 +78,19 @@ const router = createBrowserRouter([
                 path: "edit-biodata",
                 element: <EditBiodata />,
             },
+            {
+                path: "view-biodata",
+                element: <ViewBiodata />,
+            },
+            {
+                path: "contact-requests",
+                element: <ContactRequests />,
+            },
+            {
+                path: "favorite-biodatas",
+                element: <FavoriteBiodatas />,
+            },
+            // admin only pages
         ],
     },
 ]);

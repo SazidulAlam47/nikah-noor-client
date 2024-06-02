@@ -64,7 +64,7 @@ const Register = () => {
     };
 
     return (
-        <section className="grid text-center py-12 items-center">
+        <section className="grid text-center py-12 items-center min-h-[calc(100vh-425px)] px-3 sm:px-0 ">
             <Helmet>
                 <title>Nikah Noor | Register</title>
             </Helmet>

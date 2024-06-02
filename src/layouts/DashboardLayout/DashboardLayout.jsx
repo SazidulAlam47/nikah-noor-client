@@ -21,7 +21,7 @@ const DashboardLayout = () => {
                 </button>
             </div>
             {/* Desktop */}
-            <div className="flex">
+            <div className="flex font-poppins">
                 <aside className="md:w-[30%] lg:w-[20%] border-r shadow-lg hidden md:block sticky pt-10 top-0 h-screen">
                     <SideNavigation setOpen={setOpen} />
                 </aside>
