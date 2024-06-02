@@ -16,9 +16,9 @@ const DashboardLayout = () => {
             {/* Mobile Side navigation Button Header */}
             <div className="flex md:hidden justify-between items-center px-3 py-4 shadow">
                 <Logo />
-                <span onClick={openDrawer}>
+                <button onClick={openDrawer}>
                     <RxHamburgerMenu size={30} />
-                </span>
+                </button>
             </div>
             {/* Desktop */}
             <div className="flex">

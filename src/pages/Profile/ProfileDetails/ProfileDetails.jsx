@@ -86,7 +86,7 @@ const ProfileDetails = ({ biodata }) => {
     ];
 
     const requestBtn = (
-        <Link to={`/checkout/${biodata.biodataId}`}>
+        <Link to={`/dashboard/checkout/${biodata.biodataId}`}>
             <Button
                 size="sm"
                 color={biodata.biodataType === "Male" ? "blue" : "pink"}

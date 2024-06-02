@@ -10,6 +10,7 @@ import Register from "../pages/Auth/Register";
 import PrivateRoute from "./PrivetRoute";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Checkout from "../pages/Dashboard/Checkout/Checkout";
+import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
 
 const router = createBrowserRouter([
     {
@@ -60,7 +61,21 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardLayout />,
+        element: (
+            <PrivateRoute>
+                <DashboardLayout />
+            </PrivateRoute>
+        ),
+        children: [
+            {
+                path: "checkout/:biodataId",
+                element: <Checkout />,
+            },
+            {
+                path: "edit-biodata",
+                element: <EditBiodata />,
+            },
+        ],
     },
 ]);
 

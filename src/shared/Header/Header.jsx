@@ -87,7 +87,6 @@ const Header = () => {
             .catch((err) => {
                 displayError(err);
             });
-        console.log("logout");
     };
 
     return (

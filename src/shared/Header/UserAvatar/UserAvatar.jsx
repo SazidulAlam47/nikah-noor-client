@@ -55,9 +55,8 @@ const UserAvatar = ({ handleLogOut }) => {
                             key={idx}
                             onClick={() => handleClick(path, isLastItem)}
                             className={`flex items-center gap-2 rounded ${
-                                isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                    : ""
+                                isLastItem &&
+                                "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
                             }`}
                         >
                             <Icon

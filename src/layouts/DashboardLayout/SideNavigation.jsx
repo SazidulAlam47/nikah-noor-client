@@ -7,17 +7,35 @@ import {
 import Logo from "../../components/Logo/Logo";
 import profileMenuItems from "../../shared/Header/UserAvatar/profileMenuItems";
 import PropTypes from "prop-types";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useDisplayError from "../../hooks/useDisplayError";
+import toast from "react-hot-toast";
 
 const SideNavigation = ({ setOpen }) => {
+    const navigate = useNavigate();
+    const displayError = useDisplayError();
+    const { logOut } = useAuth();
+    const location = useLocation();
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success("LogOut Successful");
+            })
+            .catch((err) => {
+                displayError(err);
+            });
+    };
+
     const handleClick = (path, isLastItem) => {
         setOpen(false);
 
         if (isLastItem) {
-            // handleLogOut();
-            console.log("logout");
+            navigate("/");
+            handleLogOut();
         } else {
-            // navigate(path);
-            console.log("go to => " + path);
+            navigate(path);
         }
     };
 
@@ -28,26 +46,20 @@ const SideNavigation = ({ setOpen }) => {
             <List>
                 {profileMenuItems?.map(({ label, icon: Icon, path }, idx) => {
                     const isLastItem = idx === profileMenuItems.length - 1;
+
                     return (
                         <ListItem
                             key={idx}
                             onClick={() => handleClick(path, isLastItem)}
-                            className={`flex items-center rounded ${
-                                isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                    : ""
+                            className={`flex items-center rounded md:pl-4 ${
+                                location.pathname === path &&
+                                "text-pink-500 hover:text-pink-500 focus:text-pink-500 active:text-pink-500 hover:bg-pink-500/10 focus:bg-pink-500/10 active:bg-pink-500/10"
                             }`}
                         >
-                            <ListItemPrefix
-                                className={isLastItem ? "text-red-500" : ""}
-                            >
+                            <ListItemPrefix>
                                 <Icon size={20} />
                             </ListItemPrefix>
-                            <Typography
-                                as="span"
-                                className="font-normal"
-                                color={isLastItem ? "red" : "inherit"}
-                            >
+                            <Typography as="span" className="font-normal">
                                 {label}
                             </Typography>
                         </ListItem>
