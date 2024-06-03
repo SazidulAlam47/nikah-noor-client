@@ -61,12 +61,14 @@ const EditBiodata = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
             name: user?.displayName,
         },
     });
+
+    console.log({ isSubmitting });
 
     const onTextSubmit = (data) => {
         let isValid = true;
@@ -654,6 +656,7 @@ const EditBiodata = () => {
                         type="submit"
                         size="lg"
                         className="mt-6 justify-center"
+                        loading={isSubmitting}
                         fullWidth
                     >
                         Save And Publish Now
@@ -694,6 +697,7 @@ const EditBiodata = () => {
                         type="submit"
                         size="lg"
                         className="mt-6 justify-center"
+                        disabled={isSubmitting}
                         fullWidth
                     >
                         Update Photo
