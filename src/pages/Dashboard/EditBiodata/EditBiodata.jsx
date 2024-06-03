@@ -28,10 +28,33 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const EditBiodata = () => {
-    const [date, setDate] = useState();
+    const [date, setDate] = useState("");
+    const [dateErr, setDateErr] = useState("");
     const { user, updateInfo } = useAuth();
     const [imgUrl, setImgUrl] = useState(user?.photoURL);
     const [imgErr, setImgErr] = useState("");
+
+    const [biodataType, setBiodataType] = useState("");
+    const [height, setHeight] = useState("");
+    const [weight, setWeight] = useState("");
+    const [occupation, setOccupation] = useState("");
+    const [race, setRace] = useState("");
+    const [permanentDivision, setPermanentDivision] = useState("");
+    const [presentDivision, setPresentDivision] = useState("");
+    const [expectedPartnerHeight, setExpectedPartnerHeight] = useState("");
+    const [expectedPartnerWeight, setExpectedPartnerWeight] = useState("");
+
+    const [biodataTypeErr, setBiodataTypeErr] = useState("");
+    const [heightErr, setHeightErr] = useState("");
+    const [weightErr, setWeightErr] = useState("");
+    const [occupationErr, setOccupationErr] = useState("");
+    const [raceErr, setRaceErr] = useState("");
+    const [permanentDivisionErr, setPermanentDivisionErr] = useState("");
+    const [presentDivisionErr, setPresentDivisionErr] = useState("");
+    const [expectedPartnerHeightErr, setExpectedPartnerHeightErr] =
+        useState("");
+    const [expectedPartnerWeightErr, setExpectedPartnerWeightErr] =
+        useState("");
 
     const currentYear = new Date().getFullYear();
 
@@ -41,7 +64,82 @@ const EditBiodata = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
+    const onTextSubmit = (data) => {
+        let isValid = true;
+
+        if (!date) {
+            setDateErr("Please select a date");
+            isValid = false;
+        }
+
+        if (!biodataType) {
+            setBiodataTypeErr("Please Select Biodata Type");
+            isValid = false;
+        } else {
+            setBiodataTypeErr("");
+        }
+
+        if (!height) {
+            setHeightErr("Please Select Height");
+            isValid = false;
+        } else {
+            setHeightErr("");
+        }
+
+        if (!weight) {
+            setWeightErr("Please Select Weight");
+            isValid = false;
+        } else {
+            setWeightErr("");
+        }
+
+        if (!occupation) {
+            setOccupationErr("Please Select Occupation");
+            isValid = false;
+        } else {
+            setOccupationErr("");
+        }
+
+        if (!race) {
+            setRaceErr("Please Select Race");
+            isValid = false;
+        } else {
+            setRaceErr("");
+        }
+
+        if (!permanentDivision) {
+            setPermanentDivisionErr("Please Select Permanent Division");
+            isValid = false;
+        } else {
+            setPermanentDivisionErr("");
+        }
+
+        if (!presentDivision) {
+            setPresentDivisionErr("Please Select Present Division");
+            isValid = false;
+        } else {
+            setPresentDivisionErr("");
+        }
+
+        if (!expectedPartnerHeight) {
+            setExpectedPartnerHeightErr(
+                "Please Select Expected Partner Height"
+            );
+            isValid = false;
+        } else {
+            setExpectedPartnerHeightErr("");
+        }
+
+        if (!expectedPartnerWeight) {
+            setExpectedPartnerWeightErr(
+                "Please Select Expected Partner Weight"
+            );
+            isValid = false;
+        } else {
+            setExpectedPartnerWeightErr("");
+        }
+
+        console.log(isValid);
         console.log(data);
     };
 
@@ -110,18 +208,34 @@ const EditBiodata = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-8">
                 <form
                     className="sm:min-w-[430px] space-y-6 col-span-2 order-2 lg:order-1"
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(onTextSubmit)}
                 >
                     <div>
-                        <Select label="Biodata Type" size="lg">
-                            <Option>Male</Option>
-                            <Option>Female</Option>
+                        <Select
+                            label="Biodata Type"
+                            size="lg"
+                            value={biodataType}
+                            onChange={(val) => {
+                                setBiodataType(val);
+                                setBiodataTypeErr("");
+                            }}
+                            error={Boolean(biodataTypeErr)}
+                        >
+                            <Option value="Male">Male</Option>
+                            <Option value="Female">Female</Option>
                         </Select>
+                        {biodataTypeErr && (
+                            <div className="flex gap-2 items-center text-red-600 pt-1">
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                <Typography>{biodataTypeErr}</Typography>
+                            </div>
+                        )}
                     </div>
                     <div>
                         <Input
                             label="Name"
                             size="lg"
+                            defaultValue={user?.displayName}
                             {...register("name", {
                                 required: "Please enter your name",
                             })}
@@ -148,6 +262,7 @@ const EditBiodata = () => {
                                               )
                                             : ""
                                     }
+                                    error={Boolean(dateErr)}
                                 />
                             </PopoverHandler>
                             <PopoverContent>
@@ -162,77 +277,320 @@ const EditBiodata = () => {
                                 />
                             </PopoverContent>
                         </Popover>
+                        {dateErr && (
+                            <div className="flex gap-2 items-center text-red-600 pt-1">
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                <Typography>{dateErr}</Typography>
+                            </div>
+                        )}
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <Select label="Height" size="lg">
-                            {heightOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
+                        <div>
+                            <Select
+                                label="Height"
+                                size="lg"
+                                value={height}
+                                onChange={(val) => {
+                                    setHeight(val);
+                                    setHeightErr("");
+                                }}
+                                error={Boolean(heightErr)}
+                            >
+                                {heightOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {heightErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>{heightErr}</Typography>
+                                </div>
+                            )}
+                        </div>
 
-                        <Select label="Weight" size="lg">
-                            {weightOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
+                        <div>
+                            <Select
+                                label="Weight"
+                                size="lg"
+                                value={weight}
+                                onChange={(val) => {
+                                    setWeight(val);
+                                    setWeightErr("");
+                                }}
+                                error={Boolean(weightErr)}
+                            >
+                                {weightOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {weightErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>{weightErr}</Typography>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div>
-                        <Input label="Age" size="lg" />
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <Select label="Occupation" size="lg">
-                            {occupationOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-
-                        <Select label="Race" size="lg">
-                            {raceOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <Input label="Fathers name" size="lg" />
-                        <Input label="Mothers name" size="lg" />
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <Select label="Permanent Division" size="lg">
-                            {divisionOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-
-                        <Select label="Present Division" size="lg">
-                            {divisionOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-                    </div>
-                    <div>
-                        <Input label="Expected Partner Age" size="lg" />
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <Select label="Expected Partner Height" size="lg">
-                            {heightOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-
-                        <Select label="Expected Partner Weight" size="lg">
-                            {weightOptions?.map((item, idx) => (
-                                <Option key={idx}>{item}</Option>
-                            ))}
-                        </Select>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Input
-                            label="Contact Email"
+                            label="Age"
                             size="lg"
-                            value={user?.email}
-                            onChange={() => null}
+                            {...register("age", {
+                                required: "Please enter your age",
+                                pattern: {
+                                    value: /^(1[8-9]|[2-5][0-9]|60)$/,
+                                    message: "Age must be between 18 to 60",
+                                },
+                            })}
+                            error={Boolean(errors.age)}
                         />
-                        <Input label="Mobile Number" size="lg" />
+                        {errors.age && (
+                            <div className="flex gap-2 items-center text-red-600 pt-1">
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                <Typography>{errors.age.message}</Typography>
+                            </div>
+                        )}
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            <Select
+                                label="Occupation"
+                                size="lg"
+                                value={occupation}
+                                onChange={(val) => {
+                                    setOccupation(val);
+                                    setOccupationErr("");
+                                }}
+                                error={Boolean(occupationErr)}
+                            >
+                                {occupationOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {occupationErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>{occupationErr}</Typography>
+                                </div>
+                            )}
+                        </div>
+
+                        <div>
+                            <Select
+                                label="Race"
+                                size="lg"
+                                value={race}
+                                onChange={(val) => {
+                                    setRace(val);
+                                    setRaceErr("");
+                                }}
+                                error={Boolean(raceErr)}
+                            >
+                                {raceOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {raceErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>{raceErr}</Typography>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            <Input
+                                label="Fathers name"
+                                size="lg"
+                                {...register("fathersName", {
+                                    required: "Please enter your Fathers name",
+                                })}
+                                error={Boolean(errors.fathersName)}
+                            />
+                            {errors.fathersName && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {errors.fathersName.message}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            <Input
+                                label="Mothers name"
+                                size="lg"
+                                {...register("mothersName", {
+                                    required: "Please enter your Mothers name",
+                                })}
+                                error={Boolean(errors.mothersName)}
+                            />
+                            {errors.mothersName && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {errors.mothersName.message}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            <Select
+                                label="Permanent Division"
+                                size="lg"
+                                value={permanentDivision}
+                                onChange={(val) => {
+                                    setPermanentDivision(val);
+                                    setPermanentDivisionErr("");
+                                }}
+                                error={Boolean(permanentDivisionErr)}
+                            >
+                                {divisionOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {permanentDivisionErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {permanentDivisionErr}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            <Select
+                                label="Present Division"
+                                size="lg"
+                                value={presentDivision}
+                                onChange={(val) => {
+                                    setPresentDivision(val);
+                                    setPresentDivisionErr("");
+                                }}
+                                error={Boolean(presentDivisionErr)}
+                            >
+                                {divisionOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {presentDivisionErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {presentDivisionErr}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <Input
+                            label="Expected Partner Age"
+                            size="lg"
+                            {...register("expectedPartnerAge", {
+                                required: "Please enter Expected Partner age",
+                                pattern: {
+                                    value: /^(1[8-9]|[2-5][0-9]|60)$/,
+                                    message: "Age must be between 18 to 60",
+                                },
+                            })}
+                            error={Boolean(errors.expectedPartnerAge)}
+                        />
+                        {errors.expectedPartnerAge && (
+                            <div className="flex gap-2 items-center text-red-600 pt-1">
+                                <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                <Typography>
+                                    {errors.expectedPartnerAge.message}
+                                </Typography>
+                            </div>
+                        )}
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            <Select
+                                label="Expected Partner Height"
+                                size="lg"
+                                value={expectedPartnerHeight}
+                                onChange={(val) => {
+                                    setExpectedPartnerHeight(val);
+                                    setExpectedPartnerHeightErr("");
+                                }}
+                                error={Boolean(expectedPartnerHeightErr)}
+                            >
+                                {heightOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {expectedPartnerHeightErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {expectedPartnerHeightErr}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+
+                        <div>
+                            <Select
+                                label="Expected Partner Weight"
+                                size="lg"
+                                value={expectedPartnerWeight}
+                                onChange={(val) => {
+                                    setExpectedPartnerWeight(val);
+                                    setExpectedPartnerWeightErr("");
+                                }}
+                                error={Boolean(expectedPartnerWeightErr)}
+                            >
+                                {weightOptions?.map((item, idx) => (
+                                    <Option key={idx}>{item}</Option>
+                                ))}
+                            </Select>
+                            {expectedPartnerWeightErr && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {expectedPartnerWeightErr}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            <Input
+                                label="Contact Email"
+                                size="lg"
+                                value={user?.email}
+                                onChange={() => null}
+                            />
+                        </div>
+                        <div>
+                            <Input
+                                label="Mobile Number"
+                                size="lg"
+                                {...register("mobileNumber", {
+                                    required: "Please enter Mobile Number",
+                                    pattern: {
+                                        value: /^01\d{9}$/,
+                                        message:
+                                            'Number must be 11 digits and start with "01"',
+                                    },
+                                })}
+                                error={Boolean(errors.mobileNumber)}
+                            />
+                            {errors.mobileNumber && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {errors.mobileNumber.message}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <Button
                         type="submit"
