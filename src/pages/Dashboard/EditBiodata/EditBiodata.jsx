@@ -70,6 +70,8 @@ const EditBiodata = () => {
         if (!date) {
             setDateErr("Please select a date");
             isValid = false;
+        } else {
+            setDateErr("");
         }
 
         if (!biodataType) {
@@ -139,8 +141,29 @@ const EditBiodata = () => {
             setExpectedPartnerWeightErr("");
         }
 
-        console.log(isValid);
-        console.log(data);
+        if (isValid) {
+            const biodata = {
+                biodataType,
+                name: data.name,
+                profileImage: user?.photoURL,
+                dateOfBirth: date,
+                height,
+                weight,
+                age: data.age,
+                occupation,
+                race,
+                fathersName: data.fathersName,
+                mothersName: data.mothersName,
+                permanentDivision,
+                presentDivision,
+                expectedPartnerAge: data.expectedPartnerAge,
+                expectedPartnerHeight,
+                expectedPartnerWeight,
+                contactEmail: user?.email,
+                mobileNumber: data.mobileNumber,
+            };
+            console.log(biodata);
+        }
     };
 
     const handleImgUpdate = async (e) => {
@@ -291,13 +314,16 @@ const EditBiodata = () => {
                                 size="lg"
                                 value={height}
                                 onChange={(val) => {
+                                    console.log(val);
                                     setHeight(val);
                                     setHeightErr("");
                                 }}
                                 error={Boolean(heightErr)}
                             >
                                 {heightOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {heightErr && (
@@ -320,7 +346,9 @@ const EditBiodata = () => {
                                 error={Boolean(weightErr)}
                             >
                                 {weightOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {weightErr && (
@@ -364,7 +392,9 @@ const EditBiodata = () => {
                                 error={Boolean(occupationErr)}
                             >
                                 {occupationOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {occupationErr && (
@@ -387,7 +417,9 @@ const EditBiodata = () => {
                                 error={Boolean(raceErr)}
                             >
                                 {raceOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {raceErr && (
@@ -449,7 +481,9 @@ const EditBiodata = () => {
                                 error={Boolean(permanentDivisionErr)}
                             >
                                 {divisionOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {permanentDivisionErr && (
@@ -473,7 +507,9 @@ const EditBiodata = () => {
                                 error={Boolean(presentDivisionErr)}
                             >
                                 {divisionOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {presentDivisionErr && (
@@ -521,7 +557,9 @@ const EditBiodata = () => {
                                 error={Boolean(expectedPartnerHeightErr)}
                             >
                                 {heightOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {expectedPartnerHeightErr && (
@@ -546,7 +584,9 @@ const EditBiodata = () => {
                                 error={Boolean(expectedPartnerWeightErr)}
                             >
                                 {weightOptions?.map((item, idx) => (
-                                    <Option key={idx}>{item}</Option>
+                                    <Option key={idx} value={item}>
+                                        {item}
+                                    </Option>
                                 ))}
                             </Select>
                             {expectedPartnerWeightErr && (
