@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "./providers/AuthProvider.jsx";
+import "react-day-picker/dist/style.css";
 
 const queryClient = new QueryClient();
 
