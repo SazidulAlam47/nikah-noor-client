@@ -244,9 +244,9 @@ const EditBiodata = () => {
                 title="Edit Your Biodata"
                 subtitle="Update your profile information to better reflect who you are and what you're looking for"
             />
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-4 pt-8">
                 <form
-                    className="sm:min-w-[430px] space-y-6 col-span-2 order-2 lg:order-1"
+                    className="sm:min-w-[430px] space-y-6 col-span-2 order-2 lg:order-1 mt-10 lg:mt-0"
                     onSubmit={handleSubmit(onTextSubmit)}
                 >
                     <div>

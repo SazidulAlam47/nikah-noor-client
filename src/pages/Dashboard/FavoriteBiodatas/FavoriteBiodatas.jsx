@@ -35,7 +35,7 @@ const FavoriteBiodatas = () => {
                 subtitle="Review and manage your favorite profiles to keep track of potential matches"
             />
             <div className="mt-8">
-                <Card className="h-fit w-full rounded-lg overflow-hidden">
+                <Card className="h-fit w-full overflow-x-auto">
                     <table className="w-full min-w-max table-auto text-left">
                         <thead>
                             <tr>

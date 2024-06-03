@@ -60,7 +60,7 @@ const commonItem = {
 
 const useMenuItems = () => {
     // TODO: admin configuration
-    const isAdmin = true;
+    const isAdmin = false;
 
     const menuItems = [
         ...(isAdmin ? adminMenuItems : userMenuItems),

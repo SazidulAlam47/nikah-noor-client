@@ -2,8 +2,9 @@ import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../../shared/SectionHeading/SectionHeading";
 import AdminCard from "./AdminCard";
 import { BsClipboardData } from "react-icons/bs";
-import { FaDollarSign, FaFemale, FaMale } from "react-icons/fa";
+import { FaFemale, FaMale } from "react-icons/fa";
 import { PiMedalBold } from "react-icons/pi";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const AdminDashboard = () => {
     return (
@@ -29,7 +30,7 @@ const AdminDashboard = () => {
                     count={57}
                 />
                 <AdminCard
-                    icon={FaDollarSign}
+                    icon={TbCurrencyTaka}
                     title="Total Revenue"
                     count={234}
                 />

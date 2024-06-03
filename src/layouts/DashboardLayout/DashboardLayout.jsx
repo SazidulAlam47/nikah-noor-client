@@ -25,7 +25,7 @@ const DashboardLayout = () => {
                 <aside className="md:w-[30%] lg:w-[20%] border-r shadow-lg hidden md:block sticky pt-10 top-0 h-screen">
                     <SideNavigation setOpen={setOpen} />
                 </aside>
-                <div className="px-1 sm:px-5 md:px-8 md:w-[70%] lg:w-[80%] py-6 md:py-12">
+                <div className="px-3 sm:px-5 md:px-8 w-full md:w-[70%] lg:w-[80%] py-6 md:py-12">
                     <Outlet />
                 </div>
             </div>
