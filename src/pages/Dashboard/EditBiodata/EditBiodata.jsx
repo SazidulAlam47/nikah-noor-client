@@ -24,10 +24,14 @@ import {
     raceOptions,
     weightOptions,
 } from "./selectData";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const EditBiodata = () => {
     const [date, setDate] = useState();
-    const { user } = useAuth();
+    const { user, updateInfo } = useAuth();
+    const [imgUrl, setImgUrl] = useState(user?.photoURL);
+    const [imgErr, setImgErr] = useState("");
 
     const currentYear = new Date().getFullYear();
 
@@ -39,6 +43,59 @@ const EditBiodata = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+    };
+
+    const handleImgUpdate = async (e) => {
+        e.preventDefault();
+        const imgForm = new FormData(e.currentTarget);
+        const image = imgForm.get("image");
+        console.log(image);
+
+        setImgErr("");
+        if (!image.size) {
+            setImgErr("Please select an image");
+            return;
+        }
+
+        const imgApiUrl = `https://api.imgbb.com/1/upload?&key=${
+            import.meta.env.VITE_IMG_BB_KEY
+        }`;
+
+        const config = {
+            headers: {
+                "content-Type": "multipart/form-data",
+            },
+        };
+        try {
+            const imgRes = await axios.post(imgApiUrl, imgForm, config);
+            const imgUrl = imgRes?.data?.data?.url;
+
+            setImgUrl(imgUrl);
+
+            const profile = {
+                photoURL: imgUrl,
+            };
+            updateInfo(user, profile)
+                .then(() => {
+                    console.log("profile updated from edit biodata", user);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Image Updated!",
+                        text: "The Image has been updated successfully.",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
+        } catch {
+            Swal.fire({
+                icon: "error",
+                title: "Upload Failed",
+                text: "The selected image could not be uploaded. Please try a different image.",
+            });
+        }
     };
 
     return (
@@ -186,11 +243,14 @@ const EditBiodata = () => {
                         submit
                     </Button>
                 </form>
-                <form className="order-1 lg:order-2 space-y-4">
+                <form
+                    onSubmit={handleImgUpdate}
+                    className="order-1 lg:order-2 space-y-4"
+                >
                     <div>
                         <img
                             className="w-full aspect-square rounded-lg object-cover object-center"
-                            src={user?.photoURL}
+                            src={imgUrl}
                             alt="profile image"
                         />
                     </div>
@@ -205,11 +265,12 @@ const EditBiodata = () => {
                             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file-input"
                             id="file_input"
                             type="file"
+                            name="image"
                         ></input>
-                        {errors.image && (
+                        {imgErr && (
                             <div className="flex gap-2 items-center text-red-600 pt-1">
                                 <BsExclamationCircleFill className="hidden sm:inline-block" />
-                                <Typography>{errors.image.message}</Typography>
+                                <Typography>{imgErr}</Typography>
                             </div>
                         )}
                     </div>
