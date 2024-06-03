@@ -5,6 +5,8 @@ import moment from "moment";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
+import { PiMedalThin } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 const ProfileDetails = ({ biodata, self }) => {
     // TODO: premium memberships
@@ -107,12 +109,40 @@ const ProfileDetails = ({ biodata, self }) => {
         },
     ];
 
+    const handlePremium = () => {
+        Swal.fire({
+            title: "Confirm Your Action",
+            text: "Are you sure you want to upgrade to a premium membership on this website?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, proceed",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Request Submitted",
+                    text: "Your request has been sent to the admin. Please wait for approval",
+                    icon: "success",
+                });
+            }
+        });
+    };
+
     return (
         <>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
                 <PhotoDetails biodata={biodata} />
-                {self || (
-                    <Button className="h-fit w-fit flex items-center gap-2 ">
+                {self ? (
+                    <Button
+                        className="h-fit w-fit flex items-center gap-2"
+                        onClick={handlePremium}
+                    >
+                        <PiMedalThin size={14} />
+                        Make biodata to premium
+                    </Button>
+                ) : (
+                    <Button className="h-fit w-fit flex items-center gap-2">
                         <FaHeart size={14} />
                         Add to favorites
                     </Button>

@@ -639,7 +639,7 @@ const EditBiodata = () => {
                         className="mt-6 justify-center"
                         fullWidth
                     >
-                        submit
+                        Save And Publish Now
                     </Button>
                 </form>
                 <form
