@@ -8,15 +8,16 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
-import profileMenuItems from "./profileMenuItems";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuth from "../../../hooks/useAuth";
+import useMenuItems from "../../../hooks/useMenuItems";
 
 const UserAvatar = ({ handleLogOut }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user } = useAuth();
     const navigate = useNavigate();
+    const menuItems = useMenuItems();
 
     const handleClick = (path, isLastItem) => {
         setIsMenuOpen(false);
@@ -48,8 +49,8 @@ const UserAvatar = ({ handleLogOut }) => {
                 </Button>
             </MenuHandler>
             <MenuList className="p-1">
-                {profileMenuItems.map(({ label, icon: Icon, path }, idx) => {
-                    const isLastItem = idx === profileMenuItems.length - 1;
+                {menuItems.map(({ label, icon: Icon, path }, idx) => {
+                    const isLastItem = idx === menuItems.length - 1;
                     return (
                         <MenuItem
                             key={idx}

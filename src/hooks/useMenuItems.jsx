@@ -5,64 +5,69 @@ import { IoIosContacts } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi2";
-import { PiMedalThin, } from "react-icons/pi";
-
-// TODO: admin configuration
-const isAdmin = false;
+import { PiMedalThin } from "react-icons/pi";
 
 const userMenuItems = [
     {
         label: "Edit Biodata",
         icon: FiEdit,
-        path: "/dashboard/edit-biodata"
+        path: "/dashboard/edit-biodata",
     },
     {
         label: "View Biodata",
         icon: AiOutlineUser,
-        path: "/dashboard/view-biodata"
+        path: "/dashboard/view-biodata",
     },
     {
         label: "My Contact Requests",
         icon: IoIosContacts,
-        path: "/dashboard/contact-requests"
+        path: "/dashboard/contact-requests",
     },
     {
         label: "Favorite Biodatas",
         icon: CiHeart,
-        path: "/dashboard/favorite-biodatas"
-    }
+        path: "/dashboard/favorite-biodatas",
+    },
 ];
 
 const adminMenuItems = [
     {
         label: "Admin Dashboard",
         icon: LuLayoutDashboard,
-        path: "/dashboard/admin-dashboard"
+        path: "/dashboard/admin-dashboard",
     },
     {
         label: "Manage Users",
         icon: HiOutlineUserGroup,
-        path: "/dashboard/manage-users"
+        path: "/dashboard/manage-users",
     },
     {
         label: "Approved Premium",
         icon: PiMedalThin,
-        path: "/dashboard/approved-premium"
+        path: "/dashboard/approved-premium",
     },
     {
         label: "Approved Contact Request",
         icon: LuUserCheck2,
-        path: "/dashboard/approved-contact-request"
-    }
-];
-
-const profileMenuItems = [
-
-    ...(isAdmin ? adminMenuItems : userMenuItems),
-    {
-        label: "Logout",
-        icon: IoExitOutline,
+        path: "/dashboard/approved-contact-request",
     },
 ];
 
-export default profileMenuItems;
+const commonItem = {
+    label: "Logout",
+    icon: IoExitOutline,
+};
+
+const useMenuItems = () => {
+    // TODO: admin configuration
+    const isAdmin = false;
+
+    const menuItems = [
+        ...(isAdmin ? adminMenuItems : userMenuItems),
+        commonItem,
+    ];
+
+    return menuItems;
+};
+
+export default useMenuItems;

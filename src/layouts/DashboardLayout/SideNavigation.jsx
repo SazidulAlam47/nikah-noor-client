@@ -5,18 +5,19 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import Logo from "../../components/Logo/Logo";
-import profileMenuItems from "../../shared/Header/UserAvatar/profileMenuItems";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useDisplayError from "../../hooks/useDisplayError";
 import toast from "react-hot-toast";
+import useMenuItems from "../../hooks/useMenuItems";
 
 const SideNavigation = ({ setOpen }) => {
     const navigate = useNavigate();
     const displayError = useDisplayError();
     const { logOut } = useAuth();
     const location = useLocation();
+    const menuItems = useMenuItems();
 
     const handleLogOut = () => {
         logOut()
@@ -44,8 +45,8 @@ const SideNavigation = ({ setOpen }) => {
             <Logo width="2/5" />
 
             <List>
-                {profileMenuItems?.map(({ label, icon: Icon, path }, idx) => {
-                    const isLastItem = idx === profileMenuItems.length - 1;
+                {menuItems?.map(({ label, icon: Icon, path }, idx) => {
+                    const isLastItem = idx === menuItems.length - 1;
 
                     return (
                         <ListItem
