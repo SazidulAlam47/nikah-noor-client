@@ -14,6 +14,10 @@ import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
 import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
 import ContactRequests from "../pages/Dashboard/ContactRequests/ContactRequests";
 import FavoriteBiodatas from "../pages/Dashboard/FavoriteBiodatas/FavoriteBiodatas";
+import AdminDashboard from "../pages/Dashboard/AdminPages/AdminDashboard/AdminDashboard";
+import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers/ManageUsers";
+import ApprovedPremium from "../pages/Dashboard/AdminPages/ApprovedPremium/ApprovedPremium";
+import ApprovedContact from "../pages/Dashboard/AdminPages/ApprovedContact/ApprovedContact";
 
 const router = createBrowserRouter([
     {
@@ -91,6 +95,22 @@ const router = createBrowserRouter([
                 element: <FavoriteBiodatas />,
             },
             // admin only pages
+            {
+                path: "admin-dashboard",
+                element: <AdminDashboard />,
+            },
+            {
+                path: "manage-users",
+                element: <ManageUsers />,
+            },
+            {
+                path: "approved-premium",
+                element: <ApprovedPremium />,
+            },
+            {
+                path: "approved-contact-request",
+                element: <ApprovedContact />,
+            },
         ],
     },
 ]);
