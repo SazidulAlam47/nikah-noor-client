@@ -62,7 +62,11 @@ const EditBiodata = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            name: user?.displayName,
+        },
+    });
 
     const onTextSubmit = (data) => {
         let isValid = true;
@@ -164,6 +168,17 @@ const EditBiodata = () => {
             };
             console.log(biodata);
             // TODO: upload the data to database
+            // TODO: update user name on firebase
+            const profile = {
+                displayName: data.name,
+            };
+            updateInfo(user, profile)
+                .then(() => {
+                    console.log("profile name updated from edit biodata", user);
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
         }
     };
 
@@ -259,7 +274,6 @@ const EditBiodata = () => {
                         <Input
                             label="Name"
                             size="lg"
-                            defaultValue={user?.displayName}
                             {...register("name", {
                                 required: "Please enter your name",
                             })}
@@ -296,7 +310,10 @@ const EditBiodata = () => {
                                     toYear={currentYear - 18}
                                     mode="single"
                                     selected={date}
-                                    onSelect={setDate}
+                                    onSelect={(val) => {
+                                        setDate(val);
+                                        setDateErr("");
+                                    }}
                                     showOutsideDays
                                 />
                             </PopoverContent>
