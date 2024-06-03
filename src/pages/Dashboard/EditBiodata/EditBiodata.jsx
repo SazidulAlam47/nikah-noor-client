@@ -163,6 +163,7 @@ const EditBiodata = () => {
                 mobileNumber: data.mobileNumber,
             };
             console.log(biodata);
+            // TODO: upload the data to database
         }
     };
 

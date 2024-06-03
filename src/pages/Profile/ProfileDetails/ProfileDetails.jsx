@@ -6,7 +6,7 @@ import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 
-const ProfileDetails = ({ biodata }) => {
+const ProfileDetails = ({ biodata, self }) => {
     // TODO: premium memberships
     const premium = false;
 
@@ -99,11 +99,11 @@ const ProfileDetails = ({ biodata }) => {
     const contactTable = [
         {
             field: "Contact Email",
-            value: premium ? biodata?.contactEmail : requestBtn,
+            value: premium || self ? biodata?.contactEmail : requestBtn,
         },
         {
             field: "Mobile Number",
-            value: premium ? biodata?.mobileNumber : requestBtn,
+            value: premium || self ? biodata?.mobileNumber : requestBtn,
         },
     ];
 
@@ -111,10 +111,12 @@ const ProfileDetails = ({ biodata }) => {
         <>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
                 <PhotoDetails biodata={biodata} />
-                <Button className="h-fit w-fit flex items-center gap-2 ">
-                    <FaHeart size={14} />
-                    Add to favorites
-                </Button>
+                {self || (
+                    <Button className="h-fit w-fit flex items-center gap-2 ">
+                        <FaHeart size={14} />
+                        Add to favorites
+                    </Button>
+                )}
             </div>
             <TableDetails
                 tableRows={personalTable}
@@ -152,6 +154,7 @@ const ProfileDetails = ({ biodata }) => {
 
 ProfileDetails.propTypes = {
     biodata: PropTypes.object.isRequired,
+    self: PropTypes.bool,
 };
 
 export default ProfileDetails;
