@@ -20,11 +20,11 @@ const ApprovedPremium = () => {
     return (
         <>
             <Helmet>
-                <title>Nikah Noor | My Contact Requests</title>
+                <title>Nikah Noor | Approved Premium Members</title>
             </Helmet>
             <SectionHeading
-                title="Manage Users"
-                subtitle="View, edit, and manage user accounts"
+                title="Approved Premium Members"
+                subtitle="Review and manage users who have been granted premium membership"
             />
             <div className="mt-8">
                 <Card className="h-fit w-full rounded-lg overflow-hidden">
@@ -84,7 +84,6 @@ const ApprovedPremium = () => {
 
                                         <td className="p-4">
                                             <Button size="sm">
-                                                {" "}
                                                 Make premium
                                             </Button>
                                         </td>

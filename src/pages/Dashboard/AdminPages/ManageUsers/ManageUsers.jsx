@@ -18,7 +18,7 @@ const ManageUsers = () => {
     return (
         <>
             <Helmet>
-                <title>Nikah Noor | My Contact Requests</title>
+                <title>Nikah Noor | Manage Users</title>
             </Helmet>
             <SectionHeading
                 title="Manage Users"
