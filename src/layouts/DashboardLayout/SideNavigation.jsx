@@ -42,7 +42,7 @@ const SideNavigation = ({ setOpen }) => {
 
     return (
         <div className="text-center px-2 space-y-4">
-            <Logo width="2/5" />
+            <Logo width="3/5" />
 
             <List>
                 {menuItems?.map(({ label, icon: Icon, path }, idx) => {
