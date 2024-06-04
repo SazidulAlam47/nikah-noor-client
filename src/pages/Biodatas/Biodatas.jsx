@@ -30,8 +30,6 @@ const Biodatas = () => {
         gender ? `&biodataType=${gender}` : ""
     }${division ? `&permanentDivision=${division}` : ""}`;
 
-    console.log(url);
-
     const { data: bioDatas, isPending } = useQuery({
         queryKey: ["members", gender, division, from, to],
         queryFn: async () => {
@@ -41,8 +39,6 @@ const Biodatas = () => {
     });
 
     const applyFilter = (data) => {
-        console.log(data);
-
         setGender(data.gender);
         setDivision(data.division);
         setFrom(data.from);
