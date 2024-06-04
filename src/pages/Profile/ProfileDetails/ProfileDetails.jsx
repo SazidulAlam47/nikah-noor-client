@@ -7,8 +7,12 @@ import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 import { PiMedalThin } from "react-icons/pi";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ProfileDetails = ({ biodata, self }) => {
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     // TODO: premium memberships
     const premium = false;
 
@@ -129,6 +133,33 @@ const ProfileDetails = ({ biodata, self }) => {
         });
     };
 
+    const handleFavorite = () => {
+        const data = {
+            email: user?.email,
+            favoriteId: biodata.biodataId,
+        };
+        axiosSecure.post("/favorites", data).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Biodata Added to Favorites!",
+                    text: "The Biodata has been added to favorites successfully.",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            } else if (res.data.exists) {
+                Swal.fire({
+                    icon: "info",
+                    title: "Biodata Already Exists in Favorites",
+                    text: "This biodata has already been added to your favorites list.",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+    };
+
     return (
         <>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
@@ -142,7 +173,10 @@ const ProfileDetails = ({ biodata, self }) => {
                         Make biodata to premium
                     </Button>
                 ) : (
-                    <Button className="h-fit w-fit flex items-center gap-2">
+                    <Button
+                        className="h-fit w-fit flex items-center gap-2"
+                        onClick={handleFavorite}
+                    >
                         <FaHeart size={14} />
                         Add to favorites
                     </Button>
