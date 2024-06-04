@@ -60,10 +60,12 @@ const AuthProvider = ({ children }) => {
                 const email = currentUser.email;
                 axiosPublic.post("/jwt", { email }).then((res) => {
                     console.log(res.data);
-                    setLoading(false);
                 });
             } else {
                 setUser(null);
+                axiosPublic.get("/logout").then((res) => {
+                    console.log(res.data);
+                });
             }
             setLoading(false);
         });
