@@ -18,7 +18,7 @@ const ApprovedPremium = () => {
     } = useQuery({
         queryKey: ["pending-premium"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/biodatasPremium");
+            const res = await axiosSecure.get("/usersPremium");
             return res.data;
         },
     });
@@ -62,10 +62,7 @@ const ApprovedPremium = () => {
                             </thead>
                             <tbody>
                                 {pendingPremiums?.map(
-                                    (
-                                        { name, contactEmail, biodataId },
-                                        index
-                                    ) => (
+                                    ({ name, email, biodataId }, index) => (
                                         <tr
                                             key={index}
                                             className="even:bg-blue-gray-50/50"
@@ -85,7 +82,7 @@ const ApprovedPremium = () => {
                                                     color="blue-gray"
                                                     className="font-normal"
                                                 >
-                                                    {contactEmail}
+                                                    {email}
                                                 </Typography>
                                             </td>
                                             <td className="p-4">
@@ -103,7 +100,7 @@ const ApprovedPremium = () => {
                                                     size="sm"
                                                     onClick={() =>
                                                         handleMakePremium(
-                                                            biodataId,
+                                                            email,
                                                             name
                                                         )
                                                     }

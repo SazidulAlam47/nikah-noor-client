@@ -126,9 +126,7 @@ const ProfileDetails = ({ biodata }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure
-                    .patch(`/biodatas/${biodata.biodataId}`, {
-                        premium: "Pending",
-                    })
+                    .get(`/users/premiumReq/${biodata.contactEmail}`)
                     .then((res) => {
                         console.log(res.data);
                         if (res.data.matchedCount > 0) {

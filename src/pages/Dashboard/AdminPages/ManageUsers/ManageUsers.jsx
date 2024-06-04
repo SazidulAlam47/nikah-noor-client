@@ -1,20 +1,63 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../../shared/SectionHeading/SectionHeading";
 import { Button, Card, Typography } from "@material-tailwind/react";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useMakePremium from "../../../../hooks/useMakePremium";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../../components/Loader/Loader";
+import Swal from "sweetalert2";
 
 const TABLE_HEAD = ["User name", "User email", "Make admin", "Make premium"];
 
 const ManageUsers = () => {
-    const TABLE_ROWS = [
-        {
-            name: "John Michael",
-            contactEmail: "joh@gmail.com",
+    const axiosSecure = useAxiosSecure();
+
+    const {
+        data: users,
+        isPending,
+        refetch,
+    } = useQuery({
+        queryKey: ["all-users"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/users/");
+            return res.data;
         },
-        {
-            name: "John Michael",
-            contactEmail: "joh@gmail.com",
-        },
-    ];
+    });
+
+    const handleMakePremium = useMakePremium(refetch);
+
+    const handleMakeAdmin = (user) => {
+        Swal.fire({
+            title: "Confirm Admin Privileges",
+            text: `Are you sure you want to grant admin privileges to ${user?.name}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, proceed",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch("/users/admin", user).then((res) => {
+                    console.log(res.data);
+                    if (res.data.matchedCount > 0) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Admin Privileges Granted",
+                            text: `${user?.name} has been successfully granted admin privileges on Nikah Noor`,
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        refetch();
+                    }
+                });
+            }
+        });
+    };
+
+    if (isPending) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Helmet>
@@ -46,7 +89,7 @@ const ManageUsers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {TABLE_ROWS.map(({ name, contactEmail }, index) => (
+                            {users?.map((user, index) => (
                                 <tr
                                     key={index}
                                     className="even:bg-blue-gray-50/50"
@@ -57,7 +100,7 @@ const ManageUsers = () => {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {name}
+                                            {user?.name}
                                         </Typography>
                                     </td>
                                     <td className="p-4">
@@ -66,15 +109,36 @@ const ManageUsers = () => {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {contactEmail}
+                                            {user?.email}
                                         </Typography>
                                     </td>
 
-                                    <td className="p-4">
-                                        <Button size="sm"> Make Admin</Button>
+                                    <td
+                                        onClick={() => handleMakeAdmin(user)}
+                                        className="p-4"
+                                    >
+                                        <Button
+                                            disabled={user?.role === "admin"}
+                                            size="sm"
+                                        >
+                                            Make Admin
+                                        </Button>
                                     </td>
                                     <td className="p-4">
-                                        <Button size="sm"> Make premium</Button>
+                                        <Button
+                                            onClick={() =>
+                                                handleMakePremium(
+                                                    user?.email,
+                                                    user?.name
+                                                )
+                                            }
+                                            disabled={
+                                                user?.premium === "Approved"
+                                            }
+                                            size="sm"
+                                        >
+                                            Make premium
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}
