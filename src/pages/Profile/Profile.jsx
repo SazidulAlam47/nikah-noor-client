@@ -23,10 +23,10 @@ const Profile = () => {
     });
 
     const { data: sideBiodatas, isPending: sidePending } = useQuery({
-        queryKey: ["members", biodata?.biodataType],
+        queryKey: ["members", biodata?.biodataType, biodata?.biodataId],
         queryFn: async () => {
             const res = await axiosPublic.get(
-                `/biodatasWithType?type=${biodata?.biodataType}&count=3`
+                `/biodatasWithType?type=${biodata?.biodataType}&count=3&skip=${biodata?.biodataId}`
             );
             return res.data;
         },
