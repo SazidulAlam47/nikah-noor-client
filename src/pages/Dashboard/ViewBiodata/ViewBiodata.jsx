@@ -2,9 +2,11 @@ import Loader from "../../../components/Loader/Loader";
 import ProfileDetails from "../../Profile/ProfileDetails/ProfileDetails";
 import { Helmet } from "react-helmet-async";
 import useOwnBiodata from "../../../hooks/useOwnBiodata";
+import { Button, Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const ViewBiodata = () => {
-    const { ownBiodata, isPending } = useOwnBiodata();
+    const { ownBiodata, isPending, haveBiodata } = useOwnBiodata();
 
     if (isPending) {
         return <Loader />;
@@ -15,7 +17,18 @@ const ViewBiodata = () => {
             <Helmet>
                 <title>Nikah Noor | View Biodata</title>
             </Helmet>
-            <ProfileDetails biodata={ownBiodata} self />
+            {haveBiodata ? (
+                <ProfileDetails biodata={ownBiodata} self />
+            ) : (
+                <div className="h-full flex flex-col gap-5 justify-center items-center">
+                    <Typography variant="h4">
+                        You have not created any biodata yet.
+                    </Typography>
+                    <Link to="/dashboard/edit-biodata">
+                        <Button>Create Biodata</Button>
+                    </Link>
+                </div>
+            )}
         </>
     );
 };

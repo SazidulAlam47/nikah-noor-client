@@ -6,29 +6,7 @@ import { CiHeart } from "react-icons/ci";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { PiMedalThin } from "react-icons/pi";
-
-const userMenuItems = [
-    {
-        label: "Edit Biodata",
-        icon: FiEdit,
-        path: "/dashboard/edit-biodata",
-    },
-    {
-        label: "View Biodata",
-        icon: AiOutlineUser,
-        path: "/dashboard/view-biodata",
-    },
-    {
-        label: "My Contact Requests",
-        icon: IoIosContacts,
-        path: "/dashboard/contact-requests",
-    },
-    {
-        label: "Favorite Biodatas",
-        icon: CiHeart,
-        path: "/dashboard/favorite-biodatas",
-    },
-];
+import useOwnBiodata from "./useOwnBiodata";
 
 const adminMenuItems = [
     {
@@ -61,6 +39,30 @@ const commonItem = {
 const useMenuItems = () => {
     // TODO: admin configuration
     const isAdmin = false;
+    const { haveBiodata } = useOwnBiodata();
+
+    const userMenuItems = [
+        {
+            label: haveBiodata ? "Edit Biodata" : "Create Biodata",
+            icon: FiEdit,
+            path: "/dashboard/edit-biodata",
+        },
+        {
+            label: "View Biodata",
+            icon: AiOutlineUser,
+            path: "/dashboard/view-biodata",
+        },
+        {
+            label: "My Contact Requests",
+            icon: IoIosContacts,
+            path: "/dashboard/contact-requests",
+        },
+        {
+            label: "Favorite Biodatas",
+            icon: CiHeart,
+            path: "/dashboard/favorite-biodatas",
+        },
+    ];
 
     const menuItems = [
         ...(isAdmin ? adminMenuItems : userMenuItems),

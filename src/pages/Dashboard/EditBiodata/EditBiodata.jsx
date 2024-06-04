@@ -33,7 +33,7 @@ import useOwnBiodata from "../../../hooks/useOwnBiodata";
 const EditBiodata = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
-    const { ownBiodata } = useOwnBiodata();
+    const { ownBiodata, haveBiodata } = useOwnBiodata();
 
     const [date, setDate] = useState("");
     const [dateErr, setDateErr] = useState("");
@@ -52,7 +52,7 @@ const EditBiodata = () => {
     const [expectedPartnerWeight, setExpectedPartnerWeight] = useState("");
 
     useEffect(() => {
-        const oldDate = new Date("1999-06-14T18:00:00.000Z");
+        const oldDate = new Date(ownBiodata?.dateOfBirth);
         setDate(oldDate || "");
         setBiodataType(ownBiodata?.biodataType || "");
         setHeight(ownBiodata?.height || "");
@@ -705,7 +705,9 @@ const EditBiodata = () => {
                         loading={isSubmitting}
                         fullWidth
                     >
-                        Save And Publish Now
+                        {haveBiodata
+                            ? "Save and Update"
+                            : "Save And Publish Now"}
                     </Button>
                 </form>
                 <form
