@@ -5,12 +5,14 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import AuthForm from "./AuthForm";
 import useDisplayError from "../../hooks/useDisplayError";
+import useAddNewUser from "../../hooks/useAddNewUser";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { loading } = useAuth();
     const displayError = useDisplayError();
+    const addNewUser = useAddNewUser();
 
     const { googleLogin, signInWithPassword } = useAuth();
 
@@ -50,6 +52,11 @@ const Login = () => {
         googleLogin()
             .then((result) => {
                 successTask(result);
+                const data = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                };
+                addNewUser(data);
             })
             .catch((err) => {
                 displayError(err);

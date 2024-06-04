@@ -7,11 +7,13 @@ import useDisplayError from "../../hooks/useDisplayError";
 import Swal from "sweetalert2";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAddNewUser from "../../hooks/useAddNewUser";
 
 const Register = () => {
     const navigate = useNavigate();
     const { createUser, updateInfo, setLoading } = useAuth();
     const displayError = useDisplayError();
+    const addNewUser = useAddNewUser();
 
     const handleRegister = async (data) => {
         setLoading(true);
@@ -44,6 +46,11 @@ const Register = () => {
                     updateInfo(result.user, profile)
                         .then(() => {
                             console.log("profile updated", result.user);
+                            const data = {
+                                name,
+                                email,
+                            };
+                            addNewUser(data);
                             navigate("/");
                             toast.success("Register Successful");
                         })
