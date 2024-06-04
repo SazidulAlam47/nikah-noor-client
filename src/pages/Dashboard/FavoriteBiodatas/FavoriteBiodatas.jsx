@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
+import Swal from "sweetalert2";
 
 const TABLE_HEAD = [
     "Name",
@@ -17,7 +18,11 @@ const TABLE_HEAD = [
 const FavoriteBiodatas = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data: favorites, isPending } = useQuery({
+    const {
+        data: favorites,
+        isPending,
+        refetch,
+    } = useQuery({
         queryKey: ["favorite-biodatas", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(
@@ -26,6 +31,43 @@ const FavoriteBiodatas = () => {
             return res.data;
         },
     });
+
+    const handleDelete = (biodataId) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/favorites/${biodataId}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The Biodata has been deleted from Favorites.",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        //remove from UI
+                        refetch();
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "The Biodata remains safe",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+    };
 
     if (isPending) {
         return <Loader />;
@@ -113,7 +155,14 @@ const FavoriteBiodatas = () => {
                                             </Typography>
                                         </td>
                                         <td className="p-4">
-                                            <Button size="sm"> Delete</Button>
+                                            <Button
+                                                onClick={() =>
+                                                    handleDelete(biodataId)
+                                                }
+                                                size="sm"
+                                            >
+                                                Delete
+                                            </Button>
                                         </td>
                                     </tr>
                                 )
