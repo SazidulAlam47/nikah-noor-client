@@ -26,8 +26,13 @@ import {
 } from "./selectData";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const EditBiodata = () => {
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+
     const [date, setDate] = useState("");
     const [dateErr, setDateErr] = useState("");
     const { user, updateInfo } = useAuth();
@@ -67,8 +72,6 @@ const EditBiodata = () => {
             name: user?.displayName,
         },
     });
-
-    console.log({ isSubmitting });
 
     const onTextSubmit = (data) => {
         let isValid = true;
@@ -168,19 +171,35 @@ const EditBiodata = () => {
                 contactEmail: user?.email,
                 mobileNumber: data.mobileNumber,
             };
-            console.log(biodata);
-            // TODO: upload the data to database
-            // TODO: update user name on firebase
+
             const profile = {
                 displayName: data.name,
             };
-            updateInfo(user, profile)
-                .then(() => {
-                    console.log("profile name updated from edit biodata", user);
-                })
-                .catch((error) => {
-                    console.error(error.message);
-                });
+            // update user name on firebase
+            updateInfo(user, profile);
+            // upload the data to database
+            axiosSecure.put(`/biodatas/${user?.email}`, biodata).then((res) => {
+                console.log(res.data);
+                if (res.data.upsertedCount) {
+                    navigate("/dashboard/view-biodata");
+                    Swal.fire({
+                        icon: "success",
+                        title: "Biodata Published!",
+                        text: "The Biodata has been published successfully.",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                } else if (res.data.matchedCount) {
+                    navigate("/dashboard/view-biodata");
+                    Swal.fire({
+                        icon: "success",
+                        title: "Biodata Updated!",
+                        text: "The Biodata has been updated successfully.",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                }
+            });
         }
     };
 

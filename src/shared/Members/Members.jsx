@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import MemberCard from "./MemberCard";
 import MemberCardSkeleton from "./MemberCardSkeleton";
 import PropTypes from "prop-types";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Members = ({ sidebar }) => {
+    const axiosPublic = useAxiosPublic();
     const { data: bioDatas, isPending } = useQuery({
         queryKey: ["members"],
         queryFn: async () => {
-            const res = await axios.get("/data/biodata.json");
+            const res = await axiosPublic.get("/biodatas");
             return res.data;
         },
     });
