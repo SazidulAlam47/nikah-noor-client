@@ -185,7 +185,7 @@ const EditBiodata = () => {
                 dateOfBirth: date,
                 height,
                 weight,
-                age: data.age,
+                age: parseInt(data.age),
                 occupation,
                 race,
                 fathersName: data.fathersName,

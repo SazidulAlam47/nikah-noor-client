@@ -18,15 +18,36 @@ import { useQuery } from "@tanstack/react-query";
 const Biodatas = () => {
     const axiosPublic = useAxiosPublic();
     const [open, setOpen] = useState(false);
+
+    const [gender, setGender] = useState(null);
+    const [division, setDivision] = useState(null);
+    const [from, setFrom] = useState(18);
+    const [to, setTo] = useState(60);
+
     const size = useWindowSize();
 
+    const url = `/biodatas?from=${from}&to=${to}${
+        gender ? `&biodataType=${gender}` : ""
+    }${division ? `&permanentDivision=${division}` : ""}`;
+
+    console.log(url);
+
     const { data: bioDatas, isPending } = useQuery({
-        queryKey: ["members"],
+        queryKey: ["members", gender, division, from, to],
         queryFn: async () => {
-            const res = await axiosPublic.get("/biodatas");
+            const res = await axiosPublic.get(url);
             return res.data;
         },
     });
+
+    const applyFilter = (data) => {
+        console.log(data);
+
+        setGender(data.gender);
+        setDivision(data.division);
+        setFrom(data.from);
+        setTo(data.to);
+    };
 
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
@@ -50,7 +71,7 @@ const Biodatas = () => {
             {/* Desktop */}
             <div className="flex">
                 <aside className="w-[25%] border-r hidden md:block sticky pt-10 top-0 h-screen">
-                    <Filter setOpen={setOpen} />
+                    <Filter setOpen={setOpen} applyFilter={applyFilter} />
                 </aside>
                 <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12">
                     <SectionHeading
@@ -81,7 +102,7 @@ const Biodatas = () => {
                         <RxCross2 size={25} />
                     </IconButton>
                 </div>
-                <Filter setOpen={setOpen} />
+                <Filter setOpen={setOpen} applyFilter={applyFilter} />
             </Drawer>
         </>
     );

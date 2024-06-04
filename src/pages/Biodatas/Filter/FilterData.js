@@ -1,18 +1,18 @@
 import chroma from "chroma-js";
 
 const genderOptions = [
-    { value: "male", label: "Male's Biodata" },
-    { value: "female", label: "Female's Biodata" },
+    { value: "Male", label: "Male's Biodata" },
+    { value: "Female", label: "Female's Biodata" },
 ];
 
 const divisionOptions = [
-    { value: "dhaka", label: "Dhaka" },
-    { value: "chattagram", label: "Chattagram" },
-    { value: "rangpur", label: "Rangpur" },
-    { value: "barisal", label: "Barisal" },
-    { value: "khulna", label: "Khulna" },
-    { value: "maymansign", label: "Maymansign" },
-    { value: "sylhet", label: "Sylhet" },
+    { value: "Dhaka", label: "Dhaka" },
+    { value: "Chattagram", label: "Chattagram" },
+    { value: "Rangpur", label: "Rangpur" },
+    { value: "Barisal", label: "Barisal" },
+    { value: "Khulna", label: "Khulna" },
+    { value: "Maymansign", label: "Maymansign" },
+    { value: "Sylhet", label: "Sylhet" },
 ];
 
 // select style 

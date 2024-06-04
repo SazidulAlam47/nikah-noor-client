@@ -8,7 +8,7 @@ import { colorStyles, divisionOptions, genderOptions } from "./FilterData";
 
 import PropTypes from "prop-types";
 
-const Filter = ({ setOpen }) => {
+const Filter = ({ setOpen, applyFilter }) => {
     const [values, setValues] = useState([18, 60]);
     const [fromError, setFromError] = useState(false);
     const [toError, setToError] = useState(false);
@@ -34,9 +34,9 @@ const Filter = ({ setOpen }) => {
             to = values[0];
             setValues([values[1], values[0]]);
         }
-
-        console.log({ gender, division, from, to });
+        const data = { gender, division, from, to };
         setOpen(false);
+        applyFilter(data);
     };
 
     return (
@@ -50,6 +50,7 @@ const Filter = ({ setOpen }) => {
                     <Select
                         options={genderOptions}
                         styles={colorStyles}
+                        isClearable
                         name="gender"
                     />
                 </div>
@@ -92,6 +93,7 @@ const Filter = ({ setOpen }) => {
                     <Select
                         options={divisionOptions}
                         styles={colorStyles}
+                        isClearable
                         name="division"
                     />
                 </div>
@@ -105,6 +107,7 @@ const Filter = ({ setOpen }) => {
 
 Filter.propTypes = {
     setOpen: PropTypes.func,
+    applyFilter: PropTypes.func.isRequired,
 };
 
 export default Filter;

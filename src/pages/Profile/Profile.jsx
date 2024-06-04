@@ -31,7 +31,7 @@ const Profile = () => {
         enabled: isFetched,
         queryFn: async () => {
             const res = await axiosPublic.get(
-                `/biodatasWithType?type=${biodata?.biodataType}&count=3&skip=${biodata?.biodataId}`
+                `/biodatasSidebar?type=${biodata?.biodataType}&count=3&skip=${biodata?.biodataId}`
             );
             return res.data;
         },
