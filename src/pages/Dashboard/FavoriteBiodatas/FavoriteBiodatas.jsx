@@ -1,6 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 import { Button, Card, Typography } from "@material-tailwind/react";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../components/Loader/Loader";
 
 const TABLE_HEAD = [
     "Name",
@@ -11,20 +15,22 @@ const TABLE_HEAD = [
 ];
 
 const FavoriteBiodatas = () => {
-    const TABLE_ROWS = [
-        {
-            name: "John Michael",
-            biodataId: "2",
-            permanentDivision: "Dhaka",
-            occupation: "Job",
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const { data: favorites, isPending } = useQuery({
+        queryKey: ["favorite-biodatas", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(
+                `/favorites/email/${user?.email}`
+            );
+            return res.data;
         },
-        {
-            name: "John Michael",
-            biodataId: "2",
-            permanentDivision: "Dhaka",
-            occupation: "Job",
-        },
-    ];
+    });
+
+    if (isPending) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Helmet>
@@ -56,7 +62,7 @@ const FavoriteBiodatas = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {TABLE_ROWS.map(
+                            {favorites?.map(
                                 (
                                     {
                                         name,
