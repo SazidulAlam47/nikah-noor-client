@@ -125,11 +125,20 @@ const ProfileDetails = ({ biodata }) => {
             confirmButtonText: "Yes, proceed",
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Request Submitted",
-                    text: "Your request has been sent to the admin. Please wait for approval",
-                    icon: "success",
-                });
+                axiosSecure
+                    .patch(`/biodatas/${biodata.biodataId}`, {
+                        premium: "Pending",
+                    })
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.matchedCount > 0) {
+                            Swal.fire({
+                                title: "Request Submitted",
+                                text: "Your request has been sent to the admin. Please wait for approval",
+                                icon: "success",
+                            });
+                        }
+                    });
             }
         });
     };
