@@ -7,9 +7,11 @@ import Members from "../../shared/Members/Members";
 import { Typography } from "@material-tailwind/react";
 import Loader from "../../components/Loader/Loader";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Profile = () => {
     const { biodataId } = useParams();
+    const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
     const { data: biodata, isPending } = useQuery({
@@ -20,9 +22,17 @@ const Profile = () => {
         },
     });
 
-    console.log(biodata);
+    const { data: sideBiodatas, isPending: sidePending } = useQuery({
+        queryKey: ["members", biodata?.biodataType],
+        queryFn: async () => {
+            const res = await axiosPublic.get(
+                `/biodatasWithType?type=${biodata?.biodataType}&count=3`
+            );
+            return res.data;
+        },
+    });
 
-    if (isPending) {
+    if (isPending && sidePending) {
         return <Loader />;
     }
 
@@ -44,7 +54,11 @@ const Profile = () => {
                         >
                             Similar biodatas
                         </Typography>
-                        <Members sidebar />
+                        <Members
+                            sidebar
+                            bioDatas={sideBiodatas}
+                            isPending={sidePending}
+                        />
                     </aside>
                 </div>
             </Container>

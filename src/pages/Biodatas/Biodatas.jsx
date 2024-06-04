@@ -12,10 +12,21 @@ import {
 import { useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { RxCross2 } from "react-icons/rx";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Biodatas = () => {
+    const axiosPublic = useAxiosPublic();
     const [open, setOpen] = useState(false);
     const size = useWindowSize();
+
+    const { data: bioDatas, isPending } = useQuery({
+        queryKey: ["members"],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/biodatas");
+            return res.data;
+        },
+    });
 
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
@@ -46,7 +57,7 @@ const Biodatas = () => {
                         title="All Members' Biodata"
                         subtitle="Discover profiles of our members and connect with your potential life partner"
                     />
-                    <Members />
+                    <Members bioDatas={bioDatas} isPending={isPending} />
                 </div>
             </div>
             {/* Mobile Filter Drawer */}
