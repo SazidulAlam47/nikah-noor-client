@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import Container from "../../components/Container/Container";
@@ -7,19 +6,19 @@ import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import Members from "../../shared/Members/Members";
 import { Typography } from "@material-tailwind/react";
 import Loader from "../../components/Loader/Loader";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Profile = () => {
     const { biodataId } = useParams();
+    const axiosSecure = useAxiosSecure();
 
-    const { data: bioDatas, isPending } = useQuery({
-        queryKey: ["member"],
+    const { data: biodata, isPending } = useQuery({
+        queryKey: ["member", biodataId],
         queryFn: async () => {
-            const res = await axios.get("/data/biodata.json");
+            const res = await axiosSecure.get(`/biodatas/${biodataId}`);
             return res.data;
         },
     });
-
-    const biodata = bioDatas?.find((item) => item.biodataId == biodataId);
 
     console.log(biodata);
 

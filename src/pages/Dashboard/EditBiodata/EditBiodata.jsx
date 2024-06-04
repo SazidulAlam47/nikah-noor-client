@@ -13,7 +13,7 @@ import {
     Option,
 } from "@material-tailwind/react";
 import { DayPicker } from "react-day-picker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import useAuth from "../../../hooks/useAuth";
 import "./EditBiodata.css";
@@ -28,10 +28,12 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import useOwnBiodata from "../../../hooks/useOwnBiodata";
 
 const EditBiodata = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const { ownBiodata } = useOwnBiodata();
 
     const [date, setDate] = useState("");
     const [dateErr, setDateErr] = useState("");
@@ -48,6 +50,20 @@ const EditBiodata = () => {
     const [presentDivision, setPresentDivision] = useState("");
     const [expectedPartnerHeight, setExpectedPartnerHeight] = useState("");
     const [expectedPartnerWeight, setExpectedPartnerWeight] = useState("");
+
+    useEffect(() => {
+        const oldDate = new Date("1999-06-14T18:00:00.000Z");
+        setDate(oldDate || "");
+        setBiodataType(ownBiodata?.biodataType || "");
+        setHeight(ownBiodata?.height || "");
+        setWeight(ownBiodata?.weight || "");
+        setOccupation(ownBiodata?.occupation || "");
+        setRace(ownBiodata?.race || "");
+        setPermanentDivision(ownBiodata?.permanentDivision || "");
+        setPresentDivision(ownBiodata?.presentDivision || "");
+        setExpectedPartnerHeight(ownBiodata?.expectedPartnerHeight || "");
+        setExpectedPartnerWeight(ownBiodata?.expectedPartnerWeight || "");
+    }, [ownBiodata]);
 
     const [biodataTypeErr, setBiodataTypeErr] = useState("");
     const [heightErr, setHeightErr] = useState("");
@@ -68,8 +84,19 @@ const EditBiodata = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm({
-        defaultValues: {
-            name: user?.displayName,
+        // defaultValues: {
+        //     name: user?.displayName,
+        // },
+        defaultValues: async () => {
+            const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
+            return {
+                name: user?.displayName,
+                age: res.data.age,
+                expectedPartnerAge: res.data.expectedPartnerAge,
+                mobileNumber: res.data.mobileNumber,
+                fathersName: res.data.fathersName,
+                mothersName: res.data.mothersName,
+            };
         },
     });
 

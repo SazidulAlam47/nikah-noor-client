@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loader from "../../../components/Loader/Loader";
 import ProfileDetails from "../../Profile/ProfileDetails/ProfileDetails";
 import { Helmet } from "react-helmet-async";
+import useOwnBiodata from "../../../hooks/useOwnBiodata";
 
 const ViewBiodata = () => {
-    const { data: biodata, isPending } = useQuery({
-        queryKey: ["my-biodata"],
-        queryFn: async () => {
-            const res = await axios.get("/data/mybiodata.json");
-            return res.data;
-        },
-    });
+    const { ownBiodata, isPending } = useOwnBiodata();
 
     if (isPending) {
         return <Loader />;
@@ -22,7 +15,7 @@ const ViewBiodata = () => {
             <Helmet>
                 <title>Nikah Noor | View Biodata</title>
             </Helmet>
-            <ProfileDetails biodata={biodata} self />
+            <ProfileDetails biodata={ownBiodata} self />
         </>
     );
 };
