@@ -7,6 +7,7 @@ import { useState } from "react";
 import { colorStyles, divisionOptions, genderOptions } from "./FilterData";
 
 import PropTypes from "prop-types";
+import { BsExclamationCircleFill } from "react-icons/bs";
 
 const Filter = ({ setOpen, applyFilter }) => {
     const [values, setValues] = useState([18, 60]);
@@ -21,6 +22,8 @@ const Filter = ({ setOpen, applyFilter }) => {
         let from = values[0];
         let to = values[1];
 
+        setFromError(false);
+        setToError(false);
         if (values[0] < 18 || values[0] > 60) {
             setFromError(true);
             return;
@@ -100,6 +103,12 @@ const Filter = ({ setOpen, applyFilter }) => {
                 <div className="text-center">
                     <Button type="submit">Apply Filter</Button>
                 </div>
+                {(fromError || toError) && (
+                    <div className="flex gap-2 items-center justify-center text-red-600">
+                        <BsExclamationCircleFill />
+                        <Typography>Age must be between 18 to 60</Typography>
+                    </div>
+                )}
             </form>
         </div>
     );

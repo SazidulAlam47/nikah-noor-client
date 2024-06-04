@@ -7,6 +7,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { PiMedalThin } from "react-icons/pi";
 import useOwnBiodata from "./useOwnBiodata";
+import useAdmin from "./useAdmin";
 
 const adminMenuItems = [
     {
@@ -37,8 +38,7 @@ const commonItem = {
 };
 
 const useMenuItems = () => {
-    // TODO: admin configuration
-    const isAdmin = false;
+    const { isAdmin } = useAdmin();
     const { haveBiodata } = useOwnBiodata();
 
     const userMenuItems = [

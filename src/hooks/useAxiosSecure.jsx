@@ -6,7 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const axiosSecure = axios.create({
     baseURL: baseUrl,
-    // withCredentials: true,
+    withCredentials: true,
 });
 
 const useAxiosSecure = () => {

@@ -83,93 +83,101 @@ const FavoriteBiodatas = () => {
                 subtitle="Review and manage your favorite profiles to keep track of potential matches"
             />
             <div className="mt-8">
-                <Card className="h-fit w-full overflow-x-auto">
-                    <table className="w-full min-w-max table-auto text-left">
-                        <thead>
-                            <tr>
-                                {TABLE_HEAD.map((head) => (
-                                    <th
-                                        key={head}
-                                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                                    >
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal leading-none opacity-70"
+                {favorites?.length ? (
+                    <Card className="h-fit w-full overflow-x-auto">
+                        <table className="w-full min-w-max table-auto text-left">
+                            <thead>
+                                <tr>
+                                    {TABLE_HEAD.map((head) => (
+                                        <th
+                                            key={head}
+                                            className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                                         >
-                                            {head}
-                                        </Typography>
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {favorites?.map(
-                                (
-                                    {
-                                        name,
-                                        biodataId,
-                                        permanentDivision,
-                                        occupation,
-                                    },
-                                    index
-                                ) => (
-                                    <tr
-                                        key={index}
-                                        className="even:bg-blue-gray-50/50"
-                                    >
-                                        <td className="p-4">
                                             <Typography
                                                 variant="small"
                                                 color="blue-gray"
-                                                className="font-normal"
+                                                className="font-normal leading-none opacity-70"
                                             >
-                                                {name}
+                                                {head}
                                             </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {biodataId}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {permanentDivision}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {occupation}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Button
-                                                onClick={() =>
-                                                    handleDelete(biodataId)
-                                                }
-                                                size="sm"
-                                            >
-                                                Delete
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                )
-                            )}
-                        </tbody>
-                    </table>
-                </Card>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {favorites?.map(
+                                    (
+                                        {
+                                            name,
+                                            biodataId,
+                                            permanentDivision,
+                                            occupation,
+                                        },
+                                        index
+                                    ) => (
+                                        <tr
+                                            key={index}
+                                            className="even:bg-blue-gray-50/50"
+                                        >
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {name}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {biodataId}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {permanentDivision}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {occupation}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Button
+                                                    onClick={() =>
+                                                        handleDelete(biodataId)
+                                                    }
+                                                    size="sm"
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    )
+                                )}
+                            </tbody>
+                        </table>
+                    </Card>
+                ) : (
+                    <div className="flex items-center justify-center h-[55vh]">
+                        <Typography variant="lead">
+                            You don&apos;t have any Favorite Biodata
+                        </Typography>
+                    </div>
+                )}
             </div>
         </>
     );

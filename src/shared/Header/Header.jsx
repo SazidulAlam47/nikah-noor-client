@@ -15,13 +15,13 @@ import UserAvatar from "./UserAvatar/UserAvatar";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useDisplayError from "../../hooks/useDisplayError";
+import useAdmin from "../../hooks/useAdmin";
 
 const Header = () => {
     const [openNav, setOpenNav] = useState(false);
     const { user, logOut } = useAuth();
     const displayError = useDisplayError();
-    // TODO: admin configuration
-    const isAdmin = false;
+    const { isAdmin } = useAdmin();
 
     useEffect(() => {
         window.addEventListener(
