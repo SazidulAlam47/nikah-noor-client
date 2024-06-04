@@ -18,7 +18,7 @@ const ViewBiodata = () => {
                 <title>Nikah Noor | View Biodata</title>
             </Helmet>
             {haveBiodata ? (
-                <ProfileDetails biodata={ownBiodata} self />
+                <ProfileDetails biodata={ownBiodata} />
             ) : (
                 <div className="h-full flex flex-col gap-5 justify-center items-center">
                     <Typography variant="h4">

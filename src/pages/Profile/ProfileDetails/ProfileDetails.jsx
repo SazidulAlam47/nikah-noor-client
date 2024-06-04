@@ -10,8 +10,9 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const ProfileDetails = ({ biodata, self }) => {
+const ProfileDetails = ({ biodata }) => {
     const { user } = useAuth();
+    const self = user.email === biodata.contactEmail;
     const axiosSecure = useAxiosSecure();
     // TODO: premium memberships
     const premium = false;

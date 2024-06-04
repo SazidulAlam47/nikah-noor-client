@@ -14,7 +14,11 @@ const Profile = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
-    const { data: biodata, isPending } = useQuery({
+    const {
+        data: biodata,
+        isPending,
+        isFetched,
+    } = useQuery({
         queryKey: ["member", biodataId],
         queryFn: async () => {
             const res = await axiosSecure.get(`/biodatas/${biodataId}`);
@@ -24,6 +28,7 @@ const Profile = () => {
 
     const { data: sideBiodatas, isPending: sidePending } = useQuery({
         queryKey: ["members", biodata?.biodataType, biodata?.biodataId],
+        enabled: isFetched,
         queryFn: async () => {
             const res = await axiosPublic.get(
                 `/biodatasWithType?type=${biodata?.biodataType}&count=3&skip=${biodata?.biodataId}`
