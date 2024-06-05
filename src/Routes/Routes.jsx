@@ -19,6 +19,8 @@ import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers/ManageUsers";
 import ApprovedPremium from "../pages/Dashboard/AdminPages/ApprovedPremium/ApprovedPremium";
 import ApprovedContact from "../pages/Dashboard/AdminPages/ApprovedContact/ApprovedContact";
 import AdminRoute from "./AdminRoute";
+import GotMarried from "../pages/Dashboard/GotMarried/GotMarried";
+import AdminSuccessStory from "../pages/Dashboard/AdminPages/AdminSuccessStory/AdminSuccessStory";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +97,10 @@ const router = createBrowserRouter([
                 path: "favorite-biodatas",
                 element: <FavoriteBiodatas />,
             },
+            {
+                path: "got-married",
+                element: <GotMarried />,
+            },
             // admin only pages
             {
                 path: "admin-dashboard",
@@ -125,6 +131,14 @@ const router = createBrowserRouter([
                 element: (
                     <AdminRoute>
                         <ApprovedContact />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "success-story",
+                element: (
+                    <AdminRoute>
+                        <AdminSuccessStory />
                     </AdminRoute>
                 ),
             },

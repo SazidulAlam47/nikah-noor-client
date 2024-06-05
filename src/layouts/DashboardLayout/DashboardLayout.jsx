@@ -25,10 +25,10 @@ const DashboardLayout = () => {
             </div>
             {/* Desktop */}
             <div className="flex font-poppins">
-                <aside className="md:w-[30%] lg:w-[20%] border-r shadow hidden md:block sticky pt-10 top-0 h-screen">
+                <aside className="md:w-[30%] lg:w-[20%] max-w-xs border-r shadow hidden md:block sticky pt-10 top-0 h-screen">
                     <SideNavigation setOpen={setOpen} />
                 </aside>
-                <div className="px-3 sm:px-5 md:px-8 w-full md:w-[70%] lg:w-[80%] py-6 md:py-12">
+                <div className="px-3 sm:px-5 md:px-8 w-full md:w-[70%] lg:w-[80%] py-6 md:py-12 mx-auto">
                     <Outlet />
                 </div>
             </div>
