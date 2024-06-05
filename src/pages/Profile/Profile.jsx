@@ -26,7 +26,7 @@ const Profile = () => {
         },
     });
 
-    const { data: sideBiodatas, isPending: sidePending } = useQuery({
+    const { data: sideBiodatas = [], isPending: sidePending } = useQuery({
         queryKey: ["members", biodata?.biodataType, biodata?.biodataId],
         enabled: isFetched,
         queryFn: async () => {

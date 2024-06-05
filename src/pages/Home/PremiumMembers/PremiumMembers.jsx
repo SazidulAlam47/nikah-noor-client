@@ -7,8 +7,8 @@ import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 const PremiumMembers = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { data: bioDatas, isPending } = useQuery({
-        queryKey: ["members", "premium"],
+    const { data: bioDatas = [], isPending } = useQuery({
+        queryKey: ["premium-members"],
         queryFn: async () => {
             const res = await axiosPublic.get("/premiums?count=6");
             return res.data;

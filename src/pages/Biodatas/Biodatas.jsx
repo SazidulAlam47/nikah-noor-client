@@ -38,7 +38,7 @@ const Biodatas = () => {
         gender ? `&biodataType=${gender}` : ""
     }${division ? `&permanentDivision=${division}` : ""}`;
 
-    const { data: bioDatas, isPending } = useQuery({
+    const { data: bioDatas = [], isPending } = useQuery({
         queryKey: [
             "members",
             gender,
@@ -77,12 +77,8 @@ const Biodatas = () => {
         setSelectedPage(currentPage);
     };
 
-    console.log(totalDataObj);
-
     const totalData = totalDataObj?.count;
     const totalPages = Math.ceil(totalData / dataPerPage);
-
-    console.log({ totalData, totalPages });
 
     return (
         <>

@@ -1,9 +1,10 @@
 import Container from "../../../components/Container/Container";
+import useCounterData from "../../../hooks/useCounterData";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 import CounterCard from "./CounterCard";
-import counterData from "./counterData";
 
 const Counter = () => {
+    const counterData = useCounterData();
     return (
         <Container>
             <div className="py-12">

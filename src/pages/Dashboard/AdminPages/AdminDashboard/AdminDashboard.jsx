@@ -5,8 +5,26 @@ import { BsClipboardData } from "react-icons/bs";
 import { FaFemale, FaMale } from "react-icons/fa";
 import { PiMedalBold } from "react-icons/pi";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { useQuery } from "@tanstack/react-query";
+import { MdOutlineRateReview } from "react-icons/md";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Loader from "../../../../components/Loader/Loader";
 
 const AdminDashboard = () => {
+    const axiosSecure = useAxiosSecure();
+
+    const { data: stats, isPending } = useQuery({
+        queryKey: ["admin-stats"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/admin-stats");
+            return res.data;
+        },
+    });
+
+    if (isPending) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Helmet>
@@ -20,19 +38,32 @@ const AdminDashboard = () => {
                 <AdminCard
                     icon={BsClipboardData}
                     title="Total Biodata"
-                    count={312}
+                    count={stats?.totalBiodata}
                 />
-                <AdminCard icon={FaMale} title="Male Biodata" count={145} />
-                <AdminCard icon={FaFemale} title="Female Biodata" count={153} />
+                <AdminCard
+                    icon={FaMale}
+                    title="Male Biodata"
+                    count={stats?.maleBiodata}
+                />
+                <AdminCard
+                    icon={FaFemale}
+                    title="Female Biodata"
+                    count={stats?.femaleBiodata}
+                />
                 <AdminCard
                     icon={PiMedalBold}
                     title="Premium Biodata"
-                    count={57}
+                    count={stats?.premiumBiodata}
+                />
+                <AdminCard
+                    icon={MdOutlineRateReview}
+                    title="Total Review"
+                    count={stats?.totalReview}
                 />
                 <AdminCard
                     icon={TbCurrencyTaka}
                     title="Total Revenue"
-                    count={234}
+                    count={234} //TODO: Revenue
                 />
             </div>
         </>
