@@ -11,6 +11,8 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import usePremium from "../../../hooks/usePremium";
 import useAdmin from "../../../hooks/useAdmin";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../components/Loader/Loader";
 
 const ProfileDetails = ({ biodata }) => {
     const { user } = useAuth();
@@ -18,6 +20,16 @@ const ProfileDetails = ({ biodata }) => {
     const axiosSecure = useAxiosSecure();
     const { isPremium } = usePremium();
     const { isAdmin } = useAdmin();
+
+    const { data: exist = false, isPending } = useQuery({
+        queryKey: ["exists", user?.email, biodata?.biodataId],
+        queryFn: async () => {
+            const res = await axiosSecure.get(
+                `/payments/exist/${biodata?.biodataId}`
+            );
+            return res.data;
+        },
+    });
 
     const personalTable = [
         {
@@ -95,14 +107,27 @@ const ProfileDetails = ({ biodata }) => {
     ];
 
     const requestBtn = (
-        <Link to={`/dashboard/checkout/${biodata.biodataId}`}>
-            <Button
-                size="sm"
-                color={biodata.biodataType === "Male" ? "blue" : "pink"}
-            >
-                Request Contact
-            </Button>
-        </Link>
+        <>
+            {exist?.exist ? (
+                <Link to="/dashboard/contact-requests">
+                    <Button
+                        size="sm"
+                        color={biodata.biodataType === "Male" ? "blue" : "pink"}
+                    >
+                        View Contact
+                    </Button>
+                </Link>
+            ) : (
+                <Link to={`/dashboard/checkout/${biodata.biodataId}`}>
+                    <Button
+                        size="sm"
+                        color={biodata.biodataType === "Male" ? "blue" : "pink"}
+                    >
+                        Request Contact
+                    </Button>
+                </Link>
+            )}
+        </>
     );
 
     const contactTable = [
@@ -175,6 +200,10 @@ const ProfileDetails = ({ biodata }) => {
             }
         });
     };
+
+    if (isPending) {
+        return <Loader />;
+    }
 
     return (
         <>
