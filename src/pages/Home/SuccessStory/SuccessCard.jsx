@@ -8,10 +8,14 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 
-const SuccessCard = ({ story }) => {
+const SuccessCard = ({ story, noShadow }) => {
     return (
         <div className="mx-2 my-4 h-full">
-            <Card className="w-full h-full shadow-lg">
+            <Card
+                className={`w-full h-full ${
+                    noShadow ? "shadow-none" : "shadow-lg"
+                }`}
+            >
                 <CardHeader floated={false} color="blue-gray">
                     <div className="w-full aspect-square overflow-hidden">
                         <img
@@ -52,6 +56,7 @@ const SuccessCard = ({ story }) => {
 
 SuccessCard.propTypes = {
     story: PropTypes.object.isRequired,
+    noShadow: PropTypes.bool,
 };
 
 export default SuccessCard;

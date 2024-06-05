@@ -3,36 +3,48 @@
         "image": "https://i.pinimg.com/564x/df/96/6b/df966b6c15b2ede7b7d594a44fd8054c.jpg",
         "marriageDate": "2023-02-14T00:00:00.000Z",
         "reviewStar": 5,
+        "maleBiodataId": 5,
+        "femaleBiodataId": 6,
         "successStoryText": "We met on Nikah Noor and it was love at first sight. Our connection was instant and we knew we were meant to be together. Thank you Nikah Noor for helping us find each other!"
     },
     {
         "image": "https://i.pinimg.com/564x/7c/95/39/7c9539930d8fc9a96e9d0d3d476f2de7.jpg",
         "marriageDate": "2022-10-05T00:00:00.000Z",
         "reviewStar": 4,
+        "maleBiodataId": 4,
+        "femaleBiodataId": 3,
         "successStoryText": "After searching for the right partner, I finally found my soulmate on Nikah Noor. The platform made it easy to connect and communicate, and now we are happily married."
     },
     {
         "image": "https://i.pinimg.com/564x/d2/6a/b2/d26ab26364ecf4e4e7ec97f62d32e1c1.jpg",
         "marriageDate": "2021-06-20T00:00:00.000Z",
         "reviewStar": 5,
+        "maleBiodataId": 2,
+        "femaleBiodataId": 1,
         "successStoryText": "Nikah Noor changed our lives forever. The advanced matching algorithm matched us perfectly. We couldn't be happier with our decision to use this platform."
     },
     {
         "image": "https://i.pinimg.com/564x/62/6d/3a/626d3a70cd5cfe00dd95335a06929496.jpg",
         "marriageDate": "2023-01-30T00:00:00.000Z",
         "reviewStar": 4,
+        "maleBiodataId": 3,
+        "femaleBiodataId": 2,
         "successStoryText": "Thanks to Nikah Noor, I found my partner who shares my values and beliefs. Our wedding day was the happiest day of our lives, and we owe it all to this wonderful site."
     },
     {
         "image": "https://i.pinimg.com/564x/bd/ed/fd/bdedfd2fb56fc69579ccb0d05d18743f.jpg",
         "marriageDate": "2020-12-25T00:00:00.000Z",
         "reviewStar": 5,
+        "maleBiodataId": 1,
+        "femaleBiodataId": 4,
         "successStoryText": "Finding love was never easy until I joined Nikah Noor. The journey from the first message to our wedding day was magical."
     },
     {
         "image": "https://i.pinimg.com/564x/c6/cf/88/c6cf8853cc1595574c2011a8cb134348.jpg",
         "marriageDate": "2023-04-18T00:00:00.000Z",
         "reviewStar": 4,
+        "maleBiodataId": 6,
+        "femaleBiodataId": 5,
         "successStoryText": "Nikah Noor's platform made it simple to meet and get to know my partner. Our bond grew stronger each day, and now we are happily married. Grateful for this amazing service."
     }
 ]
