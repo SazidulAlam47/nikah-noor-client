@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import SuccessCard from "./SuccessCard";
 import Container from "../../../components/Container/Container";
 import Slider from "react-slick";
@@ -8,6 +7,7 @@ import PropTypes from "prop-types";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 import SuccessCardSkeleton from "./SuccessCardSkeleton";
 import { useWindowSize } from "@uidotdev/usehooks";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const SampleNextArrow = ({ onClick }) => {
     return (
@@ -33,11 +33,12 @@ const SamplePrevArrow = ({ onClick }) => {
 
 const SuccessStory = () => {
     const size = useWindowSize();
+    const axiosPublic = useAxiosPublic();
 
     const { data: stories, isPending } = useQuery({
         queryKey: ["success-sorties"],
         queryFn: async () => {
-            const res = await axios.get("/data/success.json");
+            const res = await axiosPublic.get("/reviews");
             return res.data;
         },
     });

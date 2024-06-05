@@ -10,7 +10,7 @@ const PremiumMembers = () => {
     const { data: bioDatas, isPending } = useQuery({
         queryKey: ["members", "premium"],
         queryFn: async () => {
-            const res = await axiosPublic.get("/biodatas");
+            const res = await axiosPublic.get("/premiums?count=6");
             return res.data;
         },
     });

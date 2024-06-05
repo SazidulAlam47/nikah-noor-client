@@ -22,7 +22,7 @@ const Members = ({ sidebar, bioDatas, isPending }) => {
 
     return (
         <>
-            {bioDatas.length ? (
+            {bioDatas?.length ? (
                 <div
                     className={`grid ${
                         sidebar

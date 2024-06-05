@@ -196,11 +196,10 @@ const EditBiodata = () => {
                 mobileNumber: data.mobileNumber,
             };
 
-            const profile = {
-                displayName: data.name,
-            };
             // update user name on firebase
-            updateInfo(user, profile);
+            updateInfo(user, { displayName: data.name });
+            // update user name on user collection
+            axiosSecure.patch("/users", { name: data.name });
             // upload the data to database
             axiosSecure.put(`/biodatas/${user?.email}`, biodata).then((res) => {
                 console.log(res.data);

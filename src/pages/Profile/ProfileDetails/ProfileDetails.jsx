@@ -9,13 +9,15 @@ import { PiMedalThin } from "react-icons/pi";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import usePremium from "../../../hooks/usePremium";
+import useAdmin from "../../../hooks/useAdmin";
 
 const ProfileDetails = ({ biodata }) => {
     const { user } = useAuth();
     const self = user.email === biodata.contactEmail;
     const axiosSecure = useAxiosSecure();
-    // TODO: premium memberships
-    const premium = false;
+    const { isPremium } = usePremium();
+    const { isAdmin } = useAdmin();
 
     const personalTable = [
         {
@@ -106,11 +108,17 @@ const ProfileDetails = ({ biodata }) => {
     const contactTable = [
         {
             field: "Contact Email",
-            value: premium || self ? biodata?.contactEmail : requestBtn,
+            value:
+                isPremium || isAdmin || self
+                    ? biodata?.contactEmail
+                    : requestBtn,
         },
         {
             field: "Mobile Number",
-            value: premium || self ? biodata?.mobileNumber : requestBtn,
+            value:
+                isPremium || isAdmin || self
+                    ? biodata?.mobileNumber
+                    : requestBtn,
         },
     ];
 
