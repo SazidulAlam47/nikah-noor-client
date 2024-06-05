@@ -53,7 +53,7 @@ const EditBiodata = () => {
 
     useEffect(() => {
         const oldDate = new Date(ownBiodata?.dateOfBirth);
-        setDate(oldDate || "");
+        ownBiodata?.dateOfBirth ? setDate(oldDate) : setDate("");
         setBiodataType(ownBiodata?.biodataType || "");
         setHeight(ownBiodata?.height || "");
         setWeight(ownBiodata?.weight || "");
@@ -84,9 +84,6 @@ const EditBiodata = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm({
-        // defaultValues: {
-        //     name: user?.displayName,
-        // },
         defaultValues: async () => {
             const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
             return {

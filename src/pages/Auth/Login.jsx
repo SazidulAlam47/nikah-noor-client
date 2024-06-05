@@ -17,15 +17,6 @@ const Login = () => {
     const { googleLogin, signInWithPassword } = useAuth();
 
     const successTask = (result) => {
-        // console.log(result.user);
-        // const name = result.user.displayName;
-        // const email = result.user.email;
-        // const image = result.user.photoURL;
-        // const user = { email, name, image };
-
-        // axiosPublic.put("/users", user).then((res) => {
-        //     console.log(res.data);
-        //     toast.success("Login Successful");
         //     // navigate
         //     if (result.user.emailVerified) {
         //         location.state ? navigate(location.state) : navigate("/");

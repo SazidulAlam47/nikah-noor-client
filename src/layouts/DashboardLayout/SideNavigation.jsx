@@ -4,7 +4,6 @@ import {
     ListItemPrefix,
     Typography,
 } from "@material-tailwind/react";
-import Logo from "../../components/Logo/Logo";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -15,7 +14,7 @@ import useMenuItems from "../../hooks/useMenuItems";
 const SideNavigation = ({ setOpen }) => {
     const navigate = useNavigate();
     const displayError = useDisplayError();
-    const { logOut } = useAuth();
+    const { logOut, user } = useAuth();
     const location = useLocation();
     const menuItems = useMenuItems();
 
@@ -41,8 +40,20 @@ const SideNavigation = ({ setOpen }) => {
     };
 
     return (
-        <div className="text-center px-2 space-y-4">
-            <Logo width="3/5" />
+        <div className="text-center px-2 space-y-2">
+            <div className="px-3 space-y-2">
+                <img
+                    className="w-32 aspect-square mx-auto rounded-full object-cover object-center border"
+                    src={user?.photoURL}
+                    alt={user?.displayName}
+                />
+                <Typography
+                    variant="lead"
+                    className="text-gray-900 dark:text-gray-300"
+                >
+                    {user?.displayName}
+                </Typography>
+            </div>
 
             <List>
                 {menuItems?.map(({ label, icon: Icon, path }, idx) => {
