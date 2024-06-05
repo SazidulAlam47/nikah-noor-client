@@ -18,6 +18,8 @@ import { useQuery } from "@tanstack/react-query";
 const Biodatas = () => {
     const axiosPublic = useAxiosPublic();
     const [open, setOpen] = useState(false);
+    const [selectedPage, setSelectedPage] = useState(0);
+    const dataPerPage = 6;
 
     const [gender, setGender] = useState(null);
     const [division, setDivision] = useState(null);
@@ -26,14 +28,36 @@ const Biodatas = () => {
 
     const size = useWindowSize();
 
-    const url = `/biodatas?from=${from}&to=${to}${
+    const biodataUrl = `/biodatas?from=${from}&to=${to}${
+        gender ? `&biodataType=${gender}` : ""
+    }${
+        division ? `&permanentDivision=${division}` : ""
+    }&page=${selectedPage}&size=${dataPerPage}`;
+
+    const countUrl = `/biodatasCount?from=${from}&to=${to}${
         gender ? `&biodataType=${gender}` : ""
     }${division ? `&permanentDivision=${division}` : ""}`;
 
     const { data: bioDatas, isPending } = useQuery({
-        queryKey: ["members", gender, division, from, to],
+        queryKey: [
+            "members",
+            gender,
+            division,
+            from,
+            to,
+            selectedPage,
+            dataPerPage,
+        ],
         queryFn: async () => {
-            const res = await axiosPublic.get(url);
+            const res = await axiosPublic.get(biodataUrl);
+            return res.data;
+        },
+    });
+
+    const { data: totalDataObj, isPending: isCountPending } = useQuery({
+        queryKey: ["members-count", gender, division, from, to],
+        queryFn: async () => {
+            const res = await axiosPublic.get(countUrl);
             return res.data;
         },
     });
@@ -47,6 +71,18 @@ const Biodatas = () => {
 
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
+
+    const handlePageChange = (data) => {
+        const currentPage = data.selected;
+        setSelectedPage(currentPage);
+    };
+
+    console.log(totalDataObj);
+
+    const totalData = totalDataObj?.count;
+    const totalPages = Math.ceil(totalData / dataPerPage);
+
+    console.log({ totalData, totalPages });
 
     return (
         <>
@@ -74,7 +110,14 @@ const Biodatas = () => {
                         title="All Members' Biodata"
                         subtitle="Discover profiles of our members and connect with your potential life partner"
                     />
-                    <Members bioDatas={bioDatas} isPending={isPending} />
+                    <Members
+                        bioDatas={bioDatas}
+                        isPending={isPending}
+                        totalPages={totalPages}
+                        selectedPage={selectedPage}
+                        handlePageChange={handlePageChange}
+                        isCountPending={isCountPending}
+                    />
                 </div>
             </div>
             {/* Mobile Filter Drawer */}
@@ -86,13 +129,13 @@ const Biodatas = () => {
                 className="p-4 md:hidden"
             >
                 <div className="mb-6 flex items-center justify-between">
-                    <Typography variant="h5" color="blue-gray">
+                    <Typography variant="h5" color="blue-pink">
                         Filters
                     </Typography>
 
                     <IconButton
                         variant="text"
-                        color="blue-gray"
+                        color="blue-pink"
                         onClick={closeDrawer}
                     >
                         <RxCross2 size={25} />
