@@ -1,6 +1,10 @@
-import { Button, Typography } from "@material-tailwind/react";
-
+import { Typography } from "@material-tailwind/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useParams } from "react-router-dom";
+import CheckoutForm from "./CheckoutForm";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const Checkout = () => {
     const { biodataId } = useParams();
@@ -37,9 +41,9 @@ const Checkout = () => {
                         Payment Now
                     </Typography>
                     <div className="text-center space-y-3">
-                        <p>TODO: Card here</p>
-                        {/* TODO: Card Component here */}
-                        <Button>Pay</Button>
+                        <Elements stripe={stripePromise}>
+                            <CheckoutForm biodataId={biodataId} />
+                        </Elements>
                     </div>
                 </div>
             </div>
