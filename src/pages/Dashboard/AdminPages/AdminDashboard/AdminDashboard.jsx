@@ -9,6 +9,10 @@ import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRateReview } from "react-icons/md";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loader from "../../../../components/Loader/Loader";
+import { Cell, PieChart, Pie, Legend } from "recharts";
+import { Typography } from "@material-tailwind/react";
+
+const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
 const AdminDashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -24,6 +28,40 @@ const AdminDashboard = () => {
     if (isPending) {
         return <Loader />;
     }
+
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({
+        cx,
+        cy,
+        midAngle,
+        innerRadius,
+        outerRadius,
+        percent,
+    }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        return (
+            <text
+                x={x}
+                y={y}
+                fill="white"
+                textAnchor={x > cx ? "start" : "end"}
+                dominantBaseline="central"
+            >
+                {`${(percent * 100).toFixed(0)}%`}
+            </text>
+        );
+    };
+
+    const pieChartData = [
+        { name: "Total Biodata", value: stats?.totalBiodata },
+        { name: "Male Biodata", value: stats?.maleBiodata },
+        { name: "Female Biodata", value: stats?.femaleBiodata },
+        { name: "Male", value: stats?.premiumBiodata },
+        { name: "Premium Biodata", value: stats?.premiumBiodata },
+    ];
 
     return (
         <>
@@ -65,6 +103,31 @@ const AdminDashboard = () => {
                     title="Total Revenue"
                     count={stats?.totalRevenue}
                 />
+            </div>
+            <div className="w-fit mx-auto mt-8">
+                <Typography variant="lead" className="text-center">
+                    View Website stats in Pie Chart
+                </Typography>
+                <PieChart width={500} height={300}>
+                    <Pie
+                        data={pieChartData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={renderCustomizedLabel}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                    >
+                        {pieChartData.map((entry, index) => (
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={colors[index % colors.length]}
+                            />
+                        ))}
+                    </Pie>
+                    <Legend />
+                </PieChart>
             </div>
         </>
     );
