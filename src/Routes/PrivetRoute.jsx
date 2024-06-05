@@ -16,7 +16,7 @@ const PrivateRoute = ({ children }) => {
         return children;
     }
 
-    toast.warn("Access Denied: Please Log In", {
+    toast.warn("Please Login to view this page", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,

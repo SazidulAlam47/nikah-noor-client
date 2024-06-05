@@ -8,15 +8,30 @@ import { Link } from "react-router-dom";
 const SITEMAP = [
     {
         title: "Company",
-        links: ["About Us", "Careers", "Our Team", "Projects"],
+        links: [
+            { name: "About Us", path: "/about" },
+            { name: "Careers", path: "/" },
+            { name: "Our Team", path: "/" },
+            { name: "Projects", path: "/" },
+        ],
     },
     {
         title: "Help Center",
-        links: ["Discord", "Twitter", "GitHub", "Contact Us"],
+        links: [
+            { name: "FAQ", path: "/" },
+            { name: "Support Center", path: "/" },
+            { name: "Live Chat", path: "/" },
+            { name: "Contact Us", path: "/contact" },
+        ],
     },
     {
         title: "Resources",
-        links: ["Blog", "Newsletter", "Free Products", "Affiliate Program"],
+        links: [
+            { name: "Blog", path: "/" },
+            { name: "Newsletter", path: "/" },
+            { name: "Free Products", path: "/" },
+            { name: "Affiliate Program", path: "/" },
+        ],
     },
 ];
 
@@ -52,12 +67,12 @@ const Footer = () => {
                                         color="blue-gray"
                                         className="font-normal"
                                     >
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={link.path}
                                             className="inline-block py-1 pr-2 transition-transform hover:scale-105"
                                         >
-                                            {link}
-                                        </a>
+                                            {link.name}
+                                        </Link>
                                     </Typography>
                                 ))}
                             </ul>
