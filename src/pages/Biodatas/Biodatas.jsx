@@ -98,10 +98,10 @@ const Biodatas = () => {
             </div>
             {/* Desktop */}
             <div className="flex">
-                <aside className="w-[25%] border-r hidden md:block sticky pt-10 top-0 h-screen">
+                <aside className="w-[25%] max-w-md border-r hidden md:block sticky pt-10 top-0 h-screen">
                     <Filter setOpen={setOpen} applyFilter={applyFilter} />
                 </aside>
-                <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12">
+                <div className="px-1 sm:px-5 md:px-8 md:w-[75%] py-6 md:py-12 mx-auto">
                     <SectionHeading
                         title="All Members' Biodata"
                         subtitle="Discover profiles of our members and connect with your potential life partner"

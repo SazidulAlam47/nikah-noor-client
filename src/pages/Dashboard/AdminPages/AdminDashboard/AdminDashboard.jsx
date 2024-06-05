@@ -63,7 +63,7 @@ const AdminDashboard = () => {
                 <AdminCard
                     icon={TbCurrencyTaka}
                     title="Total Revenue"
-                    count={234} //TODO: Revenue
+                    count={stats?.totalRevenue}
                 />
             </div>
         </>

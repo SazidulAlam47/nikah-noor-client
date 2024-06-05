@@ -1,26 +1,70 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 import { Button, Card, Typography } from "@material-tailwind/react";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loader from "../../../components/Loader/Loader";
+import Swal from "sweetalert2";
 
 const TABLE_HEAD = ["Name", "Biodata Id", "Status", "Mobile No", "Email", ""];
 
 const ContactRequests = () => {
-    const TABLE_ROWS = [
-        {
-            name: "John Michael",
-            biodataId: "2",
-            status: "Pending",
-            mobileNumber: "+8801712345678",
-            contactEmail: "john.michael.com",
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+
+    const {
+        data: requests,
+        isPending,
+        refetch,
+    } = useQuery({
+        queryKey: ["my-requests", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/payments/user");
+            return res.data;
         },
-        {
-            name: "John Michael",
-            biodataId: "2",
-            status: "Pending",
-            mobileNumber: "+8801712345678",
-            contactEmail: "john.michael.com",
-        },
-    ];
+    });
+
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/payments/${_id}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The Contact has been deleted.",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        //remove from UI
+                        refetch();
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "The Contact remains safe",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+    };
+
+    if (isPending) {
+        return <Loader />;
+    }
 
     return (
         <>
@@ -32,96 +76,110 @@ const ContactRequests = () => {
                 subtitle="Manage your sent and received contact requests to connect with potential partners"
             />
             <div className="mt-8">
-                <Card className="h-fit w-full overflow-x-auto">
-                    <table className="w-full min-w-max table-auto text-left">
-                        <thead>
-                            <tr>
-                                {TABLE_HEAD.map((head) => (
-                                    <th
-                                        key={head}
-                                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                                    >
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal leading-none opacity-70"
+                {requests?.length ? (
+                    <Card className="h-fit w-full overflow-x-auto">
+                        <table className="w-full min-w-max table-auto text-left">
+                            <thead>
+                                <tr>
+                                    {TABLE_HEAD.map((head) => (
+                                        <th
+                                            key={head}
+                                            className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                                         >
-                                            {head}
-                                        </Typography>
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {TABLE_ROWS.map(
-                                (
-                                    {
-                                        name,
-                                        biodataId,
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal leading-none opacity-70"
+                                            >
+                                                {head}
+                                            </Typography>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {requests?.map(
+                                    ({
+                                        _id,
+                                        requestedName,
+                                        requestedId,
                                         status,
-                                        mobileNumber,
-                                        contactEmail,
-                                    },
-                                    index
-                                ) => (
-                                    <tr
-                                        key={index}
-                                        className="even:bg-blue-gray-50/50"
-                                    >
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {name}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {biodataId}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {status}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {mobileNumber}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {contactEmail}
-                                            </Typography>
-                                        </td>
-                                        <td className="p-4">
-                                            <Button size="sm"> Delete</Button>
-                                        </td>
-                                    </tr>
-                                )
-                            )}
-                        </tbody>
-                    </table>
-                </Card>
+                                        requestedMobileNumber,
+                                        requestedEmail,
+                                    }) => (
+                                        <tr
+                                            key={_id}
+                                            className="even:bg-blue-gray-50/50"
+                                        >
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {requestedName}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {requestedId}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {status}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {requestedMobileNumber}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {requestedEmail}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Button
+                                                    onClick={() =>
+                                                        handleDelete(_id)
+                                                    }
+                                                    size="sm"
+                                                >
+                                                    {" "}
+                                                    Delete
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    )
+                                )}
+                            </tbody>
+                        </table>
+                    </Card>
+                ) : (
+                    <div className="flex items-center justify-center h-[55vh]">
+                        <Typography variant="lead">
+                            You don&apos;t have any Contact Requests
+                        </Typography>
+                    </div>
+                )}
             </div>
         </>
     );

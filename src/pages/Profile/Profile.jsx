@@ -48,10 +48,10 @@ const Profile = () => {
             </Helmet>
             <Container>
                 <div className="flex flex-col lg:flex-row">
-                    <div className="px-1 sm:px-5 md:px-8 lg:w-[70%] py-12">
+                    <div className="px-1 sm:px-5 md:px-8 lg:w-[70%] py-12 mx-auto">
                         <ProfileDetails biodata={biodata} />
                     </div>
-                    <aside className="lg:w-[30%] lg:border-l lg:py-10 lg:px-6">
+                    <aside className="lg:w-[30%] lg:max-w-md mx-auto lg:border-l lg:py-10 lg:px-6">
                         <Typography
                             variant="h5"
                             color="blue-gray"

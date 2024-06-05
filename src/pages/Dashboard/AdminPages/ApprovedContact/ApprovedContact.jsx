@@ -1,31 +1,53 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../../shared/SectionHeading/SectionHeading";
 import { Button, Card, Typography } from "@material-tailwind/react";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../../components/Loader/Loader";
+import Swal from "sweetalert2";
 
-const TABLE_HEAD = [
-    "User name",
-    "User email",
-    " Biodata Id",
-    "Approved contact request",
-];
+const TABLE_HEAD = ["User name", "User email", "Requested Biodata Id", ""];
 
 const ApprovedContact = () => {
-    const TABLE_ROWS = [
-        {
-            name: "John Michael",
-            contactEmail: "joh@gmail.com",
-            biodataId: 2,
+    const axiosSecure = useAxiosSecure();
+
+    const {
+        data: requests,
+        isPending,
+        refetch,
+    } = useQuery({
+        queryKey: ["request-admin"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/payments/admin");
+            return res.data;
         },
-        {
-            name: "John Michael",
-            contactEmail: "joh@gmail.com",
-            biodataId: 3,
-        },
-    ];
+    });
+
+    const handleApprove = (_id) => {
+        axiosSecure.get(`/payments/approve/${_id}`).then((res) => {
+            console.log(res.data);
+            if (res.data.matchedCount > 0) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Request Approved!",
+                    text: "The Request has been approved successfully.",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                // update UI
+                refetch();
+            }
+        });
+    };
+
+    if (isPending) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Helmet>
-                <title>Nikah Noor | Approved Contact Requests</title>
+                <title>Nikah Noor | Approve Contact Requests</title>
             </Helmet>
             <SectionHeading
                 title="Approved Contact Requests"
@@ -53,10 +75,10 @@ const ApprovedContact = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {TABLE_ROWS.map(
-                                ({ name, contactEmail, biodataId }, index) => (
+                            {requests?.map(
+                                ({ _id, userName, userEmail, requestedId }) => (
                                     <tr
-                                        key={index}
+                                        key={_id}
                                         className="even:bg-blue-gray-50/50"
                                     >
                                         <td className="p-4">
@@ -65,7 +87,7 @@ const ApprovedContact = () => {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {name}
+                                                {userName}
                                             </Typography>
                                         </td>
                                         <td className="p-4">
@@ -74,7 +96,7 @@ const ApprovedContact = () => {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {contactEmail}
+                                                {userEmail}
                                             </Typography>
                                         </td>
                                         <td className="p-4">
@@ -83,13 +105,18 @@ const ApprovedContact = () => {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {biodataId}
+                                                {requestedId}
                                             </Typography>
                                         </td>
 
                                         <td className="p-4">
-                                            <Button size="sm">
-                                                Approved contact request
+                                            <Button
+                                                onClick={() =>
+                                                    handleApprove(_id)
+                                                }
+                                                size="sm"
+                                            >
+                                                Approve
                                             </Button>
                                         </td>
                                     </tr>
