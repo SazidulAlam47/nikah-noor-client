@@ -44,8 +44,8 @@ const AdminSuccessStory = () => {
                 <title>Nikah Noor | Success Stories</title>
             </Helmet>
             <SectionHeading
-                title="Success Stories"
-                subtitle="View and manage contact requests that have been approved by the admin"
+                title="Success Stories Management"
+                subtitle="Review and manage all the inspiring success stories shared by our users"
             />
             <div className="mt-8">
                 {reviews?.length ? (
