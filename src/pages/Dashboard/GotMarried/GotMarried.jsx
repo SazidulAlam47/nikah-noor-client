@@ -71,7 +71,7 @@ const GotMarried = () => {
                     maleBiodataId: parseInt(data.maleBiodataId),
                     femaleBiodataId: parseInt(data.femaleBiodataId),
                     successStoryText: data.successStoryText,
-                    date,
+                    marriageDate: date,
                     reviewStar: rating,
                     image: imgUrl,
                 };
