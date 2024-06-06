@@ -67,6 +67,7 @@ const Biodatas = () => {
         setDivision(data.division);
         setFrom(data.from);
         setTo(data.to);
+        setSelectedPage(0);
     };
 
     const openDrawer = () => setOpen(true);
