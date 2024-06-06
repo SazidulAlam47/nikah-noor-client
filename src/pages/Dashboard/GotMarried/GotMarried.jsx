@@ -72,7 +72,7 @@ const GotMarried = () => {
                     femaleBiodataId: parseInt(data.femaleBiodataId),
                     successStoryText: data.successStoryText,
                     date,
-                    rating,
+                    reviewStar: rating,
                     image: imgUrl,
                 };
 
@@ -88,6 +88,8 @@ const GotMarried = () => {
                             timer: 2000,
                         });
                         reset();
+                        setRating(0);
+                        setDate("");
                     }
                 } catch {
                     Swal.fire({
