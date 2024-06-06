@@ -4,11 +4,11 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useOwnBiodata = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const { data: ownBiodata, isPending } = useQuery({
         queryKey: ["my-biodata", user?.email],
-        enabled: Boolean(user),
+        enabled: !loading && Boolean(user),
         queryFn: async () => {
             const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
             return res.data;

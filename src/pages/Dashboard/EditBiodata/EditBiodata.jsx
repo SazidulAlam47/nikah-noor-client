@@ -40,7 +40,7 @@ const EditBiodata = () => {
 
     const [date, setDate] = useState("");
     const [dateErr, setDateErr] = useState("");
-    const { user, updateInfo } = useAuth();
+    const { user, updateInfo, loading } = useAuth();
     const [imgUrl, setImgUrl] = useState(user?.photoURL);
     const [imgErr, setImgErr] = useState("");
 
@@ -89,14 +89,16 @@ const EditBiodata = () => {
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: async () => {
-            const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
+            const res =
+                !loading &&
+                (await axiosSecure.get(`/biodatas/email/${user?.email}`));
             return {
-                name: user?.displayName,
-                age: res.data.age,
-                expectedPartnerAge: res.data.expectedPartnerAge,
-                mobileNumber: res.data.mobileNumber,
-                fathersName: res.data.fathersName,
-                mothersName: res.data.mothersName,
+                name: user?.displayName || "",
+                age: res.data.age || "",
+                expectedPartnerAge: res.data.expectedPartnerAge || "",
+                mobileNumber: res.data.mobileNumber || "",
+                fathersName: res.data.fathersName || "",
+                mothersName: res.data.mothersName || "",
             };
         },
     });
