@@ -35,6 +35,9 @@ const EditBiodata = () => {
     const navigate = useNavigate();
     const { ownBiodata, haveBiodata } = useOwnBiodata();
 
+    const [age, setAge] = useState(0);
+    const [ageErr, setAgeErr] = useState("");
+
     const [date, setDate] = useState("");
     const [dateErr, setDateErr] = useState("");
     const { user, updateInfo } = useAuth();
@@ -84,17 +87,17 @@ const EditBiodata = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm({
-        defaultValues: async () => {
-            const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
-            return {
-                name: user?.displayName,
-                age: res.data.age,
-                expectedPartnerAge: res.data.expectedPartnerAge,
-                mobileNumber: res.data.mobileNumber,
-                fathersName: res.data.fathersName,
-                mothersName: res.data.mothersName,
-            };
-        },
+        // defaultValues: async () => {
+        //     const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
+        //     return {
+        //         name: user?.displayName,
+        //         age: res.data.age,
+        //         expectedPartnerAge: res.data.expectedPartnerAge,
+        //         mobileNumber: res.data.mobileNumber,
+        //         fathersName: res.data.fathersName,
+        //         mothersName: res.data.mothersName,
+        //     };
+        // },
     });
 
     const onTextSubmit = (data) => {
@@ -182,7 +185,7 @@ const EditBiodata = () => {
                 dateOfBirth: date,
                 height,
                 weight,
-                age: parseInt(data.age),
+                age: age,
                 occupation,
                 race,
                 fathersName: data.fathersName,
@@ -279,6 +282,30 @@ const EditBiodata = () => {
         }
     };
 
+    const handleAge = (birthday) => {
+        const today = new Date();
+
+        if (!birthday) {
+            setAge("");
+            return;
+        }
+
+        let age = today.getFullYear() - birthday.getFullYear();
+        let month = today.getMonth() - birthday.getMonth();
+        if (
+            month < 0 ||
+            (month === 0 && today.getDate() < birthday.getDate())
+        ) {
+            age--;
+        }
+        setAge(age);
+
+        setAgeErr("");
+        if (age < 18 || age > 60) {
+            setAgeErr("Age must be between 18 and 60");
+        }
+    };
+
     return (
         <>
             <Helmet>
@@ -357,6 +384,7 @@ const EditBiodata = () => {
                                     onSelect={(val) => {
                                         setDate(val);
                                         setDateErr("");
+                                        handleAge(val);
                                     }}
                                     showOutsideDays
                                 />
@@ -376,7 +404,6 @@ const EditBiodata = () => {
                                 size="lg"
                                 value={height}
                                 onChange={(val) => {
-                                    console.log(val);
                                     setHeight(val);
                                     setHeightErr("");
                                 }}
@@ -425,19 +452,14 @@ const EditBiodata = () => {
                         <Input
                             label="Age"
                             size="lg"
-                            {...register("age", {
-                                required: "Please enter your age",
-                                pattern: {
-                                    value: /^(1[8-9]|[2-5][0-9]|60)$/,
-                                    message: "Age must be between 18 to 60",
-                                },
-                            })}
-                            error={Boolean(errors.age)}
+                            value={age}
+                            onChange={() => null}
+                            error={Boolean(ageErr)}
                         />
-                        {errors.age && (
+                        {ageErr && (
                             <div className="flex gap-2 items-center text-red-600 pt-1">
                                 <BsExclamationCircleFill className="hidden sm:inline-block" />
-                                <Typography>{errors.age.message}</Typography>
+                                <Typography>{ageErr}</Typography>
                             </div>
                         )}
                     </div>
