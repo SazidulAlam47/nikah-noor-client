@@ -51,7 +51,7 @@ const Register = () => {
                                 email,
                             };
                             addNewUser(data);
-                            navigate("/dashboard/edit-biodata");
+                            navigate("/");
                             toast.success("Register Successful");
                         })
                         .catch((error) => {
