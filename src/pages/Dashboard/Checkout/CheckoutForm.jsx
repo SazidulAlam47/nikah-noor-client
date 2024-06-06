@@ -4,8 +4,9 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { Button } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 import PropTypes from "prop-types";
+import { BsExclamationCircleFill } from "react-icons/bs";
 
 const CheckoutForm = ({ biodataId }) => {
     const [error, setError] = useState("");
@@ -122,7 +123,12 @@ const CheckoutForm = ({ biodataId }) => {
             <Button type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </Button>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && (
+                <div className="flex gap-2 items-center text-red-600 pt-1">
+                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                    <Typography>{error}</Typography>
+                </div>
+            )}
         </form>
     );
 };

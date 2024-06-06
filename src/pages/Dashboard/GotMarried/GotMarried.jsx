@@ -229,7 +229,10 @@ const GotMarried = () => {
                         </div>
                     )}
                 </div>
-                <div>
+                <div className="space-y-1">
+                    <label className="block text-sm font-medium text-gray-700">
+                        Couple Photo
+                    </label>
                     <input
                         className="block w-full max-w-sm text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file-input"
                         id="file_input"
