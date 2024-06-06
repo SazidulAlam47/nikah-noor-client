@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import PhotoDetails from "./PhotoDetails";
 import TableDetails from "./TableDetails";
 import moment from "moment";
-import { Button } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 import { PiMedalThin } from "react-icons/pi";
@@ -210,13 +210,24 @@ const ProfileDetails = ({ biodata }) => {
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
                 <PhotoDetails biodata={biodata} />
                 {self ? (
-                    <Button
-                        className="h-fit w-fit flex items-center gap-2"
-                        onClick={handlePremium}
-                    >
-                        <PiMedalThin size={14} />
-                        Make biodata to premium
-                    </Button>
+                    <>
+                        {isPremium ? (
+                            <Typography
+                                variant="lead"
+                                className="h-fit w-fit flex items-center gap-2"
+                            >
+                                You are a Premium Member
+                            </Typography>
+                        ) : (
+                            <Button
+                                className="h-fit w-fit flex items-center gap-2"
+                                onClick={handlePremium}
+                            >
+                                <PiMedalThin size={14} />
+                                Make biodata to premium
+                            </Button>
+                        )}
+                    </>
                 ) : (
                     <Button
                         className="h-fit w-fit flex items-center gap-2"
