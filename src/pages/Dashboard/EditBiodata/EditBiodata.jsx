@@ -87,17 +87,17 @@ const EditBiodata = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm({
-        // defaultValues: async () => {
-        //     const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
-        //     return {
-        //         name: user?.displayName,
-        //         age: res.data.age,
-        //         expectedPartnerAge: res.data.expectedPartnerAge,
-        //         mobileNumber: res.data.mobileNumber,
-        //         fathersName: res.data.fathersName,
-        //         mothersName: res.data.mothersName,
-        //     };
-        // },
+        defaultValues: async () => {
+            const res = await axiosSecure.get(`/biodatas/email/${user?.email}`);
+            return {
+                name: user?.displayName,
+                age: res.data.age,
+                expectedPartnerAge: res.data.expectedPartnerAge,
+                mobileNumber: res.data.mobileNumber,
+                fathersName: res.data.fathersName,
+                mothersName: res.data.mothersName,
+            };
+        },
     });
 
     const onTextSubmit = (data) => {
