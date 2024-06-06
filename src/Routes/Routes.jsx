@@ -21,11 +21,13 @@ import ApprovedContact from "../pages/Dashboard/AdminPages/ApprovedContact/Appro
 import AdminRoute from "./AdminRoute";
 import GotMarried from "../pages/Dashboard/GotMarried/GotMarried";
 import AdminSuccessStory from "../pages/Dashboard/AdminPages/AdminSuccessStory/AdminSuccessStory";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
@@ -59,14 +61,6 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />,
             },
-            {
-                path: "/checkout/:biodataId",
-                element: (
-                    <PrivateRoute>
-                        <Checkout />
-                    </PrivateRoute>
-                ),
-            },
         ],
     },
     {
@@ -76,6 +70,7 @@ const router = createBrowserRouter([
                 <DashboardLayout />
             </PrivateRoute>
         ),
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "checkout/:biodataId",
