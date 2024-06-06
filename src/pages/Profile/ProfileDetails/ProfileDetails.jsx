@@ -214,6 +214,7 @@ const ProfileDetails = ({ biodata }) => {
                         {isPremium ? (
                             <Typography
                                 variant="lead"
+                                color="pink"
                                 className="h-fit w-fit flex items-center gap-2"
                             >
                                 You are a Premium Member
