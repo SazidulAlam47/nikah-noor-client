@@ -15,7 +15,9 @@ const DashboardLayout = () => {
 
     return (
         <>
-            <Header />
+            <div className="hidden md:block">
+                <Header />
+            </div>
             {/* Mobile Side navigation Button Header */}
             <div className="flex md:hidden justify-between items-center px-3 py-4 shadow">
                 <Logo />
