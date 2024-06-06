@@ -57,6 +57,7 @@ const EditBiodata = () => {
     useEffect(() => {
         const oldDate = new Date(ownBiodata?.dateOfBirth);
         ownBiodata?.dateOfBirth ? setDate(oldDate) : setDate("");
+        setAge(ownBiodata?.age || "");
         setBiodataType(ownBiodata?.biodataType || "");
         setHeight(ownBiodata?.height || "");
         setWeight(ownBiodata?.weight || "");
