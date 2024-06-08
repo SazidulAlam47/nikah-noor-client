@@ -6,7 +6,6 @@ import useAuth from "../../hooks/useAuth";
 import useDisplayError from "../../hooks/useDisplayError";
 import Swal from "sweetalert2";
 import axios from "axios";
-import toast from "react-hot-toast";
 import useAddNewUser from "../../hooks/useAddNewUser";
 
 const Register = () => {
@@ -51,8 +50,7 @@ const Register = () => {
                                 email,
                             };
                             addNewUser(data);
-                            navigate("/");
-                            toast.success("Register Successful");
+                            navigate("/login");
                         })
                         .catch((error) => {
                             console.error(error.message);

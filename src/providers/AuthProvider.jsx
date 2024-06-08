@@ -5,6 +5,7 @@ import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
+    sendEmailVerification,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
@@ -12,6 +13,7 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import checkEmail from "../utils/checkEmail";
 
 export const AuthContext = createContext();
 
@@ -60,14 +62,24 @@ const AuthProvider = ({ children }) => {
                 const email = currentUser.email;
                 axiosPublic.post("/jwt", { email }).then((res) => {
                     console.log(res.data);
+                    setLoading(false);
                 });
+                // verify email
+                if (!currentUser.emailVerified) {
+                    sendEmailVerification(currentUser).then(() => {
+                        checkEmail(currentUser.email, "to verify your email");
+
+                        signOut(auth);
+                        setUser(null);
+                    });
+                }
             } else {
                 setUser(null);
                 axiosPublic.get("/logout").then((res) => {
                     console.log(res.data);
+                    setLoading(false);
                 });
             }
-            setLoading(false);
         });
         return () => {
             unSubscribe();

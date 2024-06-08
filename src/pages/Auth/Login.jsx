@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import AuthForm from "./AuthForm";
 import useDisplayError from "../../hooks/useDisplayError";
 import useAddNewUser from "../../hooks/useAddNewUser";
+import checkEmail from "../../utils/checkEmail";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -17,14 +18,14 @@ const Login = () => {
     const { googleLogin, signInWithPassword } = useAuth();
 
     const successTask = (result) => {
-        //     // navigate
-        //     if (result.user.emailVerified) {
-        //         location.state ? navigate(location.state) : navigate("/");
-        //     }
-        // });
         console.log(result.user);
-        toast.success("Login Successful");
-        location.state ? navigate(location.state) : navigate("/");
+
+        if (result.user.emailVerified) {
+            toast.success("Login Successful");
+            location.state ? navigate(location.state) : navigate("/");
+        } else {
+            checkEmail(result.user.email, "to verify your email");
+        }
     };
 
     const handlePasswordLogin = (data) => {
