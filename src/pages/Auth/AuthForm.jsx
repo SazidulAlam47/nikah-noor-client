@@ -6,7 +6,11 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { BsExclamationCircleFill } from "react-icons/bs";
 
-const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
+const AuthForm = ({
+    register: registerPage,
+    forgotPass,
+    handleSubmit: onSubmit,
+}) => {
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
     const { loading } = useAuth();
@@ -79,73 +83,75 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                     </div>
                 )}
             </div>
-            <div className="mb-6">
-                {registerPage ? (
-                    <>
-                        <Input
-                            label="Password"
-                            size="lg"
-                            type={passwordShown ? "text" : "password"}
-                            icon={
-                                <i
-                                    className="cursor-pointer"
-                                    onClick={togglePasswordVisiblity}
-                                >
-                                    {passwordShown ? (
-                                        <IoEyeOff className="h-5 w-5" />
-                                    ) : (
-                                        <IoEye className="h-5 w-5" />
-                                    )}
-                                </i>
-                            }
-                            {...register("password", {
-                                validate: handlePasswordValidate,
-                            })}
-                            error={Boolean(errors.password)}
-                        />
-                        {errors.password && (
-                            <div className="flex gap-2 items-center text-red-600 pt-1">
-                                <BsExclamationCircleFill className="hidden sm:inline-block" />
-                                <Typography>
-                                    {errors.password.message}
-                                </Typography>
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    <>
-                        <Input
-                            label="Password"
-                            size="lg"
-                            type={passwordShown ? "text" : "password"}
-                            icon={
-                                <i
-                                    className="cursor-pointer"
-                                    onClick={togglePasswordVisiblity}
-                                >
-                                    {passwordShown ? (
-                                        <IoEyeOff className="h-5 w-5" />
-                                    ) : (
-                                        <IoEye className="h-5 w-5" />
-                                    )}
-                                </i>
-                            }
-                            {...register("password", {
-                                required: "Please fill in the password",
-                            })}
-                            error={Boolean(errors.password)}
-                        />
-                        {errors.password && (
-                            <div className="flex gap-2 items-center text-red-600 pt-1">
-                                <BsExclamationCircleFill className="hidden sm:inline-block" />
-                                <Typography>
-                                    {errors.password.message}
-                                </Typography>
-                            </div>
-                        )}
-                    </>
-                )}
-            </div>
+            {forgotPass || (
+                <div className="mb-6">
+                    {registerPage ? (
+                        <>
+                            <Input
+                                label="Password"
+                                size="lg"
+                                type={passwordShown ? "text" : "password"}
+                                icon={
+                                    <i
+                                        className="cursor-pointer"
+                                        onClick={togglePasswordVisiblity}
+                                    >
+                                        {passwordShown ? (
+                                            <IoEyeOff className="h-5 w-5" />
+                                        ) : (
+                                            <IoEye className="h-5 w-5" />
+                                        )}
+                                    </i>
+                                }
+                                {...register("password", {
+                                    validate: handlePasswordValidate,
+                                })}
+                                error={Boolean(errors.password)}
+                            />
+                            {errors.password && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {errors.password.message}
+                                    </Typography>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <Input
+                                label="Password"
+                                size="lg"
+                                type={passwordShown ? "text" : "password"}
+                                icon={
+                                    <i
+                                        className="cursor-pointer"
+                                        onClick={togglePasswordVisiblity}
+                                    >
+                                        {passwordShown ? (
+                                            <IoEyeOff className="h-5 w-5" />
+                                        ) : (
+                                            <IoEye className="h-5 w-5" />
+                                        )}
+                                    </i>
+                                }
+                                {...register("password", {
+                                    required: "Please fill in the password",
+                                })}
+                                error={Boolean(errors.password)}
+                            />
+                            {errors.password && (
+                                <div className="flex gap-2 items-center text-red-600 pt-1">
+                                    <BsExclamationCircleFill className="hidden sm:inline-block" />
+                                    <Typography>
+                                        {errors.password.message}
+                                    </Typography>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+            )}
             {registerPage && (
                 <div className="mb-6">
                     <label
@@ -177,7 +183,9 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
                 className="mt-6 justify-center"
                 fullWidth
             >
-                {registerPage ? "Register" : "Login"}
+                {registerPage && "Register"}
+                {forgotPass && "Reset Password"}
+                {!registerPage && !forgotPass && "Login"}
             </Button>
         </form>
     );
@@ -185,6 +193,7 @@ const AuthForm = ({ register: registerPage, handleSubmit: onSubmit }) => {
 
 AuthForm.propTypes = {
     register: PropTypes.bool,
+    forgotPass: PropTypes.bool,
     handleSubmit: PropTypes.func.isRequired,
 };
 

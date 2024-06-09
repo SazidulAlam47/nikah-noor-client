@@ -68,17 +68,17 @@ const Login = () => {
                     Enter your email and password to sign in
                 </Typography>
                 <AuthForm handleSubmit={handlePasswordLogin} />
-                {/* <div className="!mt-4 flex justify-center">
+                <div className="!mt-4 flex justify-center">
+                    <Link to="/forgot-password">
                         <Typography
-                            as="a"
-                            href="#"
                             color="blue-gray"
                             variant="small"
                             className="font-medium"
                         >
                             Forgot password
                         </Typography>
-                    </div> */}
+                    </Link>
+                </div>
                 <Button
                     disabled={loading}
                     onClick={handleGoogle}

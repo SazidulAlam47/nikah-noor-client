@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import GotMarried from "../pages/Dashboard/GotMarried/GotMarried";
 import AdminSuccessStory from "../pages/Dashboard/AdminPages/AdminSuccessStory/AdminSuccessStory";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ForgotPass from "../pages/Auth/ForgotPass";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPass />,
             },
         ],
     },
