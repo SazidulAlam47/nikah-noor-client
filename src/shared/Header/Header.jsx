@@ -80,6 +80,7 @@ const Header = () => {
     );
 
     const handleLogOut = () => {
+        setOpenNav(false);
         logOut()
             .then(() => {
                 toast.success("LogOut Successful");
@@ -130,7 +131,12 @@ const Header = () => {
                                             to="/dashboard/admin-dashboard"
                                             className="w-full"
                                         >
-                                            <Button fullWidth>
+                                            <Button
+                                                fullWidth
+                                                onClick={() =>
+                                                    setOpenNav(false)
+                                                }
+                                            >
                                                 <span>Admin Dashboard</span>
                                             </Button>
                                         </Link>
@@ -139,7 +145,12 @@ const Header = () => {
                                             to="/dashboard/edit-biodata"
                                             className="w-full"
                                         >
-                                            <Button fullWidth>
+                                            <Button
+                                                fullWidth
+                                                onClick={() =>
+                                                    setOpenNav(false)
+                                                }
+                                            >
                                                 <span>Edit Biodata</span>
                                             </Button>
                                         </Link>
@@ -156,12 +167,19 @@ const Header = () => {
                             ) : (
                                 <>
                                     <Link to="/login" className="w-full">
-                                        <Button fullWidth>
+                                        <Button
+                                            fullWidth
+                                            onClick={() => setOpenNav(false)}
+                                        >
                                             <span>Login</span>
                                         </Button>
                                     </Link>
                                     <Link to="/register" className="w-full">
-                                        <Button fullWidth color="blue-gray">
+                                        <Button
+                                            fullWidth
+                                            color="blue-gray"
+                                            onClick={() => setOpenNav(false)}
+                                        >
                                             <span>Register</span>
                                         </Button>
                                     </Link>

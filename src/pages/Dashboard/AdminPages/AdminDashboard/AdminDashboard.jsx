@@ -11,11 +11,13 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loader from "../../../../components/Loader/Loader";
 import { Cell, PieChart, Pie, Legend } from "recharts";
 import { Typography } from "@material-tailwind/react";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
 const AdminDashboard = () => {
     const axiosSecure = useAxiosSecure();
+    const size = useWindowSize();
 
     const { data: stats, isPending } = useQuery({
         queryKey: ["admin-stats"],
@@ -108,7 +110,11 @@ const AdminDashboard = () => {
                 <Typography variant="lead" className="text-center">
                     View Website stats in Pie Chart
                 </Typography>
-                <PieChart width={500} height={300}>
+                <PieChart
+                    width={size.width < 530 ? 250 : 500}
+                    height={300}
+                    className="mx-auto"
+                >
                     <Pie
                         data={pieChartData}
                         cx="50%"
