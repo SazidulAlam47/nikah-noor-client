@@ -754,6 +754,7 @@ const EditBiodata = () => {
                             id="file_input"
                             type="file"
                             name="image"
+                            accept="image/*"
                         ></input>
                         {imgErr && (
                             <div className="flex gap-2 items-center text-red-600 pt-1">
