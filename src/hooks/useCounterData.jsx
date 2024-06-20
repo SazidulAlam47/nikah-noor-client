@@ -20,22 +20,22 @@ const useCounterData = () => {
         {
             icon: maleFemale,
             title: "Total Groom and Bride's Biodatas",
-            count: isPending ? "..." : stats?.totalBiodata,
+            count: isPending ? 0 : stats?.totalBiodata,
         },
         {
             icon: male,
             title: "Total Groom's Biodatas",
-            count: isPending ? "..." : stats?.maleBiodata,
+            count: isPending ? 0 : stats?.maleBiodata,
         },
         {
             icon: female,
             title: "Total Bride's Biodatas",
-            count: isPending ? "..." : stats?.femaleBiodata,
+            count: isPending ? 0 : stats?.femaleBiodata,
         },
         {
             icon: married,
             title: "Total Successful Marriages",
-            count: isPending ? "..." : stats?.totalReview,
+            count: isPending ? 0 : stats?.totalReview,
         },
     ];
     return counterData;
