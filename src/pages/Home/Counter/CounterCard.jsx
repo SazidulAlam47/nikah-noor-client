@@ -25,7 +25,10 @@ const CounterCard = ({ counter }) => {
                 <Typography color="blue-gray" className="mb-2 text-center">
                     {counter.title}
                 </Typography>
-                <motion.h3 className="mb-2 text-center text-3xl font-semibold text-[#282a36] font-roboto">
+                <motion.h3
+                    layoutScroll
+                    className="mb-2 text-center text-3xl font-semibold text-[#282a36] font-roboto"
+                >
                     {rounded}
                 </motion.h3>
             </CardBody>
