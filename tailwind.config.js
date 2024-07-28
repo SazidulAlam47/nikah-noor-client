@@ -16,7 +16,7 @@ export default withMT({
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         prociono: ["Prociono", "sans-serif"],
-        calibri: ["Calibri", "Poppins", "sans-serif"],
+        arabic: ["Noto Naskh Arabic", "Calibri", "serif"]
       }
     },
   },
