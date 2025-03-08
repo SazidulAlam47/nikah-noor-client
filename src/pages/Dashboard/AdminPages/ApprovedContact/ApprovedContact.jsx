@@ -6,7 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../../components/Loader/Loader";
 import Swal from "sweetalert2";
 
-const TABLE_HEAD = ["User name", "User email", "Requested Biodata Id", ""];
+const TABLE_HEAD = [
+    "User name",
+    "User email",
+    "Requested Biodata Id",
+    "Payment Method",
+    "Approve",
+    "Delete",
+];
 
 const ApprovedContact = () => {
     const axiosSecure = useAxiosSecure();
@@ -40,6 +47,43 @@ const ApprovedContact = () => {
         });
     };
 
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/payments/${_id}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The Biodata has been deleted from Favorites.",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        //remove from UI
+                        refetch();
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "The Biodata remains safe",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+    };
+
     if (isPending) {
         return <Loader />;
     }
@@ -50,7 +94,7 @@ const ApprovedContact = () => {
                 <title>Nikah Noor | Approve Contact Requests</title>
             </Helmet>
             <SectionHeading
-                title="Approved Contact Requests"
+                title="Approve Contact Requests"
                 subtitle="View and manage contact requests that have been approved by the admin"
             />
             <div className="mt-8">
@@ -82,6 +126,7 @@ const ApprovedContact = () => {
                                         userName,
                                         userEmail,
                                         requestedId,
+                                        paymentMethod,
                                     }) => (
                                         <tr
                                             key={_id}
@@ -114,6 +159,15 @@ const ApprovedContact = () => {
                                                     {requestedId}
                                                 </Typography>
                                             </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {paymentMethod}
+                                                </Typography>
+                                            </td>
 
                                             <td className="p-4">
                                                 <Button
@@ -123,6 +177,16 @@ const ApprovedContact = () => {
                                                     size="sm"
                                                 >
                                                     Approve
+                                                </Button>
+                                            </td>
+                                            <td className="p-4">
+                                                <Button
+                                                    onClick={() =>
+                                                        handleDelete(_id)
+                                                    }
+                                                    size="sm"
+                                                >
+                                                    Delete
                                                 </Button>
                                             </td>
                                         </tr>

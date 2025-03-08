@@ -75,7 +75,7 @@ const CheckoutForm = ({ biodataId }) => {
             if (paymentIntent.status === "succeeded") {
                 Swal.fire({
                     icon: "success",
-                    title: "Order Confirmed!",
+                    title: "Payment Success!",
                     text: `Your transition id : ${paymentIntent.id}`,
                 });
                 // save the payment to database
@@ -85,7 +85,8 @@ const CheckoutForm = ({ biodataId }) => {
                     email: user?.email,
                     date: new Date(),
                     contactRequestId: parseInt(biodataId),
-                    status: "Pending",
+                    status: "Approved",
+                    paymentMethod: "Stripe",
                 };
 
                 console.log(payment);

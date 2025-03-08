@@ -27,31 +27,32 @@ const ManageUsers = () => {
     const handleMakePremium = useMakePremium(refetch);
 
     const handleMakeAdmin = (user) => {
-        Swal.fire({
-            title: "Confirm Admin Privileges",
-            text: `Are you sure you want to grant admin privileges to ${user?.name}?`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, proceed",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.patch("/users/admin", user).then((res) => {
-                    console.log(res.data);
-                    if (res.data.matchedCount > 0) {
-                        Swal.fire({
-                            icon: "success",
-                            title: "Admin Privileges Granted",
-                            text: `${user?.name} has been successfully granted admin privileges on Nikah Noor`,
-                            showConfirmButton: false,
-                            timer: 2000,
-                        });
-                        refetch();
-                    }
-                });
-            }
-        });
+        if (user.role !== "admin")
+            Swal.fire({
+                title: "Confirm Admin Privileges",
+                text: `Are you sure you want to grant admin privileges to ${user?.name}?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, proceed",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axiosSecure.patch("/users/admin", user).then((res) => {
+                        console.log(res.data);
+                        if (res.data.matchedCount > 0) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Admin Privileges Granted",
+                                text: `${user?.name} has been successfully granted admin privileges on Nikah Noor`,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            refetch();
+                        }
+                    });
+                }
+            });
     };
 
     if (isPending) {

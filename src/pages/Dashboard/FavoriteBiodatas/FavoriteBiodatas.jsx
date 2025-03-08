@@ -6,13 +6,15 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const TABLE_HEAD = [
     "Name",
     "Biodata Id",
     "Permanent Address",
     "Occupation",
-    "",
+    "View",
+    "Delete",
 ];
 
 const FavoriteBiodatas = () => {
@@ -154,6 +156,15 @@ const FavoriteBiodatas = () => {
                                                 >
                                                     {occupation}
                                                 </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Link
+                                                    to={`/profile/${biodataId}`}
+                                                >
+                                                    <Button size="sm">
+                                                        View
+                                                    </Button>
+                                                </Link>
                                             </td>
                                             <td className="p-4">
                                                 <Button

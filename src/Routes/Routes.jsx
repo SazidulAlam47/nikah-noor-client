@@ -23,6 +23,9 @@ import GotMarried from "../pages/Dashboard/GotMarried/GotMarried";
 import AdminSuccessStory from "../pages/Dashboard/AdminPages/AdminSuccessStory/AdminSuccessStory";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import ForgotPass from "../pages/Auth/ForgotPass";
+import PaymentSuccess from "../pages/Dashboard/Checkout/PaymentPages/PaymentSuccess";
+import PaymentFiled from "../pages/Dashboard/Checkout/PaymentPages/PaymentFiled";
+import PaymentCanceled from "../pages/Dashboard/Checkout/PaymentPages/PaymentCanceled";
 
 const router = createBrowserRouter([
     {
@@ -100,6 +103,18 @@ const router = createBrowserRouter([
             {
                 path: "got-married",
                 element: <GotMarried />,
+            },
+            {
+                path: "payment-success",
+                element: <PaymentSuccess />,
+            },
+            {
+                path: "payment-failed",
+                element: <PaymentFiled />,
+            },
+            {
+                path: "payment-canceled",
+                element: <PaymentCanceled />,
             },
             // admin only pages
             {

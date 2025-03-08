@@ -6,8 +6,16 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loader from "../../../components/Loader/Loader";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
-const TABLE_HEAD = ["Name", "Biodata Id", "Status", "Mobile No", "Email", ""];
+const TABLE_HEAD = [
+    "Name",
+    "Biodata Id",
+    "Mobile No",
+    "Email",
+    "View Biodata",
+    "Delete",
+];
 
 const ContactRequests = () => {
     const { user } = useAuth();
@@ -103,7 +111,6 @@ const ContactRequests = () => {
                                         _id,
                                         requestedName,
                                         requestedId,
-                                        status,
                                         requestedMobileNumber,
                                         requestedEmail,
                                     }) => (
@@ -129,15 +136,7 @@ const ContactRequests = () => {
                                                     {requestedId}
                                                 </Typography>
                                             </td>
-                                            <td className="p-4">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal"
-                                                >
-                                                    {status}
-                                                </Typography>
-                                            </td>
+
                                             <td className="p-4">
                                                 <Typography
                                                     variant="small"
@@ -155,6 +154,15 @@ const ContactRequests = () => {
                                                 >
                                                     {requestedEmail}
                                                 </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Link
+                                                    to={`/profile/${requestedId}`}
+                                                >
+                                                    <Button size="sm">
+                                                        View
+                                                    </Button>
+                                                </Link>
                                             </td>
                                             <td className="p-4">
                                                 <Button

@@ -23,12 +23,12 @@ const adminMenuItems = [
         path: "/dashboard/manage-users",
     },
     {
-        label: "Approved Premium",
+        label: "Approve Premium",
         icon: PiMedalThin,
         path: "/dashboard/approved-premium",
     },
     {
-        label: "Approved Contact Request",
+        label: "Approve Contact Requests",
         icon: MdPhoneLocked,
         path: "/dashboard/approved-contact-request",
     },

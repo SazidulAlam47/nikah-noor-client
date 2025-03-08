@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// export const baseUrl = "http://localhost:5000";
-export const baseUrl = "https://nikah-noor-server.vercel.app";
+export const baseUrl = import.meta.env.VITE_API_URL;
 
 const axiosPublic = axios.create({
     baseURL: baseUrl,

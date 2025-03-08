@@ -32,10 +32,10 @@ const ApprovedPremium = () => {
     return (
         <>
             <Helmet>
-                <title>Nikah Noor | Approved Premium Members</title>
+                <title>Nikah Noor | Approve Premium Members</title>
             </Helmet>
             <SectionHeading
-                title="Approved Premium Members"
+                title="Approve Premium Members"
                 subtitle="Review and manage users who have been granted premium membership"
             />
             <div className="mt-8">
