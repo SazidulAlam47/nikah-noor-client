@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loader from "../../../components/Loader/Loader";
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const TABLE_HEAD = [
@@ -13,62 +12,22 @@ const TABLE_HEAD = [
     "Biodata Id",
     "Mobile No",
     "Email",
+    "Payment Method",
+    "Payment Status",
     "View Biodata",
-    "Delete",
 ];
 
 const ContactRequests = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const {
-        data: requests,
-        isPending,
-        refetch,
-    } = useQuery({
+    const { data: requests, isPending } = useQuery({
         queryKey: ["my-requests", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get("/payments/user");
             return res.data;
         },
     });
-
-    const handleDelete = (_id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.delete(`/payments/${_id}`).then((res) => {
-                    console.log(res.data);
-                    if (res.data.deletedCount > 0) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "The Contact has been deleted.",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                        });
-                        //remove from UI
-                        refetch();
-                    }
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    title: "Cancelled",
-                    text: "The Contact remains safe",
-                    icon: "error",
-                    showConfirmButton: false,
-                    timer: 2000,
-                });
-            }
-        });
-    };
 
     if (isPending) {
         return <Loader />;
@@ -113,6 +72,8 @@ const ContactRequests = () => {
                                         requestedId,
                                         requestedMobileNumber,
                                         requestedEmail,
+                                        paymentMethod,
+                                        status,
                                     }) => (
                                         <tr
                                             key={_id}
@@ -156,6 +117,24 @@ const ContactRequests = () => {
                                                 </Typography>
                                             </td>
                                             <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {paymentMethod}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {status}
+                                                </Typography>
+                                            </td>
+                                            <td className="p-4">
                                                 <Link
                                                     to={`/profile/${requestedId}`}
                                                 >
@@ -163,17 +142,6 @@ const ContactRequests = () => {
                                                         View
                                                     </Button>
                                                 </Link>
-                                            </td>
-                                            <td className="p-4">
-                                                <Button
-                                                    onClick={() =>
-                                                        handleDelete(_id)
-                                                    }
-                                                    size="sm"
-                                                >
-                                                    {" "}
-                                                    Delete
-                                                </Button>
                                             </td>
                                         </tr>
                                     )

@@ -11,6 +11,7 @@ const TABLE_HEAD = [
     "User email",
     "Requested Biodata Id",
     "Payment Method",
+    "Payment Status",
     "Approve",
     "Delete",
 ];
@@ -31,18 +32,38 @@ const ApprovedContact = () => {
     });
 
     const handleApprove = (_id) => {
-        axiosSecure.get(`/payments/approve/${_id}`).then((res) => {
-            console.log(res.data);
-            if (res.data.matchedCount > 0) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Approve it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.get(`/payments/approve/${_id}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.matchedCount > 0) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Request Approved!",
+                            text: "The Request has been approved successfully.",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        // update UI
+                        refetch();
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
-                    icon: "success",
-                    title: "Request Approved!",
-                    text: "The Request has been approved successfully.",
+                    title: "Cancelled",
+                    text: "The Request is Cancelled",
+                    icon: "error",
                     showConfirmButton: false,
                     timer: 2000,
                 });
-                // update UI
-                refetch();
             }
         });
     };
@@ -127,6 +148,7 @@ const ApprovedContact = () => {
                                         userEmail,
                                         requestedId,
                                         paymentMethod,
+                                        status,
                                     }) => (
                                         <tr
                                             key={_id}
@@ -168,9 +190,20 @@ const ApprovedContact = () => {
                                                     {paymentMethod}
                                                 </Typography>
                                             </td>
-
+                                            <td className="p-4">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {status}
+                                                </Typography>
+                                            </td>
                                             <td className="p-4">
                                                 <Button
+                                                    disabled={
+                                                        status === "Approved"
+                                                    }
                                                     onClick={() =>
                                                         handleApprove(_id)
                                                     }
